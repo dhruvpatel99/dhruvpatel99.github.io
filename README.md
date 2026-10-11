@@ -32,7 +32,14 @@ Then open http://localhost:8000.
 
 All text lives in `index.html`:
 
-- Projects – the `<section id="projects">` block; copy one `<article class="row">` to add a project.
-- Experience – the `<section id="experience">` block.
-- Skills – the `<dl class="skills">` list.
-- Career timeline – the `<ol class="stages">` list. `data-state="done"` shows a green tick, `data-state="running"` shows the amber "Running" stage.
+- **Career run (hero console)** – the `JOBS` list in the `<script>` at the bottom. Each job has an `id`, a `when` label and log `lines`: `"cmd"` prints a `$ Run …` command, `"ok"` a green tick step, `"wip"` an amber in-progress step. `keepRunning: true` leaves that job spinning.
+- **Projects** – the `<section id="projects">` block. Each project is a `<details>` "workflow run"; copy one to add a project. `data-icon="pass"` shows a green tick, `data-icon="run"` a spinner. Update the counts in `runs-head` too.
+- **Experience** – the `<section id="experience">` block. Each bullet in `<ol class="steps">` is a step; add `class="wip"` for work still in progress.
+- **Skills** – the `<div class="matrix">` cells.
+
+## Page features
+
+- Hero console replays your career as a CI run, with a **Re-run all jobs** button.
+- The top navigation is a pipeline: sections before the one you're reading turn green, the current one turns amber.
+- The badge in the top bar is the live status of `deploy.yml` from this repo.
+- Respects dark mode and the "reduce motion" setting (the run shows finished instantly).
