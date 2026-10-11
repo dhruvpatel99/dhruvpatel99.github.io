@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dhruv Patel – Support Engineer, DevOps</title>
+  <meta name="description" content="Dhruv Patel – Support Engineer in Ahmedabad working on CI/CD pipelines, Docker, Kubernetes (k3s), AWS and monitoring.">
+  <meta property="og:title" content="Dhruv Patel – Support Engineer, DevOps">
+  <meta property="og:description" content="CI/CD for 14+ applications, 25 Docker containers, AWS serverless projects and monitoring with Prometheus and Grafana.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2314213D'/%3E%3Cpath d='M9 16.5l4.5 4.5L23 11' stroke='%2335B27A' stroke-width='3.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #F3F5F7;
+      --surface: #FFFFFF;
+      --ink: #14213D;
+      --muted: #566173;
+      --line: #D5DAE1;
+      --pass: #1F8A5B;
+      --run: #B7790A;
+      --pass-soft: rgba(31, 138, 91, 0.10);
+      --run-soft: rgba(217, 154, 0, 0.14);
+      --link: #1B4FBF;
+      --wrap: 1040px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --paper: #0F1828;
+        --surface: #16223A;
+        --ink: #E6EBF2;
+        --muted: #9AA6B8;
+        --line: #2A374D;
+        --pass: #3FB984;
+        --run: #F0B429;
+        --pass-soft: rgba(63, 185, 132, 0.14);
+        --run-soft: rgba(240, 180, 41, 0.16);
+        --link: #8DB4FF;
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--link); text-underline-offset: 3px; }
+    a:hover { text-decoration-thickness: 2px; }
+    :focus-visible { outline: 3px solid var(--link); outline-offset: 3px; border-radius: 4px; }
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+    .skip { position: absolute; left: -999px; top: 8px; background: var(--surface); padding: 8px 12px; }
+    .skip:focus { left: 8px; }
+
+    /* Top bar */
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 22px 0; }
+    .topbar .me { white-space: nowrap; font-weight: 700; color: var(--ink); text-decoration: none; }
+    .topbar nav { display: flex; gap: 20px; flex-wrap: wrap; }
+    .topbar nav a { color: var(--muted); text-decoration: none; font-weight: 500; }
+    .topbar nav a:hover { color: var(--ink); }
+
+    /* Hero */
+    .hero { padding: 56px 0 40px; }
+    .hero h1 {
+      font-size: clamp(2.8rem, 8vw, 5rem);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+      margin: 0 0 20px;
+    }
+    .hero .role { font-size: clamp(1.2rem, 2.4vw, 1.5rem); line-height: 1.4; font-weight: 500; max-width: 30ch; margin: 0 0 18px; }
+    .hero .summary { color: var(--muted); max-width: 62ch; margin: 0 0 28px; }
+    .hero .summary strong { color: var(--ink); font-weight: 700; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 18px; border-radius: 8px;
+      font-weight: 700; font-size: 0.95rem; text-decoration: none;
+      border: 1.5px solid var(--ink); color: var(--ink); background: transparent;
+    }
+    .btn.primary { background: var(--ink); color: var(--paper); }
+    .btn:hover { text-decoration: none; transform: translateY(-1px); }
+    .btn svg { width: 18px; height: 18px; flex: none; }
+
+    /* Career pipeline */
+    .pipeline { margin: 56px 0 8px; }
+    .pipeline-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+    .pipeline-head h2 { font-size: 1.05rem; margin: 0; font-weight: 700; }
+    .pipeline-head p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+    .stages {
+      list-style: none; margin: 0; padding: 22px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+      background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    }
+    .stage { position: relative; padding: 0 18px 0 0; }
+    .stage + .stage { padding-left: 18px; }
+    .stage .track { display: flex; align-items: center; margin-bottom: 14px; }
+    .stage .dot {
+      width: 30px; height: 30px; border-radius: 50%; flex: none;
+      display: grid; place-items: center;
+      border: 2px solid var(--line); background: var(--surface); color: var(--line);
+      transition: background .35s, border-color .35s, color .35s;
+    }
+    .stage .dot svg { width: 16px; height: 16px; }
+    .stage .bar { flex: 1; height: 3px; margin-left: 10px; margin-right: -18px; background: var(--line); border-radius: 2px; overflow: hidden; }
+    .stage + .stage .bar { margin-right: -18px; }
+    .stage:last-child .bar { display: none; }
+    .stage .bar i { display: block; height: 100%; width: 0; background: var(--pass); transition: width .45s ease-out; }
+    .stage h3 { font-size: 1rem; line-height: 1.3; margin: 0 0 4px; }
+    .stage .where { color: var(--muted); font-size: 0.9rem; margin: 0 0 8px; line-height: 1.4; }
+    .stage .time { font-size: 0.85rem; color: var(--muted); margin: 0; }
+    .stage .time b { font-weight: 700; color: var(--ink); }
+
+    .stage.done .dot { background: var(--pass); border-color: var(--pass); color: #fff; }
+    .stage.done .bar i { width: 100%; }
+    .stage.running .dot { border-color: var(--run); color: var(--run); background: var(--run-soft); animation: pulse 1.8s ease-in-out infinite; }
+    .stage.running .time b { color: var(--run); }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 var(--run-soft); }
+      50% { box-shadow: 0 0 0 8px transparent; }
+    }
+
+    /* Sections */
+    section.block { padding: 64px 0 8px; }
+    section.block > h2 { font-size: 1.75rem; line-height: 1.2; letter-spacing: -0.01em; margin: 0 0 8px; }
+    section.block > .lead { color: var(--muted); margin: 0 0 28px; max-width: 62ch; }
+
+    /* Rows used by projects and experience */
+    .row {
+      display: grid; grid-template-columns: 180px 1fr; gap: 28px;
+      padding: 28px 0; border-top: 1px solid var(--line);
+    }
+    .row:last-child { border-bottom: 1px solid var(--line); }
+    .row .side { color: var(--muted); font-size: 0.92rem; line-height: 1.5; }
+    .row h3 { font-size: 1.3rem; line-height: 1.3; margin: 0 0 6px; }
+    .row .sub { color: var(--muted); margin: 0 0 12px; }
+    .row p { margin: 0 0 12px; max-width: 68ch; }
+    .row ul { margin: 0 0 14px; padding-left: 20px; max-width: 70ch; }
+    .row li { margin-bottom: 6px; }
+    .row li::marker { color: var(--muted); }
+    .stack { color: var(--muted); font-size: 0.92rem; margin: 0 0 10px; }
+    .stack b { color: var(--ink); font-weight: 600; }
+    .links { display: flex; gap: 18px; flex-wrap: wrap; font-weight: 600; font-size: 0.95rem; }
+
+    .status { display: flex; align-items: center; gap: 8px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+    .status::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--pass); }
+    .status.wip::before { background: var(--run); }
+
+    /* Skills */
+    .skills { display: grid; grid-template-columns: 220px 1fr; border-top: 1px solid var(--line); margin: 0; }
+    .skills dt, .skills dd { margin: 0; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .skills dt { font-weight: 700; }
+    .skills dd { color: var(--muted); }
+
+    /* Footer */
+    footer.contact { margin-top: 80px; padding: 56px 0 40px; background: var(--ink); color: var(--paper); }
+    footer.contact h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 12px; max-width: 22ch; }
+    footer.contact p { margin: 0 0 24px; max-width: 58ch; opacity: .82; }
+    footer.contact a { color: var(--paper); }
+    footer.contact .btn { border-color: var(--paper); color: var(--paper); }
+    footer.contact .btn.primary { background: var(--paper); color: var(--ink); }
+    footer .fine { margin-top: 48px; font-size: 0.85rem; opacity: .6; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+    /* Mobile */
+    @media (max-width: 760px) {
+      body { font-size: 16px; }
+      .topbar nav { gap: 14px; }
+      .topbar nav a.hide-sm { display: none; }
+      .hero { padding-top: 32px; }
+      .stages { grid-template-columns: 1fr; padding: 20px; }
+      .stage, .stage + .stage { padding: 0 0 0 46px; min-height: 92px; }
+      .stage .track { position: absolute; left: 0; top: 0; bottom: 0; flex-direction: column; align-items: center; margin: 0; width: 30px; }
+      .stage .bar, .stage + .stage .bar { width: 3px; height: auto; flex: 1; margin: 8px 0; }
+      .stage .bar i { width: 100%; height: 0; transition: height .45s ease-out; }
+      .stage.done .bar i { height: 100%; }
+      .stage:last-child { min-height: 0; }
+      .row { grid-template-columns: 1fr; gap: 8px; }
+      .skills { grid-template-columns: 1fr; }
+      .skills dt { border-bottom: 0; padding-bottom: 2px; }
+      .skills dd { padding-top: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#projects">Skip to projects</a>
+
+  <div class="wrap">
+    <header class="topbar">
+      <a class="me" href="#top">Dhruv Patel</a>
+      <nav aria-label="Main">
+        <a href="#projects">Projects</a>
+        <a href="#experience" class="hide-sm">Experience</a>
+        <a href="#skills" class="hide-sm">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <h1>Dhruv Patel</h1>
+        <p class="role">Support Engineer who builds the pipelines, servers and monitoring that keep releases calm.</p>
+        <p class="summary">
+          At Naapbooks I built CI/CD for <strong>14+ applications</strong> (<strong>4 in production</strong>) with GitHub Actions and Jenkins,
+          run <strong>25 Docker containers</strong> on Ubuntu, and I'm moving them to Kubernetes (k3s).
+          B.Tech in Cybersecurity, based in Ahmedabad.
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="mailto:dhruv00987@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            Email me
+          </a>
+          <a class="btn" href="https://github.com/dhruvpatel99" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+            GitHub
+          </a>
+          <a class="btn" href="https://www.linkedin.com/in/dhruv0911" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21H9z"/></svg>
+            LinkedIn
+          </a>
+          <a class="btn" href="resume.pdf" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
+            Download CV
+          </a>
+        </div>
+
+        <div class="pipeline" aria-labelledby="pipeline-title">
+          <div class="pipeline-head">
+            <h2 id="pipeline-title">Career so far</h2>
+            <p>Shown the way a CI run shows its stages.</p>
+          </div>
+          <ol class="stages" id="stages">
+            <li class="stage" data-state="done">
+              <div class="track">
+                <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+                <span class="bar"><i></i></span>
+              </div>
+              <h3>Diploma, Computer Engineering</h3>
+              <p class="where">VPMP Polytechnic, Gandhinagar</p>
+              <p class="time"><b>Passed</b>, 2018–2022</p>
+            </li>
+            <li class="stage" data-state="done">
+              <div class="track">
+                <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+                <span class="bar"><i></i></span>
+              </div>
+              <h3>B.Tech, Cybersecurity</h3>
+              <p class="where">Silver Oak University, Ahmedabad</p>
+              <p class="time"><b>Passed</b>, 2022–2025</p>
+            </li>
+            <li class="stage" data-state="done">
+              <div class="track">
+                <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+                <span class="bar"><i></i></span>
+              </div>
+              <h3>Penetration Testing Intern</h3>
+              <p class="where">Alicorn Solutions, Ahmedabad</p>
+              <p class="time"><b>Passed</b>, Jan–Apr 2025</p>
+            </li>
+            <li class="stage" data-state="running">
+              <div class="track">
+                <span class="dot"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="5"/></svg></span>
+                <span class="bar"><i></i></span>
+              </div>
+              <h3>Support Engineer</h3>
+              <p class="where">Naapbooks Limited, Ahmedabad</p>
+              <p class="time"><b>Running</b>, since July 2025</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="block" id="projects">
+        <h2>Projects</h2>
+        <p class="lead">Things I have built at work and on my own.</p>
+
+        <article class="row">
+          <div class="side">
+            <div class="status">Completed</div>
+            2026<br>Personal project
+          </div>
+          <div>
+            <h3>CloudOps Helpdesk on AWS</h3>
+            <p>A small IT ticketing app on serverless AWS. Users create tickets, list them and change their status from a web page.</p>
+            <ul>
+              <li>Built an HTTPS API with API Gateway that calls a Python Lambda function and stores tickets in DynamoDB.</li>
+              <li>Gave Lambda a least-privilege IAM role: three DynamoDB actions on one table, no access keys in code.</li>
+              <li>Built a VPC with a public subnet, Internet Gateway, route table and security groups, and hosted Apache on EC2.</li>
+              <li>Kept the frontend in a private S3 bucket, with CloudFront and Origin Access Control designed for HTTPS hosting.</li>
+            </ul>
+            <p class="stack"><b>Stack:</b> API Gateway, Lambda (Python), DynamoDB, IAM, S3, CloudFront, VPC, EC2, CloudWatch</p>
+            <div class="links">
+              <a href="https://github.com/dhruvpatel99/cloudops-helpdesk-aws" target="_blank" rel="noopener">View code on GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="row">
+          <div class="side">
+            <div class="status">Completed</div>
+            Naapbooks
+          </div>
+          <div>
+            <h3>Centralized monitoring and logging</h3>
+            <p>One place to see the health, metrics and logs of IIS-hosted .NET applications.</p>
+            <ul>
+              <li>Designed the monitoring setup with Prometheus for metrics and Loki with Promtail for logs.</li>
+              <li>Built real-time Grafana dashboards for server metrics and API performance.</li>
+              <li>Set up alerts for high resource usage and application failures, which cut troubleshooting time.</li>
+            </ul>
+            <p class="stack"><b>Stack:</b> Prometheus, Grafana, Loki, Promtail, IIS, .NET</p>
+          </div>
+        </article>
+
+        <article class="row">
+          <div class="side">
+            <div class="status wip">In progress</div>
+            Naapbooks
+          </div>
+          <div>
+            <h3>Moving 25 Docker containers to Kubernetes (k3s)</h3>
+            <p>The staging server runs 25 containers for 3 products. I'm leading their move to k3s so deployments can happen without downtime.</p>
+            <p class="stack"><b>Stack:</b> Docker, Kubernetes (k3s), Ubuntu 22.04</p>
+          </div>
+        </article>
+
+        <article class="row">
+          <div class="side">
+            <div class="status wip">In progress</div>
+            Side project
+          </div>
+          <div>
+            <h3>Baari – live queues for clinics and salons</h3>
+            <p>Customers scan a QR code to join a queue and watch their place live, with a map of nearby wait times. I handle the DevOps side: builds, deployment and hosting.</p>
+            <p class="stack"><b>Stack:</b> Java, React, CI/CD</p>
+            <div class="links">
+              <a href="https://github.com/dhruvpatel99/baari" target="_blank" rel="noopener">View code on GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="row">
+          <div class="side">
+            <div class="status">Completed</div>
+            2025<br>B.Tech major project
+          </div>
+          <div>
+            <h3>Web-based vulnerability assessment tool</h3>
+            <p>A web application that scans sites for vulnerabilities from the OWASP Top 10 and produces a structured security report for each scan.</p>
+            <p class="stack"><b>Stack:</b> Web application security, OWASP Top 10</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="block" id="experience">
+        <h2>Experience</h2>
+        <p class="lead">Production support with a growing share of DevOps work.</p>
+
+        <article class="row">
+          <div class="side">July 2025 – now<br>Ahmedabad</div>
+          <div>
+            <h3>Support Engineer</h3>
+            <p class="sub">Naapbooks Limited</p>
+            <ul>
+              <li>Build and maintain CI/CD pipelines for 14+ applications (4 production, 10+ internal and staging) with GitHub Actions and Jenkins.</li>
+              <li>Set up a Linux Jenkins pipeline that deploys a production web app to a shared Ubuntu 22.04 server hosting 7 domains on every push to staging.</li>
+              <li>Built Jenkins pipelines that deploy an API service and an IIS-hosted UI, including database migrations with Alembic.</li>
+              <li>Scripted builds and IIS deployments for .NET and Flutter Web apps, with PowerShell health checks before go-live.</li>
+              <li>Manage 25 Docker containers for 3 products and lead their move to Kubernetes (k3s).</li>
+              <li>Fixed production IIS failures (HTTP 500.30 and 503) and provide L1/L2 support for infrastructure and applications.</li>
+              <li>Rolled out standard email signatures to all Microsoft 365 mailboxes with Exchange Online PowerShell, piloting first.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="row">
+          <div class="side">Jan – Apr 2025<br>Ahmedabad</div>
+          <div>
+            <h3>Penetration Testing Intern</h3>
+            <p class="sub">Alicorn Solutions</p>
+            <ul>
+              <li>Tested web applications for vulnerabilities against the OWASP Top 10.</li>
+              <li>Wrote vulnerability reports with clear fixes for development teams.</li>
+            </ul>
+          </div>
+        </article>
+      </section>
+
+      <section class="block" id="skills">
+        <h2>Skills</h2>
+        <p class="lead">Tools I use at work or have built projects with.</p>
+        <dl class="skills">
+          <dt>CI/CD and automation</dt>
+          <dd>GitHub Actions, Jenkins, Git, self-hosted runners, Ansible, Bash, PowerShell</dd>
+          <dt>Cloud</dt>
+          <dd>AWS: EC2, VPC, S3, Lambda, API Gateway, DynamoDB, IAM, CloudFront, CloudWatch</dd>
+          <dt>Containers</dt>
+          <dd>Docker, Kubernetes (k3s)</dd>
+          <dt>Monitoring and logging</dt>
+          <dd>Prometheus, Grafana, Loki, Promtail</dd>
+          <dt>Systems</dt>
+          <dd>Linux (Ubuntu), Windows Server, IIS, Active Directory, Microsoft 365, Exchange Online PowerShell</dd>
+          <dt>Databases</dt>
+          <dd>MySQL, PostgreSQL, Alembic migrations</dd>
+          <dt>Security</dt>
+          <dd>Web application penetration testing, vulnerability assessment, OWASP Top 10</dd>
+          <dt>Languages</dt>
+          <dd>Gujarati (native), Hindi, English</dd>
+        </dl>
+      </section>
+    </main>
+  </div>
+
+  <footer class="contact" id="contact">
+    <div class="wrap">
+      <h2>Working on DevOps or cloud? Let's talk.</h2>
+      <p>The fastest way to reach me is email. You can also find my code on GitHub and my work history on LinkedIn.</p>
+      <div class="actions">
+        <a class="btn primary" href="mailto:dhruv00987@gmail.com">dhruv00987@gmail.com</a>
+        <a class="btn" href="https://github.com/dhruvpatel99" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/dhruv0911" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <div class="fine">
+        <span>Dhruv Patel, Ahmedabad, Gujarat</span>
+        <span>Deployed to GitHub Pages with GitHub Actions</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Light up the career stages one after another, like a CI run.
+    (function () {
+      var stages = Array.prototype.slice.call(document.querySelectorAll("#stages .stage"));
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      function finish(stage) { stage.classList.add(stage.getAttribute("data-state")); }
+      if (reduce) { stages.forEach(finish); return; }
+      stages.forEach(function (stage, i) {
+        setTimeout(function () { finish(stage); }, 350 + i * 450);
+      });
+    })();
+  </script>
+</body>
+</html>
