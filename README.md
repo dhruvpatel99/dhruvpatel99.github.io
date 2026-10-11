@@ -2,15 +2,20 @@
 
 Personal portfolio website: **https://dhruvpatel99.github.io**
 
-A single static page (HTML + CSS + a few lines of JavaScript, no framework), deployed to GitHub Pages by a GitHub Actions workflow on every push to `main`.
+A static site (HTML, CSS and plain JavaScript, no build step) with a small 3D assistant in the hero built with three.js. It is deployed to GitHub Pages by a GitHub Actions workflow on every push to `main`.
 
 ## What's inside
 
 ```
 .
-├── index.html                    # the whole site
-├── resume.pdf                    # CV used by the "Download CV" button
-└── .github/workflows/deploy.yml  # CI/CD: check files, then deploy to GitHub Pages
+├── index.html                      # page content and structure
+├── resume.pdf                      # CV for the "Download CV" button
+├── assets/
+│   ├── css/main.css                # theme and layout
+│   ├── js/main.js                  # career run console, nav, reveals, stack filters, agent log
+│   ├── js/robot.js                 # 3D ops-agent (three.js, built from simple shapes)
+│   └── vendor/three/               # three.js r160 + two add-ons, served locally (MIT licence)
+└── .github/workflows/deploy.yml    # CI/CD: check files, then deploy to GitHub Pages
 ```
 
 ## How it deploys
@@ -18,9 +23,10 @@ A single static page (HTML + CSS + a few lines of JavaScript, no framework), dep
 1. A push to `main` starts the **Deploy portfolio to GitHub Pages** workflow.
 2. The `check` job makes sure `index.html` exists and warns if `resume.pdf` is missing.
 3. The `deploy` job packages the files and publishes them to GitHub Pages.
-4. The live URL is shown in the workflow run summary.
 
 ## Run it locally
+
+The 3D robot loads JavaScript modules, so open the site through a local server, not by double-clicking the file:
 
 ```bash
 python3 -m http.server 8000
@@ -30,16 +36,14 @@ Then open http://localhost:8000.
 
 ## Update the content
 
-All text lives in `index.html`:
+- **Hero, About, Skills, Experience, Projects, Stack** – edit the matching `<section>` in `index.html`.
+- **Career run console** – the `JOBS` list in `assets/js/main.js` (`cmd` = command line, `ok` = green tick, `wip` = in progress).
+- **Robot's log lines** – the `AGENT_LINES` list in `assets/js/main.js`.
+- **Project status** – `data-icon="pass"` (tick) or `data-icon="run"` (spinner); pipeline stages use `class="ok"` or `class="wip"`.
+- **Tech stack filters** – each tool card has `data-cat` = `cicd`, `infra`, `obs` or `data`.
 
-- **Career run (hero console)** – the `JOBS` list in the `<script>` at the bottom. Each job has an `id`, a `when` label and log `lines`: `"cmd"` prints a `$ Run …` command, `"ok"` a green tick step, `"wip"` an amber in-progress step. `keepRunning: true` leaves that job spinning.
-- **Projects** – the `<section id="projects">` block. Each project is a `<details>` "workflow run"; copy one to add a project. `data-icon="pass"` shows a green tick, `data-icon="run"` a spinner. Update the counts in `runs-head` too.
-- **Experience** – the `<section id="experience">` block. Each bullet in `<ol class="steps">` is a step; add `class="wip"` for work still in progress.
-- **Skills** – the `<div class="matrix">` cells.
+## Performance and accessibility
 
-## Page features
-
-- Hero console replays your career as a CI run, with a **Re-run all jobs** button.
-- The top navigation is a pipeline: sections before the one you're reading turn green, the current one turns amber.
-- The badge in the top bar is the live status of `deploy.yml` from this repo.
-- Respects dark mode and the "reduce motion" setting (the run shows finished instantly).
+- The 3D view only renders while it is on screen, pauses in background tabs, and caps pixel density.
+- With "reduce motion" turned on, animations stop and the robot shows a still pose.
+- If WebGL is not available, the hero still works and shows the agent log.

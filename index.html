@@ -3,612 +3,465 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dhruv Patel – Support Engineer, DevOps</title>
-  <meta name="description" content="Dhruv Patel – Support Engineer in Ahmedabad working on CI/CD pipelines, Docker, Kubernetes (k3s), AWS and monitoring.">
-  <meta property="og:title" content="Dhruv Patel – Support Engineer, DevOps">
-  <meta property="og:description" content="CI/CD for 14+ applications, 25 Docker containers, AWS serverless projects and monitoring with Prometheus and Grafana.">
+  <title>Dhruv Patel – DevOps &amp; Support Engineer</title>
+  <meta name="description" content="Dhruv Patel, DevOps and Support Engineer in Ahmedabad. CI/CD for 14+ applications, IIS deployments, Docker and k3s, monitoring with Prometheus, Grafana and Loki.">
+  <meta name="theme-color" content="#090C11">
+  <link rel="canonical" href="https://dhruvpatel99.github.io/">
+  <meta property="og:title" content="Dhruv Patel – DevOps &amp; Support Engineer">
+  <meta property="og:description" content="Automating infrastructure, deployments and reliability. CI/CD for 14+ applications, 4 in production.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://dhruvpatel99.github.io">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2313203A'/%3E%3Cpath d='M9 16.5l4.5 4.5L23 11' stroke='%234CC38A' stroke-width='3.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <meta property="og:url" content="https://dhruvpatel99.github.io/">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23090C11'/%3E%3Cpath d='M9 16.5l4.5 4.5L23 11' stroke='%233FD8F5' stroke-width='3.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --paper: #F2F4F7;
-      --surface: #FFFFFF;
-      --ink: #13203A;
-      --muted: #59657A;
-      --line: #D9DEE6;
-      --pass: #1F8A5B;
-      --run: #C27C0E;
-      --queued: #A3ACBA;
-      --link: #1D55C8;
-      --pass-soft: rgba(31, 138, 91, 0.10);
-      --run-soft: rgba(194, 124, 14, 0.14);
-
-      /* The run console keeps one look in both themes, like a real CI log. */
-      --con-bg: #0F1B30;
-      --con-head: #13223C;
-      --con-line: #24365A;
-      --con-text: #D6DEEA;
-      --con-dim: #8494AE;
-      --con-pass: #4CC38A;
-      --con-run: #F2B33D;
-      --con-cmd: #8DB4FF;
-
-      --wrap: 1160px;
-      --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --paper: #0B1322;
-        --surface: #121D31;
-        --ink: #E6EBF2;
-        --muted: #9AA6B8;
-        --line: #26344C;
-        --pass: #4CC38A;
-        --run: #F2B33D;
-        --queued: #5B6880;
-        --link: #8DB4FF;
-        --pass-soft: rgba(76, 195, 138, 0.14);
-        --run-soft: rgba(242, 179, 61, 0.16);
-        --con-bg: #0A1222;
-        --con-head: #0F1A2E;
-        --con-line: #22324F;
-      }
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
-    body {
-      margin: 0;
-      background: var(--paper);
-      color: var(--ink);
-      font-family: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
-      font-size: 17px;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-    a { color: var(--link); text-underline-offset: 3px; }
-    a:hover { text-decoration-thickness: 2px; }
-    :focus-visible { outline: 3px solid var(--link); outline-offset: 3px; border-radius: 6px; }
-    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
-    .skip { position: absolute; left: -999px; top: 8px; z-index: 30; background: var(--surface); padding: 8px 12px; }
-    .skip:focus { left: 8px; }
-    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-
-    /* ---------- Status icons shared by the whole page ---------- */
-    .si { width: 18px; height: 18px; flex: none; display: inline-grid; place-items: center; border-radius: 50%; }
-    .si svg { width: 18px; height: 18px; display: block; }
-    .si.spin svg { animation: spin 1s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ---------- Sticky pipeline nav ---------- */
-    .topbar {
-      position: sticky; top: 0; z-index: 20;
-      background: color-mix(in srgb, var(--paper) 86%, transparent);
-      backdrop-filter: saturate(1.4) blur(10px);
-      -webkit-backdrop-filter: saturate(1.4) blur(10px);
-      border-bottom: 1px solid var(--line);
-    }
-    .topbar .wrap { display: flex; align-items: center; gap: 24px; height: 64px; }
-    .brand { font-weight: 800; color: var(--ink); text-decoration: none; white-space: nowrap; letter-spacing: -0.01em; }
-    .stages-nav { flex: 1; display: flex; justify-content: center; }
-    .stages-nav ol { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; }
-    .stages-nav li { display: flex; align-items: center; }
-    .stages-nav li + li::before {
-      content: ""; width: 34px; height: 2px; margin: 0 6px;
-      background: var(--line); border-radius: 2px;
-      transition: background .3s;
-    }
-    .stages-nav li.passed + li::before { background: var(--pass); }
-    .stages-nav a {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 6px 8px; border-radius: 999px;
-      color: var(--muted); text-decoration: none; font-weight: 600; font-size: 0.92rem;
-    }
-    .stages-nav a:hover { color: var(--ink); background: var(--surface); }
-    .stages-nav .node {
-      width: 12px; height: 12px; border-radius: 50%; flex: none;
-      border: 2px solid var(--queued); background: transparent;
-      transition: background .3s, border-color .3s, box-shadow .3s;
-    }
-    .stages-nav li.passed .node { background: var(--pass); border-color: var(--pass); }
-    .stages-nav li.current .node { border-color: var(--run); background: var(--run); box-shadow: 0 0 0 4px var(--run-soft); }
-    .stages-nav li.current a { color: var(--ink); }
-    .badge-link { display: inline-flex; align-items: center; white-space: nowrap; }
-    .badge-link img { height: 20px; display: block; }
-
-    /* ---------- Hero ---------- */
-    .hero { padding: 64px 0 40px; }
-    .hero .wrap {
-      display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-      gap: 56px; align-items: center;
-    }
-    .hero h1 {
-      font-size: clamp(3rem, 7vw, 5.4rem);
-      line-height: 0.95; letter-spacing: -0.035em; font-weight: 800;
-      margin: 0 0 22px;
-    }
-    .hero .role { font-size: clamp(1.2rem, 2.2vw, 1.5rem); line-height: 1.4; font-weight: 500; margin: 0 0 16px; max-width: 26ch; }
-    .hero .summary { color: var(--muted); margin: 0 0 30px; max-width: 52ch; }
-    .hero .summary strong { color: var(--ink); font-weight: 700; }
-    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
-    .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 11px 18px; border-radius: 10px;
-      font: inherit; font-weight: 700; font-size: 0.95rem; text-decoration: none; cursor: pointer;
-      border: 1.5px solid var(--ink); color: var(--ink); background: transparent;
-      transition: transform .15s;
-    }
-    .btn.primary { background: var(--ink); color: var(--paper); }
-    .btn:hover { text-decoration: none; transform: translateY(-1px); }
-    .btn svg { width: 18px; height: 18px; flex: none; }
-
-    /* ---------- The run console ---------- */
-    .run {
-      background: var(--con-bg); color: var(--con-text);
-      border-radius: 16px; overflow: hidden;
-      border: 1px solid var(--con-line);
-      box-shadow: 0 30px 60px -30px rgba(15, 27, 48, 0.55);
-    }
-    .run-head {
-      display: flex; justify-content: space-between; align-items: center; gap: 12px;
-      padding: 14px 18px; background: var(--con-head); border-bottom: 1px solid var(--con-line);
-    }
-    .run-title { display: flex; align-items: center; gap: 12px; min-width: 0; }
-    .run-title .si { width: 22px; height: 22px; }
-    .run-title .si svg { width: 22px; height: 22px; }
-    .run-name { font-weight: 700; font-size: 0.98rem; line-height: 1.3; }
-    .run-name span { color: var(--con-dim); font-weight: 500; }
-    .run-meta { font-size: 0.8rem; color: var(--con-dim); line-height: 1.3; }
-    .branch { font-family: var(--mono); font-size: 0.74rem; color: var(--con-cmd); background: rgba(141, 180, 255, 0.12); padding: 1px 6px; border-radius: 6px; }
-    .run-state { display: flex; align-items: center; gap: 10px; flex: none; }
-    .chip {
-      font-size: 0.78rem; font-weight: 700; padding: 3px 10px; border-radius: 999px;
-      border: 1px solid currentColor; white-space: nowrap;
-    }
-    .chip.queued { color: var(--con-dim); }
-    .chip.running { color: var(--con-run); }
-    .chip.success { color: var(--con-pass); }
-    .timer { font-family: var(--mono); font-size: 0.8rem; color: var(--con-dim); min-width: 52px; text-align: right; }
-
-    .run-body { display: grid; grid-template-columns: 226px minmax(0, 1fr); }
-    .jobs { list-style: none; margin: 0; padding: 12px 10px; border-right: 1px solid var(--con-line); }
-    .job {
-      display: grid; grid-template-columns: 18px 1fr; column-gap: 10px; align-items: start;
-      padding: 9px 10px; border-radius: 8px; font-size: 0.86rem; line-height: 1.3;
-    }
-    .job.active { background: rgba(255, 255, 255, 0.05); }
-    .job .jn { font-family: var(--mono); font-size: 0.78rem; font-weight: 500; word-break: break-word; }
-    .job .jd { grid-column: 2; color: var(--con-dim); font-size: 0.74rem; margin-top: 3px; }
-    .job.queued .jn { color: var(--con-dim); }
-
-    .log {
-      font-family: var(--mono); font-size: 0.8rem; line-height: 1.75;
-      padding: 14px 18px; margin: 0; overflow: hidden;
-      white-space: pre-wrap; word-break: break-word;
-    }
-    .log-wrap { display: grid; min-width: 0; }
-    .log-wrap > .log { grid-area: 1 / 1; }
-    .log.ghost { visibility: hidden; }
-    .log .ln { display: grid; grid-template-columns: 28px 1fr; animation: lnIn .25s ease-out; }
-    .log .no { color: #4A5B7B; user-select: none; text-align: right; padding-right: 10px; white-space: nowrap; }
-    .log .sub { display: block; color: var(--con-dim); padding-left: 1.3em; }
-    .log .grp { color: var(--con-text); font-weight: 600; }
-    .log .cmd { color: var(--con-cmd); }
-    .log .ok b { color: var(--con-pass); font-weight: 600; }
-    .log .wip b { color: var(--con-run); font-weight: 600; }
-    .log .dim { color: var(--con-dim); }
-    .cursor { display: inline-block; width: 8px; height: 1em; background: var(--con-run); vertical-align: -2px; margin-left: 4px; animation: blink 1s steps(1) infinite; }
-    @keyframes blink { 50% { opacity: 0; } }
-    @keyframes lnIn { from { opacity: 0; transform: translateY(3px); } }
-
-    .run-foot {
-      display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
-      padding: 12px 18px; border-top: 1px solid var(--con-line); background: var(--con-head);
-      font-size: 0.8rem; color: var(--con-dim);
-    }
-    .rerun {
-      font: inherit; font-weight: 700; font-size: 0.82rem; cursor: pointer;
-      color: var(--con-text); background: transparent;
-      border: 1px solid var(--con-line); border-radius: 8px; padding: 6px 12px;
-      display: inline-flex; align-items: center; gap: 7px;
-    }
-    .rerun:hover { border-color: var(--con-dim); }
-    .rerun svg { width: 14px; height: 14px; }
-
-    /* ---------- Sections ---------- */
-    section.block { padding: 72px 0 8px; }
-    .sec-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap; margin-bottom: 26px; }
-    .sec-head h2 { font-size: clamp(1.7rem, 3vw, 2.2rem); line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 6px; }
-    .sec-head p { color: var(--muted); margin: 0; max-width: 60ch; }
-    .sec-head .count { color: var(--muted); font-size: 0.92rem; }
-
-    /* Projects as workflow runs */
-    .runs { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); overflow: hidden; }
-    .runs-head {
-      display: flex; gap: 18px; flex-wrap: wrap; padding: 12px 20px;
-      border-bottom: 1px solid var(--line); font-size: 0.88rem; color: var(--muted);
-    }
-    .runs-head b { color: var(--ink); }
-    .runs details + details { border-top: 1px solid var(--line); }
-    .runs summary {
-      list-style: none; cursor: pointer;
-      display: grid; grid-template-columns: 22px minmax(0, 1fr) auto 18px; gap: 14px; align-items: center;
-      padding: 18px 20px;
-    }
-    .runs summary::-webkit-details-marker { display: none; }
-    .runs summary:hover { background: color-mix(in srgb, var(--paper) 55%, var(--surface)); }
-    .runs summary .si, .runs summary .si svg { width: 20px; height: 20px; }
-    .r-title { font-weight: 700; font-size: 1.08rem; line-height: 1.3; }
-    .r-sub { color: var(--muted); font-size: 0.88rem; margin-top: 2px; }
-    .r-sub .branch { color: var(--link); background: color-mix(in srgb, var(--link) 10%, transparent); }
-    .r-state { font-size: 0.85rem; font-weight: 600; text-align: right; white-space: nowrap; }
-    .r-state.ok { color: var(--pass); }
-    .r-state.wip { color: var(--run); }
-    .chev { width: 18px; height: 18px; color: var(--muted); transition: transform .2s; }
-    details[open] .chev { transform: rotate(90deg); }
-    .r-body { padding: 0 20px 22px 56px; }
-    .r-body > p { margin: 0 0 14px; max-width: 68ch; }
-    .steps { list-style: none; margin: 0 0 16px; padding: 0; border-left: 2px solid var(--line); }
-    .steps li { position: relative; padding: 4px 0 10px 24px; max-width: 70ch; }
-    .steps li::before {
-      content: ""; position: absolute; left: -9px; top: 8px;
-      width: 16px; height: 16px; border-radius: 50%;
-      background: var(--pass) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.3l2.6 2.6L12 5.5' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat;
-    }
-    .steps li.wip::before { background: var(--surface); border: 2px solid var(--run); width: 16px; height: 16px; }
-    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; padding: 0; list-style: none; }
-    .tags li { font-size: 0.8rem; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); color: var(--ink); }
-    .links { display: flex; gap: 18px; flex-wrap: wrap; font-weight: 600; font-size: 0.95rem; }
-
-    /* Experience as jobs */
-    .exp { display: grid; gap: 18px; }
-    .exp article {
-      display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 28px;
-      padding: 26px 24px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface);
-    }
-    .exp .side { color: var(--muted); font-size: 0.92rem; }
-    .exp .side .state { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 6px; }
-    .exp .side .state.wip { color: var(--run); }
-    .exp .side .state.ok { color: var(--pass); }
-    .exp h3 { font-size: 1.3rem; line-height: 1.3; margin: 0 0 2px; }
-    .exp .co { color: var(--muted); margin: 0 0 16px; }
-
-    /* Skills as a build matrix */
-    .matrix { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
-    .cell { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 18px 16px; }
-    .cell h3 { font-size: 1rem; margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
-    .cell .tags { margin: 0; }
-
-    /* Contact */
-    footer.contact { margin-top: 88px; padding: 64px 0 36px; background: var(--con-bg); color: var(--con-text); }
-    .dispatch {
-      display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 420px); gap: 48px; align-items: center;
-    }
-    .dispatch h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 14px; }
-    .dispatch p { color: var(--con-dim); margin: 0; max-width: 50ch; }
-    .wd { background: var(--con-head); border: 1px solid var(--con-line); border-radius: 14px; padding: 20px; }
-    .wd-title { font-weight: 700; margin: 0 0 4px; }
-    .wd-sub { color: var(--con-dim); font-size: 0.85rem; margin: 0 0 16px; }
-    .wd-field { font-size: 0.82rem; color: var(--con-dim); margin-bottom: 6px; }
-    .wd-select {
-      display: flex; justify-content: space-between; align-items: center;
-      border: 1px solid var(--con-line); border-radius: 8px; padding: 8px 12px; margin-bottom: 16px;
-      font-family: var(--mono); font-size: 0.82rem; color: var(--con-text);
-    }
-    .wd .btn { width: 100%; justify-content: center; border-color: var(--con-pass); background: var(--con-pass); color: #08301E; }
-    .wd .alt { display: flex; gap: 10px; margin-top: 10px; }
-    .wd .alt .btn { flex: 1; background: transparent; color: var(--con-text); border-color: var(--con-line); }
-    footer .fine { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--con-line); font-size: 0.85rem; color: var(--con-dim); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-    footer .fine a { color: var(--con-text); }
-
-    /* ---------- Responsive ---------- */
-    @media (max-width: 980px) {
-      .hero .wrap { grid-template-columns: 1fr; gap: 40px; }
-      .matrix { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .dispatch { grid-template-columns: 1fr; }
-      .badge-link { display: none; }
-    }
-    @media (max-width: 700px) {
-      body { font-size: 16px; }
-      .topbar .wrap { gap: 12px; height: 56px; }
-      .stages-nav { justify-content: flex-end; }
-      .stages-nav li + li::before { width: 14px; margin: 0 2px; }
-      .stages-nav a { padding: 6px 4px; }
-      .stages-nav .lbl { display: none; }
-      .stages-nav li.current .lbl { display: inline; }
-      .hero { padding-top: 40px; }
-      .run-body { grid-template-columns: 1fr; min-height: 0; }
-      .jobs { border-right: 0; border-bottom: 1px solid var(--con-line); padding: 8px; }
-      .job { padding: 6px 8px; grid-template-columns: 18px 1fr auto; }
-      .job .jd { grid-column: 3; grid-row: 1; margin: 0; align-self: center; }
-      .log { font-size: 0.74rem; padding: 12px; }
-      .log .ln { grid-template-columns: 24px 1fr; }
-      .log .no { padding-right: 8px; }
-      .run-head { padding: 12px 14px; }
-      .run-head { flex-wrap: wrap; }
-      .runs summary { grid-template-columns: 20px minmax(0, 1fr) 18px; padding: 16px; }
-      .runs summary .r-state { display: none; }
-      .r-body { padding: 0 16px 20px 18px; }
-      .exp article { grid-template-columns: 1fr; gap: 10px; padding: 22px 18px; }
-      .matrix { grid-template-columns: 1fr; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after { transition: none !important; animation: none !important; }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script>document.documentElement.classList.add("js");</script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Dhruv Patel",
+    "jobTitle": "Support Engineer (DevOps)",
+    "worksFor": { "@type": "Organization", "name": "Naapbooks Limited" },
+    "address": { "@type": "PostalAddress", "addressLocality": "Ahmedabad", "addressRegion": "Gujarat", "addressCountry": "IN" },
+    "email": "mailto:dhruv00987@gmail.com",
+    "url": "https://dhruvpatel99.github.io/",
+    "sameAs": ["https://github.com/dhruvpatel99", "https://www.linkedin.com/in/dhruv0911"],
+    "alumniOf": "Silver Oak University"
+  }
+  </script>
 </head>
 <body>
+  <!-- Icon set (generic line icons, reused across the page) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-pipeline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.2"/><circle cx="5" cy="18" r="2.2"/><circle cx="19" cy="12" r="2.2"/><path d="M7.2 6h3.3a3 3 0 0 1 3 3v0a3 3 0 0 0 3 3h.3M7.2 18h3.3a3 3 0 0 0 3-3v0"/></symbol>
+      <symbol id="i-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.4M12 18.8v2.4M4.2 7.5l2.1 1.2M17.7 15.3l2.1 1.2M4.2 16.5l2.1-1.2M17.7 8.7l2.1-1.2"/><circle cx="12" cy="12" r="7.2"/></symbol>
+      <symbol id="i-container" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></symbol>
+      <symbol id="i-cluster" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2.8l7.8 4.5v9.4L12 21.2l-7.8-4.5V7.3z"/><circle cx="12" cy="12" r="2.4"/><path d="M12 5.6v4M12 14.4v4M6.5 8.8l3.4 2M14.1 13.2l3.4 2M6.5 15.2l3.4-2M14.1 10.8l3.4-2"/></symbol>
+      <symbol id="i-playbook" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="3" width="15" height="18" rx="2.5"/><path d="M8 8.5l1.4 1.4L12 7.3M14 9h2.5M8 14.5l1.4 1.4 2.6-2.6M14 15h2.5"/></symbol>
+      <symbol id="i-web" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 8.5h18M6 6.3h.01M8.3 6.3h.01"/><path d="M8.5 13l-2 2 2 2M15.5 13l2 2-2 2M13 12.5l-2 5"/></symbol>
+      <symbol id="i-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="4" y="3.5" width="16" height="7" rx="2"/><rect x="4" y="13.5" width="16" height="7" rx="2"/><path d="M7.5 7h.01M7.5 17h.01M11 7h5.5M11 17h5.5"/></symbol>
+      <symbol id="i-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M7 9.5l3 2.5-3 2.5M12.5 15H17"/></symbol>
+      <symbol id="i-gauge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.2 17.5a8.5 8.5 0 1 1 15.6 0"/><path d="M12 13.5l4-4.5"/><circle cx="12" cy="14" r="1.6"/></symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M6.5 15.5l3.5-4 3 2.5 4.5-6"/></symbol>
+      <symbol id="i-logs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5 6h14M5 10h10M5 14h14M5 18h8"/></symbol>
+      <symbol id="i-db" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><ellipse cx="12" cy="6" rx="7" ry="2.8"/><path d="M5 6v12c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8V6M5 12c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8"/></symbol>
+      <symbol id="i-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M7 18.5h10.5a4 4 0 0 0 .4-8 6 6 0 0 0-11.6-1.3A4.7 4.7 0 0 0 7 18.5z"/></symbol>
+      <symbol id="i-shell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7l5 5-5 5M12 17h7"/></symbol>
+      <symbol id="i-branch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="6.5" cy="5.5" r="2.2"/><circle cx="6.5" cy="18.5" r="2.2"/><circle cx="17.5" cy="8" r="2.2"/><path d="M6.5 7.7v8.6M17.5 10.2c0 4-6.5 3-10.4 6.2"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7.5 3v5.5c0 4.6-3.1 8-7.5 9.5-4.4-1.5-7.5-4.9-7.5-9.5V6z"/><path d="M9 12l2.1 2.1L15.2 10"/></symbol>
+      <symbol id="i-support" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5v-1.5a7.5 7.5 0 0 1 15 0v1.5"/><rect x="3.5" y="13" width="4" height="6" rx="1.5"/><rect x="16.5" y="13" width="4" height="6" rx="1.5"/><path d="M18.5 19c0 1.4-1.6 2-3.5 2h-2"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/></symbol>
+      <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></symbol>
+      <symbol id="i-linkedin" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21H9z"/></symbol>
+    </defs>
+  </svg>
+
   <a class="skip" href="#projects">Skip to projects</a>
 
   <header class="topbar">
     <div class="wrap">
-      <a class="brand" href="#career">Dhruv Patel</a>
+      <a class="brand" href="#top" aria-label="Dhruv Patel, back to top"><span class="brand-mark" aria-hidden="true">dp</span><span class="brand-name">Dhruv Patel</span></a>
       <nav class="stages-nav" aria-label="Sections">
         <ol id="stagesNav">
-          <li data-sec="career"><a href="#career"><span class="node"></span><span class="lbl">Career</span></a></li>
-          <li data-sec="projects"><a href="#projects"><span class="node"></span><span class="lbl">Projects</span></a></li>
-          <li data-sec="experience"><a href="#experience"><span class="node"></span><span class="lbl">Experience</span></a></li>
+          <li data-sec="about"><a href="#about"><span class="node"></span><span class="lbl">About</span></a></li>
           <li data-sec="skills"><a href="#skills"><span class="node"></span><span class="lbl">Skills</span></a></li>
+          <li data-sec="experience"><a href="#experience"><span class="node"></span><span class="lbl">Experience</span></a></li>
+          <li data-sec="projects"><a href="#projects"><span class="node"></span><span class="lbl">Projects</span></a></li>
+          <li data-sec="stack"><a href="#stack"><span class="node"></span><span class="lbl">Stack</span></a></li>
           <li data-sec="contact"><a href="#contact"><span class="node"></span><span class="lbl">Contact</span></a></li>
         </ol>
       </nav>
       <a class="badge-link" href="https://github.com/dhruvpatel99/dhruvpatel99.github.io/actions/workflows/deploy.yml" target="_blank" rel="noopener" title="Live status of the workflow that deploys this site">
-        <img src="https://github.com/dhruvpatel99/dhruvpatel99.github.io/actions/workflows/deploy.yml/badge.svg" alt="Deploy status of this site" onerror="this.parentNode.style.display='none'">
+        <img src="https://github.com/dhruvpatel99/dhruvpatel99.github.io/actions/workflows/deploy.yml/badge.svg" alt="Deploy status of this site" width="150" height="20" onerror="this.parentNode.style.display='none'">
       </a>
     </div>
   </header>
 
-  <main>
+  <main id="top">
     <!-- ================= HERO ================= -->
-    <section class="hero" id="career">
+    <section class="hero" aria-labelledby="hero-title">
       <div class="wrap">
-        <div>
-          <h1>Dhruv<br>Patel</h1>
-          <p class="role">Support Engineer who builds the pipelines, servers and monitoring that keep releases calm.</p>
+        <div class="hero-copy">
+          <p class="whoami"><span class="pulse-dot" aria-hidden="true"></span><span><strong>Dhruv Patel</strong>, Support Engineer at Naapbooks, Ahmedabad</span></p>
+          <h1 id="hero-title">DevOps &amp; Support Engineer
+            <span class="role-line">Automating infrastructure, deployments and reliability.</span>
+          </h1>
           <p class="summary">
-            At Naapbooks I built CI/CD for <strong>14+ applications</strong> (<strong>4 in production</strong>) with GitHub Actions and Jenkins,
-            run <strong>25 Docker containers</strong> on Ubuntu, and I'm moving them to Kubernetes (k3s).
-            B.Tech in Cybersecurity, based in Ahmedabad.
+            I build and run the CI/CD pipelines, IIS and Linux deployments, containers and monitoring behind
+            <strong>14+ applications</strong>, <strong>4 of them in production</strong>, and handle L1/L2 support when something breaks.
           </p>
           <div class="actions">
-            <a class="btn primary" href="mailto:dhruv00987@gmail.com">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-              Email me
-            </a>
-            <a class="btn" href="https://github.com/dhruvpatel99" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
-              GitHub
-            </a>
-            <a class="btn" href="https://www.linkedin.com/in/dhruv0911" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21H9z"/></svg>
-              LinkedIn
-            </a>
-            <a class="btn" href="resume.pdf" download>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
-              Download CV
-            </a>
+            <a class="btn primary" href="#projects">See my projects</a>
+            <a class="btn" href="resume.pdf" download><svg aria-hidden="true"><use href="#i-download"/></svg>Download CV</a>
+            <a class="btn icon" href="https://github.com/dhruvpatel99" target="_blank" rel="noopener" aria-label="GitHub"><svg aria-hidden="true"><use href="#i-github"/></svg></a>
+            <a class="btn icon" href="https://www.linkedin.com/in/dhruv0911" target="_blank" rel="noopener" aria-label="LinkedIn"><svg aria-hidden="true"><use href="#i-linkedin"/></svg></a>
           </div>
+          <ul class="proof" aria-label="Key numbers from my work">
+            <li><b>14+</b><span>applications on CI/CD</span></li>
+            <li><b>4</b><span>production pipelines</span></li>
+            <li><b>25</b><span>containers moving to k3s</span></li>
+          </ul>
         </div>
 
-        <!-- Career shown as a CI run -->
-        <div class="run" role="region" aria-label="My career shown as a CI pipeline run">
-          <div class="run-head">
-            <div class="run-title">
-              <span class="si" id="runIcon"></span>
-              <div>
-                <div class="run-name">career.yml <span>run #2026</span></div>
-                <div class="run-meta"><span class="branch">main</span> pushed by dhruvpatel99</div>
-              </div>
-            </div>
-            <div class="run-state">
-              <span class="chip queued" id="runChip">Queued</span>
-              <span class="timer" id="runTimer">0s</span>
-            </div>
+        <div class="agent-stage" id="agentStage" role="button" aria-label="ops-agent, a 3D DevOps assistant robot. Activate it to see the next thing I work on.">
+          <canvas id="agentCanvas"></canvas>
+          <div class="agent-boot" aria-hidden="true">booting agent<span class="caret"></span></div>
+          <div class="hud hud-panel">
+            <div class="hud-id" aria-hidden="true"><span class="pulse-dot"></span><span>ops-agent</span><small>online</small></div>
+            <div class="hud-log" id="agentLog" aria-live="polite"></div>
           </div>
-          <div class="run-body">
-            <ol class="jobs" id="jobs" aria-label="Jobs"></ol>
-            <div class="log-wrap" aria-hidden="true"><div class="log ghost" id="logGhost"></div><div class="log" id="log"></div></div>
-          </div>
-          <div class="run-foot">
-            <span>4 jobs, triggered by a career in DevOps</span>
-            <button class="rerun" id="rerun" type="button">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9M13.5 2.5v3h-3"/></svg>
-              Re-run all jobs
-            </button>
-          </div>
-          <p class="sr-only">Diploma in Computer Engineering 2018 to 2022, B.Tech in Cybersecurity 2022 to 2025, penetration testing intern at Alicorn Solutions January to April 2025, Support Engineer at Naapbooks since July 2025, currently moving 25 Docker containers to k3s.</p>
+          <div class="hud hud-hint" aria-hidden="true">click me</div>
         </div>
       </div>
     </section>
 
-    <!-- ================= PROJECTS ================= -->
-    <section class="block" id="projects">
+    <!-- ================= ABOUT ================= -->
+    <section class="block" id="about" aria-labelledby="about-title">
       <div class="wrap">
-        <div class="sec-head">
-          <div>
-            <h2>Projects</h2>
-            <p>Each project is shown as a workflow run. Open one to see its steps.</p>
+        <div class="sec-head" data-reveal>
+          <p class="path">~/about</p>
+          <h2 id="about-title">I make releases boring</h2>
+          <p>A support engineer who moved into DevOps by automating the work that used to be done by hand.</p>
+        </div>
+        <div class="about-grid">
+          <div class="about-text glass" data-reveal>
+            <p>At <strong>Naapbooks Limited</strong> I build the pipelines that ship our applications, deploy them to <strong>IIS on Windows Server</strong> and to <strong>Ubuntu servers</strong>, run the Docker containers behind three products, and watch everything through Prometheus, Grafana and Loki.</p>
+            <p>When production breaks, I'm on it: I've fixed ASP.NET Core startup failures (HTTP 500.30) and service outages (HTTP 503) on live IIS servers, and I give L1/L2 support for infrastructure and applications.</p>
+            <p>My degree is in <strong>cybersecurity</strong>, so least privilege, secrets management and rollback-ready releases matter to me as much as speed.</p>
+            <ul class="facts">
+              <li><span class="k">Education</span><span>B.Tech, Cybersecurity, Silver Oak University (2022–2025)<br>Diploma, Computer Engineering, VPMP Polytechnic (2018–2022)</span></li>
+              <li><span class="k">Based in</span><span>Ahmedabad, Gujarat, India</span></li>
+              <li><span class="k">Languages</span><span>Gujarati, Hindi, English</span></li>
+            </ul>
           </div>
-        </div>
 
-        <div class="runs">
-          <div class="runs-head"><span><b>5</b> workflow runs</span><span><b>3</b> passed</span><span><b>2</b> in progress</span></div>
-
-          <details open>
-            <summary>
-              <span class="si" data-icon="pass"></span>
-              <div>
-                <div class="r-title">CloudOps Helpdesk on AWS</div>
-                <div class="r-sub"><span class="branch">aws/serverless</span> Personal project, 2026</div>
+          <!-- Career shown as a CI run -->
+          <div class="run" role="region" aria-label="My career shown as a CI pipeline run" data-reveal data-reveal-delay="1">
+            <div class="run-head">
+              <div class="run-title">
+                <span class="si" id="runIcon"></span>
+                <div>
+                  <div class="run-name">career.yml <span>run #2026</span></div>
+                  <div class="run-meta"><span class="branch">main</span> pushed by dhruvpatel99</div>
+                </div>
               </div>
-              <span class="r-state ok">Success</span>
-              <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 3.5L10.5 8 6 12.5"/></svg>
-            </summary>
-            <div class="r-body">
-              <p>A small IT ticketing app on serverless AWS. Users create tickets, list them and change their status from a web page.</p>
-              <ol class="steps">
-                <li>Built an HTTPS API with API Gateway that calls a Python Lambda function and stores tickets in DynamoDB.</li>
-                <li>Gave Lambda a least-privilege IAM role: three DynamoDB actions on one table, no access keys in code.</li>
-                <li>Built a VPC with a public subnet, Internet Gateway, route table and security groups, and hosted Apache on EC2.</li>
-                <li>Tested every route with curl: GET 200, POST 201, PATCH 200.</li>
-                <li class="wip">Frontend kept in a private S3 bucket; CloudFront with Origin Access Control is designed and waiting for AWS account verification.</li>
-              </ol>
-              <ul class="tags"><li>API Gateway</li><li>Lambda (Python)</li><li>DynamoDB</li><li>IAM</li><li>S3</li><li>CloudFront</li><li>VPC</li><li>EC2</li><li>CloudWatch</li></ul>
-              <div class="links"><a href="https://github.com/dhruvpatel99/cloudops-helpdesk-aws" target="_blank" rel="noopener">View code on GitHub</a></div>
-            </div>
-          </details>
-
-          <details>
-            <summary>
-              <span class="si" data-icon="pass"></span>
-              <div>
-                <div class="r-title">Centralized monitoring and logging</div>
-                <div class="r-sub"><span class="branch">observability</span> Naapbooks</div>
+              <div class="run-state">
+                <span class="chip queued" id="runChip">Queued</span>
+                <span class="timer" id="runTimer">0s</span>
               </div>
-              <span class="r-state ok">Success</span>
-              <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 3.5L10.5 8 6 12.5"/></svg>
-            </summary>
-            <div class="r-body">
-              <p>One place to see the health, metrics and logs of IIS-hosted .NET applications.</p>
-              <ol class="steps">
-                <li>Designed the setup with Prometheus for metrics and Loki with Promtail for logs.</li>
-                <li>Built real-time Grafana dashboards for server metrics and API performance.</li>
-                <li>Set up alerts for high resource usage and application failures, which cut troubleshooting time.</li>
-              </ol>
-              <ul class="tags"><li>Prometheus</li><li>Grafana</li><li>Loki</li><li>Promtail</li><li>IIS</li><li>.NET</li></ul>
             </div>
-          </details>
-
-          <details>
-            <summary>
-              <span class="si" data-icon="run"></span>
-              <div>
-                <div class="r-title">Moving 25 Docker containers to Kubernetes (k3s)</div>
-                <div class="r-sub"><span class="branch">containers/k3s</span> Naapbooks</div>
-              </div>
-              <span class="r-state wip">In progress</span>
-              <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 3.5L10.5 8 6 12.5"/></svg>
-            </summary>
-            <div class="r-body">
-              <p>The staging server runs 25 containers for 3 products. I'm leading their move to k3s so deployments can happen without downtime.</p>
-              <ol class="steps">
-                <li>Running 25 containers for 3 products on an Ubuntu 22.04 staging server.</li>
-                <li class="wip">Moving them to k3s for zero-downtime deployments.</li>
-              </ol>
-              <ul class="tags"><li>Docker</li><li>Kubernetes (k3s)</li><li>Ubuntu 22.04</li></ul>
+            <div class="run-body">
+              <ol class="jobs" id="jobs" aria-label="Jobs"></ol>
+              <div class="log-wrap" aria-hidden="true"><div class="log ghost" id="logGhost"></div><div class="log" id="log"></div></div>
             </div>
-          </details>
-
-          <details>
-            <summary>
-              <span class="si" data-icon="run"></span>
-              <div>
-                <div class="r-title">Baari – live queues for clinics and salons</div>
-                <div class="r-sub"><span class="branch">side-project</span> Built with a friend</div>
-              </div>
-              <span class="r-state wip">In progress</span>
-              <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 3.5L10.5 8 6 12.5"/></svg>
-            </summary>
-            <div class="r-body">
-              <p>Customers scan a QR code to join a queue and watch their place live, with a map of nearby wait times. I handle the DevOps side: builds, deployment and hosting.</p>
-              <ul class="tags"><li>Java</li><li>React</li><li>CI/CD</li></ul>
-              <div class="links"><a href="https://github.com/dhruvpatel99/baari" target="_blank" rel="noopener">View code on GitHub</a></div>
+            <div class="run-foot">
+              <span>4 jobs, triggered by a career in DevOps</span>
+              <button class="rerun" id="rerun" type="button">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9M13.5 2.5v3h-3"/></svg>
+                Re-run all jobs
+              </button>
             </div>
-          </details>
-
-          <details>
-            <summary>
-              <span class="si" data-icon="pass"></span>
-              <div>
-                <div class="r-title">Web-based vulnerability assessment tool</div>
-                <div class="r-sub"><span class="branch">security</span> B.Tech major project, 2025</div>
-              </div>
-              <span class="r-state ok">Success</span>
-              <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 3.5L10.5 8 6 12.5"/></svg>
-            </summary>
-            <div class="r-body">
-              <p>A web application that scans sites for vulnerabilities from the OWASP Top 10.</p>
-              <ol class="steps">
-                <li>Scans web applications against the OWASP Top 10.</li>
-                <li>Produces a structured security report for each scan.</li>
-              </ol>
-              <ul class="tags"><li>Web security</li><li>OWASP Top 10</li></ul>
-            </div>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= EXPERIENCE ================= -->
-    <section class="block" id="experience">
-      <div class="wrap">
-        <div class="sec-head">
-          <div>
-            <h2>Experience</h2>
-            <p>Production support with a growing share of DevOps work.</p>
+            <p class="sr-only">Diploma in Computer Engineering 2018 to 2022, B.Tech in Cybersecurity 2022 to 2025, penetration testing intern at Alicorn Solutions January to April 2025, Support Engineer at Naapbooks since July 2025, currently moving 25 Docker containers to k3s.</p>
           </div>
-        </div>
-        <div class="exp">
-          <article>
-            <div class="side">
-              <div class="state wip"><span class="si" data-icon="run"></span>Running</div>
-              July 2025 – now<br>Ahmedabad
-            </div>
-            <div>
-              <h3>Support Engineer</h3>
-              <p class="co">Naapbooks Limited</p>
-              <ol class="steps">
-                <li>Build and maintain CI/CD pipelines for 14+ applications (4 production, 10+ internal and staging) with GitHub Actions and Jenkins.</li>
-                <li>Set up a Linux Jenkins pipeline that deploys a production web app to a shared Ubuntu 22.04 server hosting 7 domains on every push to staging.</li>
-                <li>Built Jenkins pipelines that deploy an API service and an IIS-hosted UI, including database migrations with Alembic.</li>
-                <li>Scripted builds and IIS deployments for .NET and Flutter Web apps, with PowerShell health checks before go-live.</li>
-                <li>Fixed production IIS failures (HTTP 500.30 and 503) and provide L1/L2 support for infrastructure and applications.</li>
-                <li>Rolled out standard email signatures to all Microsoft 365 mailboxes with Exchange Online PowerShell, piloting first.</li>
-                <li class="wip">Manage 25 Docker containers for 3 products and lead their move to Kubernetes (k3s).</li>
-              </ol>
-            </div>
-          </article>
-          <article>
-            <div class="side">
-              <div class="state ok"><span class="si" data-icon="pass"></span>Passed</div>
-              Jan – Apr 2025<br>Ahmedabad
-            </div>
-            <div>
-              <h3>Penetration Testing Intern</h3>
-              <p class="co">Alicorn Solutions</p>
-              <ol class="steps">
-                <li>Tested web applications for vulnerabilities against the OWASP Top 10.</li>
-                <li>Wrote vulnerability reports with clear fixes for development teams.</li>
-              </ol>
-            </div>
-          </article>
         </div>
       </div>
     </section>
 
     <!-- ================= SKILLS ================= -->
-    <section class="block" id="skills">
+    <section class="block" id="skills" aria-labelledby="skills-title">
       <div class="wrap">
-        <div class="sec-head">
-          <div>
-            <h2>Skills</h2>
-            <p>The tools in my build matrix, used at work or in projects.</p>
-          </div>
+        <div class="sec-head" data-reveal>
+          <p class="path">~/skills</p>
+          <h2 id="skills-title">What I'm trusted with</h2>
+          <p>Each skill comes with where I've used it.</p>
         </div>
-        <div class="matrix">
-          <div class="cell"><h3>CI/CD and automation</h3><ul class="tags"><li>GitHub Actions</li><li>Jenkins</li><li>Git</li><li>Self-hosted runners</li><li>Ansible</li><li>Bash</li><li>PowerShell</li></ul></div>
-          <div class="cell"><h3>Cloud (AWS)</h3><ul class="tags"><li>EC2</li><li>VPC</li><li>S3</li><li>Lambda</li><li>API Gateway</li><li>DynamoDB</li><li>IAM</li><li>CloudFront</li><li>CloudWatch</li></ul></div>
-          <div class="cell"><h3>Containers</h3><ul class="tags"><li>Docker</li><li>Kubernetes (k3s)</li></ul></div>
-          <div class="cell"><h3>Monitoring and logging</h3><ul class="tags"><li>Prometheus</li><li>Grafana</li><li>Loki</li><li>Promtail</li></ul></div>
-          <div class="cell"><h3>Systems</h3><ul class="tags"><li>Linux (Ubuntu)</li><li>Windows Server</li><li>IIS</li><li>Active Directory</li><li>Microsoft 365</li><li>Exchange Online PowerShell</li></ul></div>
-          <div class="cell"><h3>Databases and security</h3><ul class="tags"><li>MySQL</li><li>PostgreSQL</li><li>Alembic</li><li>Penetration testing</li><li>OWASP Top 10</li></ul></div>
+        <div class="caps">
+          <article class="cap glass" data-reveal>
+            <div class="cap-ic"><svg aria-hidden="true"><use href="#i-pipeline"/></svg></div>
+            <h3>CI/CD engineering</h3>
+            <p>Pipelines for 14+ applications, 4 in production, sped up with dependency caching and parallel jobs.</p>
+            <ul class="tags"><li>GitHub Actions</li><li>Jenkins</li><li>Self-hosted runners</li></ul>
+          </article>
+          <article class="cap glass" data-reveal data-reveal-delay="1">
+            <div class="cap-ic"><svg aria-hidden="true"><use href="#i-web"/></svg></div>
+            <h3>Windows and IIS deployments</h3>
+            <p>Scripted builds and IIS releases with PowerShell health checks before go-live and rollback-ready configuration.</p>
+            <ul class="tags"><li>IIS</li><li>Windows Server</li><li>PowerShell</li></ul>
+          </article>
+          <article class="cap glass" data-reveal data-reveal-delay="2">
+            <div class="cap-ic"><svg aria-hidden="true"><use href="#i-container"/></svg></div>
+            <h3>Containers and orchestration</h3>
+            <p>25 Docker containers for 3 products on Ubuntu 22.04, now moving to k3s for zero-downtime deployments.</p>
+            <ul class="tags"><li>Docker</li><li>Kubernetes (k3s)</li><li>Linux</li></ul>
+          </article>
+          <article class="cap glass" data-reveal>
+            <div class="cap-ic"><svg aria-hidden="true"><use href="#i-chart"/></svg></div>
+            <h3>Monitoring and alerting</h3>
+            <p>Metrics, logs and alerts for IIS-hosted .NET applications in one place, which cut troubleshooting time.</p>
+            <ul class="tags"><li>Prometheus</li><li>Grafana</li><li>Loki</li></ul>
+          </article>
+          <article class="cap glass" data-reveal data-reveal-delay="1">
+            <div class="cap-ic"><svg aria-hidden="true"><use href="#i-support"/></svg></div>
+            <h3>Production support</h3>
+            <p>L1/L2 support for infrastructure and applications, including HTTP 500.30 and 503 outages on production IIS.</p>
+            <ul class="tags"><li>Troubleshooting</li><li>Active Directory</li><li>Microsoft 365</li></ul>
+          </article>
+          <article class="cap glass" data-reveal data-reveal-delay="2">
+            <div class="cap-ic"><svg aria-hidden="true"><use href="#i-shield"/></svg></div>
+            <h3>Security and access</h3>
+            <p>Web application testing against the OWASP Top 10, role-based access in MySQL, and secrets kept out of pipelines.</p>
+            <ul class="tags"><li>OWASP Top 10</li><li>MySQL RBAC</li><li>Secrets management</li></ul>
+          </article>
         </div>
+      </div>
+    </section>
+
+    <!-- ================= EXPERIENCE ================= -->
+    <section class="block" id="experience" aria-labelledby="experience-title">
+      <div class="wrap">
+        <div class="sec-head" data-reveal>
+          <p class="path">~/experience</p>
+          <h2 id="experience-title">Experience</h2>
+          <p>Production support with a growing share of DevOps work.</p>
+        </div>
+        <div class="timeline">
+          <article class="xp glass" data-reveal>
+            <span class="si" data-icon="run"></span>
+            <div class="xp-head">
+              <div>
+                <h3>Support Engineer</h3>
+                <p class="co">Naapbooks Limited, Ahmedabad</p>
+              </div>
+              <div class="when"><span class="state wip">Running</span>July 2025 – now</div>
+            </div>
+            <p class="products">Applications I deploy: <b>VizMan</b> <b>InsiderQ</b> <b>eNotary</b></p>
+            <ul class="steps">
+              <li><strong>CI/CD and IIS deployments for VizMan, InsiderQ and eNotary.</strong></li>
+              <li>Build and maintain CI/CD pipelines for 14+ applications (4 production, 10+ internal and staging) with GitHub Actions and Jenkins.</li>
+              <li>Scripted builds and IIS deployments for .NET and Flutter Web applications, replacing manual release steps, with PowerShell health checks before go-live.</li>
+              <li>Built Jenkins pipelines that deploy an API service and an IIS-hosted UI, including database schema migrations with Alembic.</li>
+              <li>Set up a Linux Jenkins pipeline that deploys a production web application to a shared Ubuntu 22.04 server hosting 7 domains on every push to staging.</li>
+              <li>Set up role-based access control (RBAC) in MySQL.</li>
+              <li>Environment-based configuration, secure secrets management and rollback-ready deployments; self-hosted runners for on-premises deployments.</li>
+              <li>Resolved ASP.NET Core startup failures (HTTP 500.30) and service outages (HTTP 503) on production IIS servers; L1/L2 support.</li>
+              <li>Rolled out standard email signatures to all Microsoft 365 mailboxes with Exchange Online PowerShell, piloting first.</li>
+              <li class="wip">Manage 25 Docker containers for 3 products and lead their move to Kubernetes (k3s).</li>
+            </ul>
+          </article>
+          <article class="xp glass" data-reveal>
+            <span class="si" data-icon="pass"></span>
+            <div class="xp-head">
+              <div>
+                <h3>Penetration Testing Intern</h3>
+                <p class="co">Alicorn Solutions, Ahmedabad</p>
+              </div>
+              <div class="when"><span class="state ok">Passed</span>Jan – Apr 2025</div>
+            </div>
+            <ul class="steps">
+              <li>Penetration testing and vulnerability assessments of web applications against the OWASP Top 10.</li>
+              <li>Vulnerability reports with clear fixes for development teams, working with senior analysts.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PROJECTS ================= -->
+    <section class="block" id="projects" aria-labelledby="projects-title">
+      <div class="wrap">
+        <div class="sec-head" data-reveal>
+          <p class="path">~/projects</p>
+          <h2 id="projects-title">Projects</h2>
+          <p>Each card shows the stages of the work and where it stands today.</p>
+        </div>
+
+        <div class="projects">
+          <!-- Featured: real production deployments -->
+          <article class="proj featured glass" data-reveal>
+            <div class="proj-top">
+              <span class="proj-status ok"><span class="si" data-icon="pass"></span>In production</span>
+              <span class="branch">naapbooks/iis</span>
+            </div>
+            <div class="featured-body">
+              <div>
+                <h3>CI/CD and IIS deployments for VizMan, InsiderQ and eNotary</h3>
+                <p class="where">Naapbooks, 2025 – now</p>
+                <ol class="pipe" aria-label="Pipeline stages: build, deploy to IIS, health check">
+                  <li class="ok"><span class="dot"></span>build</li>
+                  <li class="ok"><span class="dot"></span>deploy to IIS</li>
+                  <li class="ok"><span class="dot"></span>health check</li>
+                </ol>
+                <ul class="steps">
+                  <li>Automated build and IIS deployment, replacing manual release steps.</li>
+                  <li>PowerShell health checks validate each deployment before go-live.</li>
+                  <li>Environment-based configuration, secrets management and rollback-ready releases.</li>
+                </ul>
+                <ul class="tags"><li>GitHub Actions</li><li>Jenkins</li><li>IIS</li><li>Windows Server</li><li>PowerShell</li></ul>
+              </div>
+              <div class="deploy-map" aria-hidden="true">
+                <div class="row">
+                  <div class="node">git push<small>repository</small></div>
+                  <div class="arrow"></div>
+                  <div class="node">pipeline<small>Actions / Jenkins</small></div>
+                  <div class="arrow"></div>
+                  <div class="node target">IIS<small>Windows Server</small></div>
+                </div>
+                <div class="apps">
+                  <div class="app"><span class="si" data-icon="pass"></span>VizMan</div>
+                  <div class="app"><span class="si" data-icon="pass"></span>InsiderQ</div>
+                  <div class="app"><span class="si" data-icon="pass"></span>eNotary</div>
+                </div>
+                <p class="cap-line">health-check.ps1 runs before each go-live</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="proj glass" data-reveal>
+            <div class="proj-top">
+              <span class="proj-status ok"><span class="si" data-icon="pass"></span>Completed</span>
+              <span class="branch">observability</span>
+            </div>
+            <h3>Centralized monitoring and logging</h3>
+            <p class="where">Naapbooks</p>
+            <ol class="pipe" aria-label="Stages: collect, visualise, alert">
+              <li class="ok"><span class="dot"></span>collect</li>
+              <li class="ok"><span class="dot"></span>visualise</li>
+              <li class="ok"><span class="dot"></span>alert</li>
+            </ol>
+            <ul class="steps">
+              <li>Prometheus for metrics, Loki with Promtail for logs, for IIS-hosted .NET applications.</li>
+              <li>Real-time Grafana dashboards for server metrics and API performance.</li>
+              <li>Alerts for high resource usage and application failures.</li>
+            </ul>
+            <ul class="tags"><li>Prometheus</li><li>Grafana</li><li>Loki</li><li>Promtail</li></ul>
+          </article>
+
+          <article class="proj glass" data-reveal data-reveal-delay="1">
+            <div class="proj-top">
+              <span class="proj-status ok"><span class="si" data-icon="pass"></span>Completed</span>
+              <span class="branch">database/access</span>
+            </div>
+            <h3>MySQL role-based access control</h3>
+            <p class="where">Naapbooks</p>
+            <ol class="pipe" aria-label="Stages: define roles, grant privileges, assign users">
+              <li class="ok"><span class="dot"></span>roles</li>
+              <li class="ok"><span class="dot"></span>grants</li>
+              <li class="ok"><span class="dot"></span>users</li>
+            </ol>
+            <p>Set up RBAC in MySQL so access is managed through roles instead of one-off privileges for each user.</p>
+            <ul class="tags"><li>MySQL</li><li>RBAC</li><li>Least privilege</li></ul>
+          </article>
+
+          <article class="proj glass" data-reveal>
+            <div class="proj-top">
+              <span class="proj-status ok"><span class="si" data-icon="pass"></span>Completed</span>
+              <span class="branch">security</span>
+            </div>
+            <h3>OWASP Top 10 vulnerability assessment tool</h3>
+            <p class="where">B.Tech major project, 2025</p>
+            <ol class="pipe" aria-label="Stages: scan, report">
+              <li class="ok"><span class="dot"></span>scan</li>
+              <li class="ok"><span class="dot"></span>report</li>
+            </ol>
+            <ul class="steps">
+              <li>A web application that scans sites for vulnerabilities from the OWASP Top 10.</li>
+              <li>Produces a structured security report for each scan.</li>
+            </ul>
+            <ul class="tags"><li>Web security</li><li>OWASP Top 10</li></ul>
+          </article>
+
+          <article class="proj glass" data-reveal data-reveal-delay="1">
+            <div class="proj-top">
+              <span class="proj-status ok"><span class="si" data-icon="pass"></span>Completed</span>
+              <span class="branch">aws/serverless</span>
+            </div>
+            <h3>CloudOps Helpdesk on AWS</h3>
+            <p class="where">Personal project, 2026</p>
+            <ol class="pipe" aria-label="Stages: API, IAM, network passed; CDN in progress">
+              <li class="ok"><span class="dot"></span>api</li>
+              <li class="ok"><span class="dot"></span>iam</li>
+              <li class="ok"><span class="dot"></span>network</li>
+              <li class="wip"><span class="dot"></span>cdn</li>
+            </ol>
+            <ul class="steps">
+              <li>Ticket API with API Gateway, Python Lambda and DynamoDB; tested GET 200, POST 201, PATCH 200.</li>
+              <li>Least-privilege IAM role: three DynamoDB actions on one table, no keys in code.</li>
+              <li>VPC, public subnet, route table, security groups and Apache on EC2.</li>
+              <li class="wip">CloudFront with Origin Access Control is waiting for AWS account verification.</li>
+            </ul>
+            <ul class="tags"><li>Lambda</li><li>API Gateway</li><li>DynamoDB</li><li>IAM</li><li>VPC</li></ul>
+            <div class="links"><a href="https://github.com/dhruvpatel99/cloudops-helpdesk-aws" target="_blank" rel="noopener">View code on GitHub</a></div>
+          </article>
+
+          <article class="proj glass" data-reveal>
+            <div class="proj-top">
+              <span class="proj-status wip"><span class="si" data-icon="run"></span>In progress</span>
+              <span class="branch">containers/k3s</span>
+            </div>
+            <h3>Moving 25 Docker containers to k3s</h3>
+            <p class="where">Naapbooks</p>
+            <ol class="pipe" aria-label="Stages: containerised done; migration in progress; zero-downtime deploys next">
+              <li class="ok"><span class="dot"></span>docker</li>
+              <li class="wip"><span class="dot"></span>migrate</li>
+              <li><span class="dot"></span>zero-downtime</li>
+            </ol>
+            <p>25 containers for 3 products run on an Ubuntu 22.04 staging server. I'm leading their move to k3s so deployments can happen without downtime.</p>
+            <ul class="tags"><li>Docker</li><li>Kubernetes (k3s)</li><li>Ubuntu 22.04</li></ul>
+          </article>
+
+          <article class="proj glass" data-reveal data-reveal-delay="1">
+            <div class="proj-top">
+              <span class="proj-status wip"><span class="si" data-icon="run"></span>In progress</span>
+              <span class="branch">side-project</span>
+            </div>
+            <h3>Baari – live queues for clinics and salons</h3>
+            <p class="where">Built with a friend</p>
+            <p>Customers scan a QR code to join a queue and watch their place live, with a map of nearby wait times. I handle the DevOps side: builds, deployment and hosting.</p>
+            <ul class="tags"><li>Java</li><li>React</li><li>CI/CD</li></ul>
+            <div class="links"><a href="https://github.com/dhruvpatel99/baari" target="_blank" rel="noopener">View code on GitHub</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TECH STACK ================= -->
+    <section class="block" id="stack" aria-labelledby="stack-title">
+      <div class="wrap">
+        <div class="sec-head" data-reveal>
+          <p class="path">~/stack</p>
+          <h2 id="stack-title">Tech stack</h2>
+          <p>The tools I use, and what I use each one for.</p>
+        </div>
+        <div class="filters" role="group" aria-label="Filter tools" data-reveal>
+          <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter" type="button" data-filter="cicd" aria-pressed="false">CI/CD</button>
+          <button class="filter" type="button" data-filter="infra" aria-pressed="false">Infrastructure</button>
+          <button class="filter" type="button" data-filter="obs" aria-pressed="false">Observability</button>
+          <button class="filter" type="button" data-filter="data" aria-pressed="false">Data and cloud</button>
+        </div>
+        <ul class="stack" id="stackGrid">
+          <li class="tool glass" data-cat="cicd"><div class="tool-top"><span class="tool-ic"><svg aria-hidden="true"><use href="#i-pipeline"/></svg></span><h3>GitHub Actions<span class="cat">CI/CD</span></h3></div><p>Application pipelines with self-hosted runners for on-premises deploys. Also deploys this site.</p></li>
+          <li class="tool glass" data-cat="cicd"><div class="tool-top"><span class="tool-ic"><svg aria-hidden="true"><use href="#i-gear"/></svg></span><h3>Jenkins<span class="cat">CI/CD</span></h3></div><p>Deploys an API service and an IIS UI with Alembic migrations, and a Linux app on every push to staging.</p></li>
+          <li class="tool glass" data-cat="cicd"><div class="tool-top"><span class="tool-ic"><svg aria-hidden="true"><use href="#i-playbook"/></svg></span><h3>Ansible<span class="cat">Automation</span></h3></div><p>Part of my automation toolkit alongside Bash and PowerShell.</p></li>
+          <li class="tool glass" data-cat="cicd"><div class="tool-top"><span class="tool-ic"><svg aria-hidden="true"><use href="#i-shell"/></svg></span><h3>PowerShell<span class="cat">Scripting</span></h3></div><p>Pre-go-live health checks and the Exchange Online email signature rollout.</p></li>
+          <li class="tool glass" data-cat="infra"><div class="tool-top"><span class="tool-ic"><svg aria-hidden="true"><use href="#i-container"/></svg></span><h3>Docker<span class="cat">Containers</span></h3></div><p>25 containers for 3 products on an Ubuntu 22.04 staging server.</p></li>
+          <li class="tool glass" data-cat="infra"><div class="tool-top"><span class="tool-ic"><svg aria-hidden="true"><use href="#i-cluster"/></svg></span><h3>Kubernetes (k3s)<span class="cat">Orchestration</span></h3></div><p>Target platform for those containers, for zero-downtime deployments.</p></li>
+          <li class="tool glass" data-cat="infra"><div class="tool-top"><span class="tool-ic"><svg aria-hidden="true"><use href="#i-web"/></svg></span><h3>IIS<span class="cat">Web server</span></h3></div><p>Hosts VizMan, InsiderQ and eNotary deployments; fixed 500.30 and 503 failures in production.</p></li>
+          <li class="tool glass" data-cat="infra"><div class="tool-top"><span class="tool-ic"><svg aria-hidden="true"><use href="#i-server"/></svg></span><h3>Windows Server<span class="cat">Systems</span></h3></div><p>Runs the IIS applications I deploy and support, with Active Directory.</p></li>
+          <li class="tool glass" data-cat="infra"><div class="tool-top"><span class="tool-ic"><svg aria-hidden="true"><use href="#i-terminal"/></svg></span><h3>Linux (Ubuntu)<span class="cat">Systems</span></h3></div><p>Docker host and a shared web server that serves 7 domains.</p></li>
+          <li class="tool glass" data-cat="obs"><div class="tool-top"><span class="tool-ic"><svg aria-hidden="true"><use href="#i-gauge"/></svg></span><h3>Prometheus<span class="cat">Metrics</span></h3></div><p>Collects server and API metrics from IIS-hosted .NET applications.</p></li>
+          <li class="tool glass" data-cat="obs"><div class="tool-top"><span class="tool-ic"><svg aria-hidden="true"><use href="#i-chart"/></svg></span><h3>Grafana<span class="cat">Dashboards</span></h3></div><p>Real-time dashboards and alerts for resource use and application failures.</p></li>
+          <li class="tool glass" data-cat="obs"><div class="tool-top"><span class="tool-ic"><svg aria-hidden="true"><use href="#i-logs"/></svg></span><h3>Loki + Promtail<span class="cat">Logs</span></h3></div><p>Central logs next to the metrics, so issues are found faster.</p></li>
+          <li class="tool glass" data-cat="data"><div class="tool-top"><span class="tool-ic"><svg aria-hidden="true"><use href="#i-db"/></svg></span><h3>MySQL<span class="cat">Database</span></h3></div><p>Role-based access control set up with roles and grants.</p></li>
+          <li class="tool glass" data-cat="data"><div class="tool-top"><span class="tool-ic"><svg aria-hidden="true"><use href="#i-db"/></svg></span><h3>PostgreSQL<span class="cat">Database</span></h3></div><p>Administered with pgAdmin.</p></li>
+          <li class="tool glass" data-cat="data"><div class="tool-top"><span class="tool-ic"><svg aria-hidden="true"><use href="#i-cloud"/></svg></span><h3>AWS<span class="cat">Cloud</span></h3></div><p>Serverless helpdesk with Lambda, API Gateway, DynamoDB, IAM, VPC and EC2.</p></li>
+          <li class="tool glass" data-cat="cicd"><div class="tool-top"><span class="tool-ic"><svg aria-hidden="true"><use href="#i-branch"/></svg></span><h3>Git<span class="cat">Version control</span></h3></div><p>Branch-based releases: a push to staging deploys to the server.</p></li>
+        </ul>
       </div>
     </section>
   </main>
@@ -617,230 +470,34 @@
   <footer class="contact" id="contact">
     <div class="wrap">
       <div class="dispatch">
-        <div>
-          <h2>Working on DevOps or cloud? Let's talk.</h2>
+        <div data-reveal>
+          <p class="path">~/contact</p>
+          <h2>Need someone to keep your releases calm? Let's talk.</h2>
           <p>Email is the fastest way to reach me. My code is on GitHub and my work history is on LinkedIn.</p>
         </div>
-        <div class="wd">
+        <div class="wd glass" data-reveal data-reveal-delay="1">
           <p class="wd-title">Run workflow</p>
           <p class="wd-sub">This workflow has a manual trigger.</p>
           <div class="wd-field">Workflow</div>
           <div class="wd-select"><span>say-hello.yml</span><span>main</span></div>
-          <a class="btn" href="mailto:dhruv00987@gmail.com">Email dhruv00987@gmail.com</a>
+          <a class="btn primary" href="mailto:dhruv00987@gmail.com"><svg aria-hidden="true"><use href="#i-mail"/></svg>Email dhruv00987@gmail.com</a>
           <div class="alt">
-            <a class="btn" href="https://github.com/dhruvpatel99" target="_blank" rel="noopener">GitHub</a>
-            <a class="btn" href="https://www.linkedin.com/in/dhruv0911" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn" href="https://github.com/dhruvpatel99" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-github"/></svg>GitHub</a>
+            <a class="btn" href="https://www.linkedin.com/in/dhruv0911" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn</a>
           </div>
         </div>
       </div>
       <div class="fine">
-        <span>Dhruv Patel, Ahmedabad, Gujarat. Languages: Gujarati, Hindi, English.</span>
+        <span>Dhruv Patel, Ahmedabad, Gujarat</span>
         <span>Deployed to GitHub Pages by <a href="https://github.com/dhruvpatel99/dhruvpatel99.github.io/actions" target="_blank" rel="noopener">GitHub Actions</a></span>
       </div>
     </div>
   </footer>
 
-  <script>
-  (function () {
-    var ICONS = {
-      pass: '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="var(--icon-pass, #1F8A5B)"/><path d="M6 10.3l2.7 2.7L14.2 7.6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-      run: '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.5" stroke="var(--icon-run-track, rgba(194,124,14,.25))" stroke-width="2.4" fill="none"/><path d="M10 2.5a7.5 7.5 0 0 1 7.5 7.5" stroke="var(--icon-run, #C27C0E)" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>',
-      queued: '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.5" stroke="var(--icon-queued, #8494AE)" stroke-width="2" fill="none" stroke-dasharray="3 3"/></svg>'
-    };
-    function setIcon(el, kind) {
-      el.innerHTML = ICONS[kind];
-      el.classList.toggle("spin", kind === "run");
-    }
-
-    // Static icons on the page (projects, experience) use page colours.
-    var pageStyle = getComputedStyle(document.documentElement);
-    document.documentElement.style.setProperty("--icon-pass", pageStyle.getPropertyValue("--pass").trim());
-    document.documentElement.style.setProperty("--icon-run", pageStyle.getPropertyValue("--run").trim());
-    document.querySelectorAll("[data-icon]").forEach(function (el) { setIcon(el, el.getAttribute("data-icon")); });
-
-    // ---------- The career run ----------
-    var JOBS = [
-      { id: "checkout-education", when: "2018–2025", lines: [
-        ["cmd", "Run actions/checkout@education"],
-        ["ok",  "Diploma, Computer Engineering", "VPMP Polytechnic, 2018–2022"],
-        ["ok",  "B.Tech, Cybersecurity", "Silver Oak University, 2022–2025"]
-      ]},
-      { id: "security-testing", when: "Jan–Apr 2025", lines: [
-        ["cmd", "Run pentest --standard owasp-top-10"],
-        ["ok",  "Penetration Testing Intern", "Alicorn Solutions"],
-        ["ok",  "Vulnerability reports delivered with fixes"]
-      ]},
-      { id: "build-at-naapbooks", when: "Jul 2025 – now", lines: [
-        ["cmd", "Run support-engineer --company naapbooks"],
-        ["ok",  "CI/CD pipelines for 14+ applications"],
-        ["ok",  "4 pipelines in production"],
-        ["ok",  "Jenkins deploys to an Ubuntu server with 7 domains"],
-        ["ok",  "Monitoring with Prometheus, Grafana and Loki"]
-      ]},
-      { id: "migrate-to-k3s", when: "running", keepRunning: true, lines: [
-        ["cmd", "Run migrate --from docker --to k3s"],
-        ["wip", "Moving 25 containers for 3 products to k3s"]
-      ]}
-    ];
-
-    var jobsEl = document.getElementById("jobs");
-    var logEl = document.getElementById("log");
-    var chip = document.getElementById("runChip");
-    var timerEl = document.getElementById("runTimer");
-    var runIcon = document.getElementById("runIcon");
-    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    // Console icons use console colours.
-    var con = getComputedStyle(document.querySelector(".run"));
-    var consoleVars = "--icon-pass:" + con.getPropertyValue("--con-pass").trim() +
-      ";--icon-run:" + con.getPropertyValue("--con-run").trim() +
-      ";--icon-run-track:rgba(242,179,61,.25);--icon-queued:" + con.getPropertyValue("--con-dim").trim();
-    document.querySelector(".run").setAttribute("style", consoleVars);
-
-    var jobEls = JOBS.map(function (job) {
-      var li = document.createElement("li");
-      li.className = "job queued";
-      li.innerHTML = '<span class="si"></span><span class="jn"></span><span class="jd"></span>';
-      li.querySelector(".jn").textContent = job.id;
-      li.querySelector(".jd").textContent = job.when;
-      jobsEl.appendChild(li);
-      return li;
-    });
-
-    var lineNo = 0, runToken = 0, startTime = 0, timerId = null;
-
-    function fmt(sec) {
-      if (sec < 60) return sec + "s";
-      return Math.floor(sec / 60) + "m " + (sec % 60) + "s";
-    }
-    function startTimer() {
-      clearInterval(timerId);
-      startTime = Date.now();
-      timerEl.textContent = "0s";
-      timerId = setInterval(function () {
-        timerEl.textContent = fmt(Math.floor((Date.now() - startTime) / 1000));
-      }, 1000);
-    }
-    function setJob(i, state) {
-      var li = jobEls[i];
-      li.className = "job " + state + (state === "running" ? " active" : "");
-      setIcon(li.querySelector(".si"), state === "done" ? "pass" : state === "running" ? "run" : "queued");
-    }
-    function addLine(kind, text, extra, target) {
-      target = target || logEl;
-      var n = target === logEl ? (lineNo += 1) : target.childElementCount + 1;
-      var row = document.createElement("div");
-      row.className = "ln";
-      var no = document.createElement("span");
-      no.className = "no"; no.textContent = n;
-      var body = document.createElement("span");
-      if (kind === "grp") { body.className = "grp"; body.textContent = "▸ " + text; }
-      else if (kind === "cmd") { body.className = "cmd"; body.textContent = "$ " + text; }
-      else {
-        body.className = kind;
-        var mark = document.createElement("b");
-        mark.textContent = kind === "ok" ? "✓ " : "● ";
-        body.appendChild(mark);
-        body.appendChild(document.createTextNode(text));
-        if (extra) {
-          var d = document.createElement("span");
-          d.className = "sub"; d.textContent = extra;
-          body.appendChild(d);
-        }
-      }
-      row.appendChild(no); row.appendChild(body);
-      target.appendChild(row);
-      return body;
-    }
-    function setRun(state) {
-      chip.className = "chip " + state;
-      chip.textContent = state === "queued" ? "Queued" : state === "running" ? "In progress" : "Success";
-      setIcon(runIcon, state === "queued" ? "queued" : state === "running" ? "run" : "pass");
-    }
-    function sleep(ms, token) {
-      return new Promise(function (resolve, reject) {
-        setTimeout(function () { token === runToken ? resolve() : reject("cancelled"); }, ms);
-      });
-    }
-
-    // Fill the invisible copy once, so the console has its final height from the start.
-    var ghost = document.getElementById("logGhost");
-    JOBS.forEach(function (job) {
-      addLine("grp", job.id, null, ghost);
-      job.lines.forEach(function (l) { addLine(l[0], l[1], l[2], ghost); });
-    });
-
-    function reset() {
-      logEl.innerHTML = ""; lineNo = 0;
-      JOBS.forEach(function (_, i) { setJob(i, "queued"); });
-      setRun("queued");
-      timerEl.textContent = "0s";
-    }
-
-    function renderInstant() {
-      reset();
-      setRun("running");
-      JOBS.forEach(function (job, i) {
-        addLine("grp", job.id);
-        job.lines.forEach(function (l) { addLine(l[0], l[1], l[2]); });
-        setJob(i, job.keepRunning ? "running" : "done");
-      });
-      timerEl.textContent = "since 2018";
-    }
-
-    async function play() {
-      var token = ++runToken;
-      reset();
-      try {
-        await sleep(700, token);
-        setRun("running");
-        startTimer();
-        for (var i = 0; i < JOBS.length; i++) {
-          var job = JOBS[i];
-          setJob(i, "running");
-          addLine("grp", job.id);
-          await sleep(380, token);
-          for (var j = 0; j < job.lines.length; j++) {
-            var l = job.lines[j];
-            addLine(l[0], l[1], l[2]);
-            await sleep(l[0] === "cmd" ? 520 : 360, token);
-          }
-          if (!job.keepRunning) { setJob(i, "done"); await sleep(260, token); }
-        }
-        var last = logEl.lastChild && logEl.lastChild.lastChild;
-        if (last) { var c = document.createElement("span"); c.className = "cursor"; last.appendChild(c); }
-      } catch (e) { /* a newer run replaced this one */ }
-    }
-
-    document.getElementById("rerun").addEventListener("click", function () {
-      if (reduce) { renderInstant(); return; }
-      clearInterval(timerId);
-      play();
-    });
-
-    if (reduce) { renderInstant(); } else { play(); }
-
-    // ---------- Pipeline nav follows the scroll ----------
-    var navItems = Array.prototype.slice.call(document.querySelectorAll("#stagesNav li"));
-    var order = navItems.map(function (li) { return li.getAttribute("data-sec"); });
-    var sections = order.map(function (id) { return document.getElementById(id); });
-
-    function updateNav() {
-      var mark = window.scrollY + window.innerHeight * 0.35;
-      var current = 0;
-      sections.forEach(function (sec, i) { if (sec && sec.offsetTop <= mark) current = i; });
-      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) current = sections.length - 1;
-      navItems.forEach(function (li, i) {
-        li.classList.toggle("passed", i < current);
-        li.classList.toggle("current", i === current);
-        var a = li.querySelector("a");
-        if (i === current) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current");
-      });
-    }
-    window.addEventListener("scroll", updateNav, { passive: true });
-    window.addEventListener("resize", updateNav);
-    updateNav();
-  })();
+  <script type="importmap">
+    { "imports": { "three": "./assets/vendor/three/three.module.min.js" } }
   </script>
+  <script src="assets/js/main.js" defer></script>
+  <script type="module" src="assets/js/robot.js"></script>
 </body>
 </html>
