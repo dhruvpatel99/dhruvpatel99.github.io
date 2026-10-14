@@ -379,20 +379,21 @@
             </div>
             <h3>CloudOps Helpdesk on AWS</h3>
             <p class="where">Personal project, 2026</p>
-            <ol class="pipe" aria-label="Stages: API, IAM, network passed; CDN in progress">
+            <ol class="pipe" aria-label="Stages: API, IAM, frontend and CDN all passed">
               <li class="ok"><span class="dot"></span>api</li>
               <li class="ok"><span class="dot"></span>iam</li>
-              <li class="ok"><span class="dot"></span>network</li>
-              <li class="wip"><span class="dot"></span>cdn</li>
+              <li class="ok"><span class="dot"></span>frontend</li>
+              <li class="ok"><span class="dot"></span>cdn</li>
             </ol>
             <ul class="steps">
               <li>Ticket API with API Gateway, Python Lambda and DynamoDB; tested GET 200, POST 201, PATCH 200.</li>
-              <li>Least-privilege IAM role: three DynamoDB actions on one table, no keys in code.</li>
-              <li>VPC, public subnet, route table, security groups and Apache on EC2.</li>
-              <li class="wip">CloudFront with Origin Access Control is waiting for AWS account verification.</li>
+              <li>React + Vite Employee Portal and Admin Dashboard, connected to the live API.</li>
+              <li>Served over HTTPS by CloudFront from a private S3 bucket using Origin Access Control.</li>
+              <li>Least-privilege IAM role: three DynamoDB actions on one table, no keys in code; CORS locked to the site's own domains.</li>
+              <li>GitHub Actions also builds and deploys a mirror to GitHub Pages on every push.</li>
             </ul>
-            <ul class="tags"><li>Lambda</li><li>API Gateway</li><li>DynamoDB</li><li>IAM</li><li>VPC</li></ul>
-            <div class="links"><a href="https://github.com/dhruvpatel99/cloudops-helpdesk-aws" target="_blank" rel="noopener">View code on GitHub</a></div>
+            <ul class="tags"><li>CloudFront</li><li>S3</li><li>Lambda</li><li>API Gateway</li><li>DynamoDB</li><li>IAM</li><li>React</li><li>GitHub Actions</li></ul>
+            <div class="links"><a href="https://dpdx3rbgfvdsz.cloudfront.net/" target="_blank" rel="noopener">Live demo</a><a href="https://github.com/dhruvpatel99/cloudops-helpdesk-aws" target="_blank" rel="noopener">View code on GitHub</a></div>
           </article>
 
           <article class="proj glass" data-reveal>
@@ -456,7 +457,7 @@
           <li class="tool glass" data-cat="obs"><div class="tool-top"><span class="tool-ic"><svg aria-hidden="true"><use href="#i-logs"/></svg></span><h3>Loki + Promtail<span class="cat">Logs</span></h3></div><p>Central logs next to the metrics, so issues are found faster.</p></li>
           <li class="tool glass" data-cat="data"><div class="tool-top"><span class="tool-ic"><svg aria-hidden="true"><use href="#i-db"/></svg></span><h3>MySQL<span class="cat">Database</span></h3></div><p>Role-based access control set up with roles and grants.</p></li>
           <li class="tool glass" data-cat="data"><div class="tool-top"><span class="tool-ic"><svg aria-hidden="true"><use href="#i-db"/></svg></span><h3>PostgreSQL<span class="cat">Database</span></h3></div><p>Administered with pgAdmin.</p></li>
-          <li class="tool glass" data-cat="data"><div class="tool-top"><span class="tool-ic"><svg aria-hidden="true"><use href="#i-cloud"/></svg></span><h3>AWS<span class="cat">Cloud</span></h3></div><p>Serverless helpdesk with Lambda, API Gateway, DynamoDB, IAM, VPC and EC2.</p></li>
+          <li class="tool glass" data-cat="data"><div class="tool-top"><span class="tool-ic"><svg aria-hidden="true"><use href="#i-cloud"/></svg></span><h3>AWS<span class="cat">Cloud</span></h3></div><p>Serverless helpdesk: Lambda, API Gateway and DynamoDB, served by CloudFront from a private S3 bucket.</p></li>
           <li class="tool glass" data-cat="cicd"><div class="tool-top"><span class="tool-ic"><svg aria-hidden="true"><use href="#i-branch"/></svg></span><h3>Git<span class="cat">Version control</span></h3></div><p>Branch-based releases: a push to staging deploys to the server.</p></li>
         </ul>
       </div>
