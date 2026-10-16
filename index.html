@@ -17,7 +17,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/src/styles/main.css">
-  <script>document.documentElement.classList.add("js");</script>
+  <script>
+    document.documentElement.classList.add("js");
+    // Safety net: if the main script fails to load, never leave visitors on the boot screen.
+    setTimeout(function () { var b = document.getElementById("boot"); if (b) b.remove(); }, 9000);
+  </script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
