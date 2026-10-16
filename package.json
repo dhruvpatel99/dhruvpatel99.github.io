@@ -1,0 +1,19 @@
+{
+  "name": "dhruvpatel99.github.io",
+  "private": true,
+  "version": "2.0.0",
+  "description": "Dhruv Patel – DevOps & Support Engineer portfolio with a 3D CI/CD infinity loop (Vite + Three.js + GSAP).",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "gsap": "^3.12.5",
+    "three": "~0.160.0"
+  },
+  "devDependencies": {
+    "vite": "^5.4.10"
+  }
+}
