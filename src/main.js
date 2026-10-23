@@ -53,6 +53,7 @@ async function boot() {
 
     if (reduced) {
       intro.showFinalState(world, heroItems);
+      scroll.connectStaticScroll(world);
     } else {
       world.startLoop();
       intro.playIntro(world, heroItems);

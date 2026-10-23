@@ -24,3 +24,25 @@ export function connectScroll(world) {
     scrollTrigger: { trigger: document.body, start: 'top top', end: 'bottom bottom', scrub: 1.2 },
   });
 }
+
+/**
+ * Reduced motion: no scrubbed movement. The loop simply switches to its
+ * faded backdrop state (labels hidden) once you scroll past the hero, and
+ * back when you return, with one still frame each time.
+ */
+export function connectStaticScroll(world) {
+  const { state } = world;
+  const hero = document.getElementById('hero');
+  let raf = 0;
+  const update = () => {
+    raf = 0;
+    const past = window.scrollY > (hero?.offsetHeight || window.innerHeight) * 0.45 ? 1 : 0;
+    if (past === state.hero) return;
+    state.hero = past;
+    state.page = past ? 0.5 : 0;
+    world.renderOnce();
+  };
+  window.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
+  window.addEventListener('resize', () => world.renderOnce());
+  update();
+}

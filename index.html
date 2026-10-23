@@ -17,6 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/src/styles/main.css">
+  <link rel="stylesheet" href="/src/styles/upgrades.css">
   <script>
     document.documentElement.classList.add("js");
     // Safety net: if the main script fails to load, never leave visitors on the boot screen.
@@ -58,6 +59,7 @@
       <symbol id="i-branch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="6.5" cy="5.5" r="2.2"/><circle cx="6.5" cy="18.5" r="2.2"/><circle cx="17.5" cy="8" r="2.2"/><path d="M6.5 7.7v8.6M17.5 10.2c0 4-6.5 3-10.4 6.2"/></symbol>
       <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7.5 3v5.5c0 4.6-3.1 8-7.5 9.5-4.4-1.5-7.5-4.9-7.5-9.5V6z"/><path d="M9 12l2.1 2.1L15.2 10"/></symbol>
       <symbol id="i-support" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5v-1.5a7.5 7.5 0 0 1 15 0v1.5"/><rect x="3.5" y="13" width="4" height="6" rx="1.5"/><rect x="16.5" y="13" width="4" height="6" rx="1.5"/><path d="M18.5 19c0 1.4-1.6 2-3.5 2h-2"/></symbol>
+      <symbol id="i-cube" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 7.5L12 3l8 4.5-8 4.5zM4 7.5v9L12 21v-9M20 7.5v9L12 21"/></symbol>
       <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
       <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/></symbol>
       <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></symbol>
@@ -86,12 +88,16 @@
           <li data-sec="about"><a href="#about"><span class="node"></span><span class="lbl">About</span></a></li>
           <li data-sec="skills"><a href="#skills"><span class="node"></span><span class="lbl">Skills</span></a></li>
           <li data-sec="experience"><a href="#experience"><span class="node"></span><span class="lbl">Experience</span></a></li>
+          <li data-sec="ops"><a href="#ops"><span class="node"></span><span class="lbl">Ops</span></a></li>
           <li data-sec="projects"><a href="#projects"><span class="node"></span><span class="lbl">Projects</span></a></li>
           <li data-sec="stack"><a href="#stack"><span class="node"></span><span class="lbl">Stack</span></a></li>
+          <li data-sec="shell"><a href="#shell"><span class="node"></span><span class="lbl">Shell</span></a></li>
           <li data-sec="contact"><a href="#contact"><span class="node"></span><span class="lbl">Contact</span></a></li>
         </ol>
       </nav>
+      <button class="kbar-btn" id="kbarOpen" type="button" aria-haspopup="dialog" aria-controls="kbar"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span class="kbar-lbl">Search</span><kbd data-kbd>Ctrl K</kbd></button>
     </div>
+    <div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
   </header>
 
   <main id="top">
@@ -127,13 +133,20 @@
           <a class="btn icon" href="https://www.linkedin.com/in/dhruv0911" target="_blank" rel="noopener" aria-label="LinkedIn"><svg aria-hidden="true"><use href="#i-linkedin"/></svg></a>
         </div>
         <ul class="proof" aria-label="Key numbers from my work" data-hero-item>
-          <li><b>14+</b><span>applications on CI/CD</span></li>
-          <li><b>4</b><span>production pipelines</span></li>
-          <li><b>25</b><span>containers moving to k3s</span></li>
+          <li><b data-count="14" data-suffix="+">14+</b><span>applications on CI/CD</span></li>
+          <li><b data-count="4">4</b><span>production pipelines</span></li>
+          <li><b data-count="25">25</b><span>containers, 6 on k3s</span></li>
         </ul>
       </div>
       <a class="scroll-cue" href="#about" data-hero-item><span>scroll</span><i aria-hidden="true"></i></a>
     </section>
+
+    <!-- Tool marquee -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track" id="marquee">
+        <span><svg><use href="#i-pipeline"/></svg>GitHub Actions</span><span><svg><use href="#i-gear"/></svg>Jenkins</span><span><svg><use href="#i-container"/></svg>Docker</span><span><svg><use href="#i-cluster"/></svg>Kubernetes</span><span><svg><use href="#i-cube"/></svg>Terraform</span><span><svg><use href="#i-playbook"/></svg>Ansible</span><span><svg><use href="#i-web"/></svg>IIS</span><span><svg><use href="#i-terminal"/></svg>Linux</span><span><svg><use href="#i-server"/></svg>Windows Server</span><span><svg><use href="#i-gauge"/></svg>Prometheus</span><span><svg><use href="#i-chart"/></svg>Grafana</span><span><svg><use href="#i-logs"/></svg>Loki</span><span><svg><use href="#i-cloud"/></svg>AWS</span><span><svg><use href="#i-shell"/></svg>PowerShell</span><span><svg><use href="#i-db"/></svg>MySQL</span>
+      </div>
+    </div>
 
     <!-- ================= ABOUT ================= -->
     <section class="block" id="about" aria-labelledby="about-title">
@@ -198,7 +211,8 @@
                 <div class="job-top"><span class="si" data-icon="queued"></span><span class="job-id">migrate-to-k3s</span><span class="job-when">running</span></div>
                 <ul class="job-lines">
                   <li class="cmd">Run migrate --from docker --to k3s</li>
-                  <li class="wip">Moving 25 containers for 3 products to k3s</li>
+                  <li class="ok">eNotary: 6 containers live on k3s</li>
+                  <li class="wip">Next: the remaining containers for 2 products</li>
                 </ul>
               </li>
             </ol>
@@ -238,7 +252,7 @@
           <article class="cap glass tilt" data-reveal>
             <div class="cap-ic"><svg aria-hidden="true"><use href="#i-container"/></svg></div>
             <h3>Containers and orchestration</h3>
-            <p>25 Docker containers for 3 products on Ubuntu 22.04, now moving to k3s for zero-downtime deployments.</p>
+            <p>25 Docker containers for 3 products on Ubuntu 22.04. The first 6 now run on k3s for zero-downtime deployments.</p>
             <ul class="tags"><li>Docker</li><li>Kubernetes (k3s)</li><li>Linux</li></ul>
           </article>
           <article class="cap glass tilt" data-reveal>
@@ -292,7 +306,8 @@
               <li>Environment-based configuration, secure secrets management and rollback-ready deployments; self-hosted runners for on-premises deployments.</li>
               <li>Resolved ASP.NET Core startup failures (HTTP 500.30) and service outages (HTTP 503) on production IIS servers; L1/L2 support.</li>
               <li>Rolled out standard email signatures to all Microsoft 365 mailboxes with Exchange Online PowerShell, piloting first.</li>
-              <li class="wip">Manage 25 Docker containers for 3 products and lead their move to Kubernetes (k3s).</li>
+              <li>Moved eNotary's 6 containers from Docker to Kubernetes (k3s) for zero-downtime deployments.</li>
+              <li class="wip">Manage 25 Docker containers for 3 products; moving the rest to k3s next.</li>
             </ul>
           </article>
           <article class="xp glass" data-side="right">
@@ -309,6 +324,42 @@
               <li>Vulnerability reports with clear fixes for development teams, working with senior analysts.</li>
             </ul>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= OPS DASHBOARD ================= -->
+    <section class="block" id="ops" aria-labelledby="ops-title">
+      <div class="wrap">
+        <div class="sec-head" data-reveal>
+          <p class="path">~/metrics</p>
+          <h2 id="ops-title">Ops at a glance</h2>
+          <p>My work as a Grafana board. The six numbers are real; the graph and the log stream are a live demo of what I watch every day.</p>
+        </div>
+        <div class="dash glass" data-reveal>
+          <div class="dash-bar">
+            <span class="dash-title"><svg aria-hidden="true"><use href="#i-chart"/></svg>dhruv / ops-overview</span>
+            <span class="dash-time"><span class="live-dot" aria-hidden="true"></span>Last 24 hours · refresh 5s</span>
+          </div>
+          <ul class="stats" aria-label="Key numbers">
+            <li class="stat c-cyan"><span class="stat-k">Apps on CI/CD</span><b data-count="14" data-suffix="+">14+</b><svg class="spark" viewBox="0 0 100 28" aria-hidden="true"><path d="M0 24 L14 22 L28 20 L42 17 L56 15 L70 11 L84 8 L100 5"/></svg></li>
+            <li class="stat c-green"><span class="stat-k">Production pipelines</span><b data-count="4">4</b><svg class="spark" viewBox="0 0 100 28" aria-hidden="true"><path d="M0 22 L25 22 L25 16 L50 16 L50 11 L75 11 L75 6 L100 6"/></svg></li>
+            <li class="stat c-amber"><span class="stat-k">Containers managed</span><b data-count="25">25</b><svg class="spark" viewBox="0 0 100 28" aria-hidden="true"><path d="M0 20 L20 18 L40 19 L60 12 L80 10 L100 8"/></svg></li>
+            <li class="stat c-cyan"><span class="stat-k">Pods on k3s</span><b data-count="6">6</b><svg class="spark" viewBox="0 0 100 28" aria-hidden="true"><path d="M0 26 L70 26 L72 6 L100 6"/></svg></li>
+            <li class="stat c-green"><span class="stat-k">Domains on one Ubuntu server</span><b data-count="7">7</b><svg class="spark" viewBox="0 0 100 28" aria-hidden="true"><path d="M0 22 L30 18 L55 14 L80 10 L100 8"/></svg></li>
+            <li class="stat c-magenta"><span class="stat-k">Products deployed to IIS</span><b data-count="3">3</b><svg class="spark" viewBox="0 0 100 28" aria-hidden="true"><path d="M0 20 L33 20 L33 13 L66 13 L66 7 L100 7"/></svg></li>
+          </ul>
+          <div class="dash-row">
+            <figure class="panel graph-panel">
+              <figcaption><span>Pipeline runs / min</span><span class="demo-tag">demo data</span></figcaption>
+              <div class="graph-wrap"><canvas id="graph" aria-hidden="true"></canvas></div>
+              <div class="legend" aria-hidden="true"><span class="lg c-green">success</span><span class="lg c-amber">running</span><span class="lg c-magenta">failed → rolled back</span></div>
+            </figure>
+            <figure class="panel logs-panel">
+              <figcaption><span>Loki · {job="deploy"}</span><span class="demo-tag">demo data</span></figcaption>
+              <ol class="logs" id="logs" aria-hidden="true"></ol>
+            </figure>
+          </div>
         </div>
       </div>
     </section>
@@ -365,6 +416,51 @@
           <article class="proj glass tilt" data-reveal>
             <div class="proj-top">
               <span class="proj-status ok"><span class="si" data-icon="pass"></span>Completed</span>
+              <span class="branch">aws/serverless</span>
+            </div>
+            <h3>CloudOps Helpdesk on AWS</h3>
+            <p class="where">Personal project, 2026</p>
+            <ol class="pipe" aria-label="Stages: API, IAM, frontend and CDN all passed">
+              <li class="ok"><span class="dot"></span>api</li>
+              <li class="ok"><span class="dot"></span>iam</li>
+              <li class="ok"><span class="dot"></span>frontend</li>
+              <li class="ok"><span class="dot"></span>cdn</li>
+            </ol>
+            <ul class="steps">
+              <li>Ticket API with API Gateway, Python Lambda and DynamoDB; tested GET 200, POST 201, PATCH 200.</li>
+              <li>React + Vite Employee Portal and Admin Dashboard, connected to the live API.</li>
+              <li>Served over HTTPS by CloudFront from a private S3 bucket using Origin Access Control.</li>
+              <li>Least-privilege IAM role: three DynamoDB actions on one table, no keys in code; CORS locked to the site's own domains.</li>
+              <li>GitHub Actions also builds and deploys a mirror to GitHub Pages on every push.</li>
+            </ul>
+            <ul class="tags"><li>CloudFront</li><li>S3</li><li>Lambda</li><li>API Gateway</li><li>DynamoDB</li><li>IAM</li><li>React</li><li>GitHub Actions</li></ul>
+            <div class="links"><a href="https://dpdx3rbgfvdsz.cloudfront.net/" target="_blank" rel="noopener">Live demo</a><a href="https://github.com/dhruvpatel99/cloudops-helpdesk-aws" target="_blank" rel="noopener">View code on GitHub</a></div>
+          </article>
+
+          <article class="proj glass tilt" data-reveal>
+            <div class="proj-top">
+              <span class="proj-status wip"><span class="si" data-icon="run"></span>In progress</span>
+              <span class="branch">containers/k3s</span>
+            </div>
+            <h3>Docker to Kubernetes (k3s) migration</h3>
+            <p class="where">Naapbooks, 2026</p>
+            <ol class="pipe" aria-label="Stages: Docker done; eNotary moved to k3s; remaining products in progress">
+              <li class="ok"><span class="dot"></span>docker</li>
+              <li class="ok"><span class="dot"></span>enotary → k3s</li>
+              <li class="wip"><span class="dot"></span>2 more products</li>
+            </ol>
+            <p>25 containers for 3 products ran on one Ubuntu 22.04 staging server. I moved eNotary's 6 containers to k3s first, so its deployments now roll out without downtime. The other two products are next.</p>
+            <div class="rollout" data-rollout aria-hidden="true">
+              <div class="ro-head"><span class="ro-cmd">$ kubectl rollout status deploy/enotary</span><span class="ro-ready"><b data-ro-ready>6</b>/6 ready</span></div>
+              <div class="ro-pods" data-ro-pods></div>
+              <div class="ro-foot"><span data-ro-msg>waiting for rollout…</span><span class="ro-avail">availability <b data-ro-avail>100%</b></span></div>
+            </div>
+            <p class="sr-only">Animation: a rolling update replaces the 6 pods one at a time, so 6 of 6 stay ready the whole way through.</p>
+            <ul class="tags"><li>Docker</li><li>Kubernetes (k3s)</li><li>Ubuntu 22.04</li><li>Zero downtime</li></ul>
+          </article>
+          <article class="proj glass tilt" data-reveal>
+            <div class="proj-top">
+              <span class="proj-status ok"><span class="si" data-icon="pass"></span>Completed</span>
               <span class="branch">observability</span>
             </div>
             <h3>Centralized monitoring and logging</h3>
@@ -382,6 +478,37 @@
             <ul class="tags"><li>Prometheus</li><li>Grafana</li><li>Loki</li><li>Promtail</li></ul>
           </article>
 
+          <article class="proj glass tilt" data-reveal>
+            <div class="proj-top">
+              <span class="proj-status wip"><span class="si" data-icon="run"></span>Building</span>
+              <span class="branch">aws/platform</span>
+            </div>
+            <h3>AWS Zero-Touch Deployment Platform</h3>
+            <p class="where">Personal project, 2026</p>
+            <ol class="pipe" aria-label="Planned stages: CI, container image, cluster deploy, monitoring; CI in progress">
+              <li class="wip"><span class="dot"></span>ci</li>
+              <li><span class="dot"></span>image → ecr</li>
+              <li><span class="dot"></span>k8s</li>
+              <li><span class="dot"></span>monitor</li>
+            </ol>
+            <p>A push to main should be the only manual step. GitHub Actions tests and builds a Node/Express + React helpdesk into Docker images, pushes them to Amazon ECR with GitHub OIDC (no stored keys), and deploys to Kubernetes: kind locally, EKS optionally. Terraform defines the infrastructure and Prometheus with Grafana watches it.</p>
+            <ul class="tags"><li>GitHub Actions</li><li>Docker</li><li>Amazon ECR</li><li>Kubernetes</li><li>Terraform</li><li>Prometheus</li><li>Grafana</li></ul>
+          </article>
+          <article class="proj glass tilt" data-reveal>
+            <div class="proj-top">
+              <span class="proj-status wip"><span class="si" data-icon="run"></span>In progress</span>
+              <span class="branch">iac/hyper-v</span>
+            </div>
+            <h3>Infrastructure as code lab: Terraform on Hyper-V</h3>
+            <p class="where">Naapbooks, 2026</p>
+            <ol class="pipe" aria-label="Stages: Terraform provisioning done; unattended Ubuntu install in progress; Ansible configuration next">
+              <li class="ok"><span class="dot"></span>terraform</li>
+              <li class="wip"><span class="dot"></span>unattended install</li>
+              <li><span class="dot"></span>ansible</li>
+            </ol>
+            <p>Terraform provisions Ubuntu Server VMs on Windows Hyper-V, so a server can be rebuilt from Git instead of by hand. I'm making the Ubuntu install fully unattended, then handing configuration to Ansible, and moving the lab onto an office Hyper-V host.</p>
+            <ul class="tags"><li>Terraform</li><li>Hyper-V</li><li>Ubuntu Server</li><li>Ansible</li></ul>
+          </article>
           <article class="proj glass tilt" data-reveal>
             <div class="proj-top">
               <span class="proj-status ok"><span class="si" data-icon="pass"></span>Completed</span>
@@ -414,46 +541,6 @@
               <li>Produces a structured security report for each scan.</li>
             </ul>
             <ul class="tags"><li>Web security</li><li>OWASP Top 10</li></ul>
-          </article>
-
-          <article class="proj glass tilt" data-reveal>
-            <div class="proj-top">
-              <span class="proj-status ok"><span class="si" data-icon="pass"></span>Completed</span>
-              <span class="branch">aws/serverless</span>
-            </div>
-            <h3>CloudOps Helpdesk on AWS</h3>
-            <p class="where">Personal project, 2026</p>
-            <ol class="pipe" aria-label="Stages: API, IAM, frontend and CDN all passed">
-              <li class="ok"><span class="dot"></span>api</li>
-              <li class="ok"><span class="dot"></span>iam</li>
-              <li class="ok"><span class="dot"></span>frontend</li>
-              <li class="ok"><span class="dot"></span>cdn</li>
-            </ol>
-            <ul class="steps">
-              <li>Ticket API with API Gateway, Python Lambda and DynamoDB; tested GET 200, POST 201, PATCH 200.</li>
-              <li>React + Vite Employee Portal and Admin Dashboard, connected to the live API.</li>
-              <li>Served over HTTPS by CloudFront from a private S3 bucket using Origin Access Control.</li>
-              <li>Least-privilege IAM role: three DynamoDB actions on one table, no keys in code; CORS locked to the site's own domains.</li>
-              <li>GitHub Actions also builds and deploys a mirror to GitHub Pages on every push.</li>
-            </ul>
-            <ul class="tags"><li>CloudFront</li><li>S3</li><li>Lambda</li><li>API Gateway</li><li>DynamoDB</li><li>IAM</li><li>React</li><li>GitHub Actions</li></ul>
-            <div class="links"><a href="https://dpdx3rbgfvdsz.cloudfront.net/" target="_blank" rel="noopener">Live demo</a><a href="https://github.com/dhruvpatel99/cloudops-helpdesk-aws" target="_blank" rel="noopener">View code on GitHub</a></div>
-          </article>
-
-          <article class="proj glass tilt" data-reveal>
-            <div class="proj-top">
-              <span class="proj-status wip"><span class="si" data-icon="run"></span>In progress</span>
-              <span class="branch">containers/k3s</span>
-            </div>
-            <h3>Moving 25 Docker containers to k3s</h3>
-            <p class="where">Naapbooks</p>
-            <ol class="pipe" aria-label="Stages: containerised done; migration in progress; zero-downtime deploys next">
-              <li class="ok"><span class="dot"></span>docker</li>
-              <li class="wip"><span class="dot"></span>migrate</li>
-              <li><span class="dot"></span>zero-downtime</li>
-            </ol>
-            <p>25 containers for 3 products run on an Ubuntu 22.04 staging server. I'm leading their move to k3s so deployments can happen without downtime.</p>
-            <ul class="tags"><li>Docker</li><li>Kubernetes (k3s)</li><li>Ubuntu 22.04</li></ul>
           </article>
 
           <article class="proj glass tilt" data-reveal>
@@ -491,10 +578,11 @@
             <ul class="cloud-list" id="cloudList" aria-label="Tools. Choose one to read what I use it for.">
               <li><button class="orb" type="button" data-cat="cicd" data-kind="CI/CD" data-desc="Application pipelines with self-hosted runners for on-premises deploys. Also deploys this site."><svg aria-hidden="true"><use href="#i-pipeline"/></svg>GitHub Actions</button></li>
               <li><button class="orb" type="button" data-cat="cicd" data-kind="CI/CD" data-desc="Deploys an API service and an IIS UI with Alembic migrations, and a Linux app on every push to staging."><svg aria-hidden="true"><use href="#i-gear"/></svg>Jenkins</button></li>
-              <li><button class="orb" type="button" data-cat="cicd" data-kind="Automation" data-desc="Part of my automation toolkit alongside Bash and PowerShell."><svg aria-hidden="true"><use href="#i-playbook"/></svg>Ansible</button></li>
+              <li><button class="orb" type="button" data-cat="cicd" data-kind="Automation" data-desc="Configuration management in my infrastructure-as-code lab, next to Terraform."><svg aria-hidden="true"><use href="#i-playbook"/></svg>Ansible</button></li>
+              <li><button class="orb" type="button" data-cat="infra" data-kind="Infrastructure as code" data-desc="Learning IaC: provisions Ubuntu Server VMs on Hyper-V in my lab, fully reproducible from Git."><svg aria-hidden="true"><use href="#i-cube"/></svg>Terraform</button></li>
               <li><button class="orb" type="button" data-cat="cicd" data-kind="Scripting" data-desc="Pre-go-live health checks and the Exchange Online email signature rollout."><svg aria-hidden="true"><use href="#i-shell"/></svg>PowerShell</button></li>
-              <li><button class="orb" type="button" data-cat="infra" data-kind="Containers" data-desc="25 containers for 3 products on an Ubuntu 22.04 staging server."><svg aria-hidden="true"><use href="#i-container"/></svg>Docker</button></li>
-              <li><button class="orb" type="button" data-cat="infra" data-kind="Orchestration" data-desc="Target platform for those containers, for zero-downtime deployments."><svg aria-hidden="true"><use href="#i-cluster"/></svg>Kubernetes (k3s)</button></li>
+              <li><button class="orb" type="button" data-cat="infra" data-kind="Containers" data-desc="25 containers for 3 products on an Ubuntu 22.04 staging server, run with Docker Compose."><svg aria-hidden="true"><use href="#i-container"/></svg>Docker</button></li>
+              <li><button class="orb" type="button" data-cat="infra" data-kind="Orchestration" data-desc="eNotary's 6 containers already run on k3s for zero-downtime deployments; the rest are next."><svg aria-hidden="true"><use href="#i-cluster"/></svg>Kubernetes (k3s)</button></li>
               <li><button class="orb" type="button" data-cat="infra" data-kind="Web server" data-desc="Hosts VizMan, InsiderQ and eNotary deployments; fixed 500.30 and 503 failures in production."><svg aria-hidden="true"><use href="#i-web"/></svg>IIS</button></li>
               <li><button class="orb" type="button" data-cat="infra" data-kind="Systems" data-desc="Runs the IIS applications I deploy and support, with Active Directory."><svg aria-hidden="true"><use href="#i-server"/></svg>Windows Server</button></li>
               <li><button class="orb" type="button" data-cat="infra" data-kind="Systems" data-desc="Docker host and a shared web server that serves 7 domains."><svg aria-hidden="true"><use href="#i-terminal"/></svg>Linux (Ubuntu)</button></li>
@@ -513,6 +601,30 @@
         </div>
         <!-- Full list for search engines and screen readers -->
         <dl class="sr-only" id="stackList"></dl>
+      </div>
+    </section>
+
+    <!-- ================= SHELL ================= -->
+    <section class="block" id="shell" aria-labelledby="shell-title">
+      <div class="wrap">
+        <div class="sec-head" data-reveal>
+          <p class="path">~/shell</p>
+          <h2 id="shell-title">Ask my terminal</h2>
+          <p>Type <code>help</code> to see what it can do. A few commands fetch live data from GitHub.</p>
+        </div>
+        <div class="term glass" id="term" data-reveal>
+          <div class="term-bar"><i></i><i></i><i></i><span>dhruv@ops: ~</span><span class="term-hint">try: kubectl get pods</span></div>
+          <div class="term-body" id="termBody">
+            <div class="term-out" id="termOut" role="log" aria-live="polite" aria-label="Terminal output"></div>
+            <form class="term-line" id="termForm" autocomplete="off">
+              <label class="prompt" for="termIn"><span class="pu">dhruv@ops</span>:<span class="pp">~</span>$</label>
+              <input id="termIn" type="text" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Type a command, for example help">
+            </form>
+          </div>
+          <div class="term-chips" aria-label="Quick commands">
+            <button type="button" data-cmd="whoami">whoami</button><button type="button" data-cmd="kubectl get pods">kubectl get pods</button><button type="button" data-cmd="cat skills.yml">cat skills.yml</button><button type="button" data-cmd="gh repo list">gh repo list</button><button type="button" data-cmd="./deploy.sh">./deploy.sh</button><button type="button" data-cmd="sudo hire dhruv">sudo hire dhruv</button>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -547,10 +659,20 @@
       </div>
       <div class="fine">
         <span>Dhruv Patel, Ahmedabad, Gujarat</span>
-        <span>Deployed to GitHub Pages by <a href="https://github.com/dhruvpatel99/dhruvpatel99.github.io/actions" target="_blank" rel="noopener">GitHub Actions</a></span>
+        <span class="deploy-live" id="deployLive">Deployed to GitHub Pages by <a href="https://github.com/dhruvpatel99/dhruvpatel99.github.io/actions" target="_blank" rel="noopener">GitHub Actions</a></span>
       </div>
     </div>
   </footer>
+
+  <!-- Command palette (Ctrl/Cmd + K) -->
+  <div class="kbar" id="kbar" role="dialog" aria-modal="true" aria-label="Command palette" hidden>
+    <div class="kbar-box glass">
+      <div class="kbar-input"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><input id="kbarIn" type="text" placeholder="Jump to a section or run an action…" aria-label="Search sections and actions" aria-controls="kbarList" aria-autocomplete="list" autocomplete="off"><kbd>Esc</kbd></div>
+      <ul class="kbar-list" id="kbarList" role="listbox" aria-label="Results"></ul>
+    </div>
+  </div>
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script type="module" src="/src/main.js"></script>
 </body>

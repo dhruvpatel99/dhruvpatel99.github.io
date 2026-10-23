@@ -8,6 +8,21 @@ All page content is real, semantic HTML. The 3D scene is a decorative layer behi
 
 ---
 
+## What's new in v3
+
+| Feature | Where | File |
+| --- | --- | --- |
+| Interactive terminal: `help`, `neofetch`, `kubectl get pods`, `./deploy.sh`, `sudo hire dhruv`. `gh repo list` and `gh run list` call the GitHub API live | `~/shell` section | `src/ui/terminal.js` |
+| Grafana-style ops board: six real numbers with sparklines, a scrolling demo graph and a Loki-style log tail | `~/metrics` section | `src/ui/dashboard.js` |
+| Kubernetes rolling update (maxSurge 1, maxUnavailable 0): pods swap one at a time while 6/6 stay ready | k3s project card | `src/ui/rollout.js` |
+| Command palette: Ctrl K / ⌘K or `/` to jump to sections, copy the email, run terminal commands | top bar | `src/ui/palette.js` |
+| Live footer: latest GitHub Actions deploy (status, commit, time) | footer | `src/ui/live.js` |
+| Scroll progress line, scrambled section titles, magnetic buttons, cursor ring, tool marquee, count-up numbers | everywhere | `src/ui/fx.js`, `src/ui/dashboard.js` |
+
+All of it respects `prefers-reduced-motion` (final states, no autoplay) and pauses when off screen. New styles live in `src/styles/upgrades.css`.
+
+The GitHub API allows 60 unauthenticated requests per hour per visitor IP, which is plenty for the footer and terminal; if it's unreachable the page keeps its static text.
+
 ## Run locally
 
 Requirements: Node.js 20+.
@@ -56,7 +71,14 @@ src/
     cloud.js               tech-stack sphere with filters and details
     workflow.js            contact "Run workflow" animation
     icons.js               passed / running / queued icons
-  styles/main.css          all styles (colour tokens at the top)
+    terminal.js            interactive terminal (~/shell)
+    dashboard.js           ops board + count-up numbers
+    rollout.js             k8s rolling-update animation
+    palette.js             Ctrl/⌘K command palette
+    live.js                latest deploy in the footer
+    fx.js                  progress line, title scramble, magnetic buttons, cursor, marquee
+  styles/main.css          base styles (colour tokens at the top)
+  styles/upgrades.css      styles for the v3 features
 .github/workflows/deploy.yml
 ```
 
@@ -96,7 +118,7 @@ The timings are all in `INTRO` in `src/config.js`.
 
 ## Accessibility and fallbacks
 
-- **`prefers-reduced-motion`**: no boot animation, no fly-in, no moving packets or auto-rotation. You get a single still frame of the loop and every section in its final state.
+- **`prefers-reduced-motion`**: no boot animation, no fly-in, no moving packets or auto-rotation. You get a still frame of the loop (it switches to its faded backdrop once you scroll past the hero) and every section in its final state.
 - **No WebGL**: the canvas is skipped and the hero shows a static SVG drawing of the loop. All content is the same.
 - Semantic headings, landmarks, a "Skip to projects" link, visible focus rings, `aria-live` regions for the tool details and the workflow run, and a hidden text list of all tools.
 - Title, description, Open Graph tags, canonical URL and JSON-LD are kept from the original site.

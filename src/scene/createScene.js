@@ -240,8 +240,8 @@ export function createScene({ canvas, mobile, reduced }) {
     cancelAnimationFrame(raf);
   }
   function renderOnce() {
+    place(1); // set the scroll state first, so labels pick up the right opacity
     loop.update(0);
-    place(1);
     draw();
   }
 
