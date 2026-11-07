@@ -1,37 +1,58 @@
-# Dhruv Patel – 3D portfolio
+# Dhruv Patel – portfolio (v4, editorial)
 
 Live site: **https://dhruvpatel99.github.io**
 
-A static portfolio built with **Vite + vanilla JavaScript + Three.js + GSAP**. The hero is a 3D CI/CD infinity loop: the DevOps lifecycle as a glowing figure-8 with packets travelling through Plan → Code → Build → Test → Release → Deploy → Operate → Monitor. It deploys to GitHub Pages with GitHub Actions.
+A static portfolio built with **Vite + vanilla JavaScript + Three.js + GSAP**, deployed to GitHub Pages by GitHub Actions.
 
-All page content is real, semantic HTML. The 3D scene is a decorative layer behind it, so screen readers, search engines and browsers without WebGL get the full site.
+v4 is a restyle in a cinematic, editorial direction: near-black `#090909`, warm off-white `#F2EFEB`, one red accent `#E32B3C`, huge condensed headlines (Anton), calm body text (Manrope) and handwritten notes (Caveat). The hero keeps the 3D CI/CD infinity loop (Plan → Code → Build → Test → Release → Deploy → Operate → Monitor), recoloured to match.
 
 ---
 
-## What's new in v3
+## Edit your details here
 
-| Feature | Where | File |
+All personal content lives in **`src/data/`**. You never need to touch the components to change text.
+
+| File | What's in it |
+| --- | --- |
+| `src/data/site.js` | name, role, email, links, CV path, hero numbers, section list (header, mobile menu and command palette all read it) |
+| `src/data/projects.js` | every project: category, year, status, the story (why / what I did / result), pipeline stages, tools, links, optional screenshot |
+| `src/data/experience.js` | jobs, education, "What I'm trusted with" and the toolbox |
+
+`index.html` holds the static hero text and the SEO tags (title, description, Open Graph, JSON-LD). If you change your email or name, update both; `npm run check` fails if they don't match.
+
+**Adding a project screenshot:** put it in `public/projects/` (WebP, about 1600 px wide), blur internal IPs, hostnames and client data, then set `image: 'projects/your-file.webp'` on the project. It replaces the drawn pipeline on the card and shows in the popup.
+
+**Featured projects:** set `featured: true` on your 2–4 strongest projects. They get the large cards in "Selected work"; every project is also in the searchable index.
+
+---
+
+## What's on the page
+
+| Feature | Notes | File |
 | --- | --- | --- |
-| Interactive terminal: `help`, `neofetch`, `kubectl get pods`, `./deploy.sh`, `sudo hire dhruv`. `gh repo list` and `gh run list` call the GitHub API live | `~/shell` section | `src/ui/terminal.js` |
-| Grafana-style ops board: six real numbers with sparklines, a scrolling demo graph and a Loki-style log tail | `~/metrics` section | `src/ui/dashboard.js` |
-| Kubernetes rolling update (maxSurge 1, maxUnavailable 0): pods swap one at a time while 6/6 stay ready | k3s project card | `src/ui/rollout.js` |
-| Command palette: Ctrl K / ⌘K or `/` to jump to sections, copy the email, run terminal commands | top bar | `src/ui/palette.js` |
-| Live footer: latest GitHub Actions deploy (status, commit, time) | footer | `src/ui/live.js` |
-| Scroll progress line, scrambled section titles, magnetic buttons, cursor ring, tool marquee, count-up numbers | everywhere | `src/ui/fx.js`, `src/ui/dashboard.js` |
-
-All of it respects `prefers-reduced-motion` (final states, no autoplay) and pauses when off screen. New styles live in `src/styles/upgrades.css`.
-
-The GitHub API allows 60 unauthenticated requests per hour per visitor IP, which is plenty for the footer and terminal; if it's unreachable the page keeps its static text.
+| Intro curtain | name, count to 100, curtain lifts; once per browser tab | `src/ui/loader.js` |
+| Motion on/off button | in the header; remembered in the browser; defaults to the system "reduce motion" setting; pauses the 3D loop, marquee, dashboard, rollout and reveals | `src/ui/motion.js` |
+| Mobile menu | full-screen, Escape closes, focus stays inside | `src/ui/menu.js` |
+| Selected work + project index | category filters, search, Load more, empty state | `src/ui/projects.js` |
+| Project popup | Escape / backdrop / ✕ close it, focus returns; deep links like `#work/k3s-migration` | `src/ui/projects.js` |
+| k8s rolling update | live animation inside the k3s project popup | `src/ui/rollout.js` |
+| Experience timeline | expandable rows (current role open) | `src/ui/render.js` |
+| Ops board | six real numbers, demo graph and Loki-style log tail | `src/ui/dashboard.js` |
+| Terminal | `help`, `neofetch`, `kubectl get pods`, `gh run list` (live) | `src/ui/terminal.js` |
+| Command palette | Ctrl K / ⌘K or `/`: sections, every project, copy email, motion | `src/ui/palette.js` |
+| Contact form | opens the visitor's own email app with the message filled in; never claims to send anything | `src/ui/contact.js` |
+| Live deploy status | footer reads the latest GitHub Actions run | `src/ui/live.js` |
 
 ## Run locally
 
 Requirements: Node.js 20+.
 
 ```bash
-npm install      # first time only; creates package-lock.json (commit it)
+npm install      # first time only
 npm run dev      # http://localhost:5173
 npm run build    # production build into dist/
-npm run preview  # serve dist/ to check the build
+npm run check    # content, links and build-output check
+npm run preview  # serve dist/
 ```
 
 ## Deploy
@@ -40,123 +61,52 @@ Every push to `main` runs `.github/workflows/deploy.yml`:
 
 1. `npm ci` installs the exact versions from `package-lock.json`.
 2. `npm run build` builds the site into `dist/`.
-3. The workflow checks that `dist/index.html` exists and warns if `resume.pdf` is missing.
+3. `npm run check` stops the deploy if anything is wrong (see below).
 4. `dist/` is published to GitHub Pages.
 
-One-time setup: **Settings → Pages → Source: GitHub Actions**. `vite.config.js` uses `base: '/'` because this is a user site (`<user>.github.io`). For a project site, set `base: '/<repo-name>/'`.
+One-time setup: **Settings → Pages → Source: GitHub Actions**. `vite.config.js` uses `base: '/'` because this is a user site.
 
-`resume.pdf` lives in `public/`. Vite copies it to the site root, so the "Download CV" link keeps working.
+### What `npm run check` catches
 
----
+- project data: duplicate or bad ids, missing fields, unknown category or status, non-https links, missing screenshots
+- `index.html`: email, name or canonical URL out of sync with `src/data/site.js`; any `#link` without a matching section
+- missing `public/resume.pdf` or `public/og.png`
+- private IP addresses (10.x, 172.16–31.x, 192.168.x) and names that must never be published
+- after a build: missing files in `dist/`, or dev-only `/src/` paths left in `dist/index.html`
 
 ## Project structure
 
 ```
-index.html                 all page content (semantic HTML) + SEO tags
-public/resume.pdf          your CV (copied as-is to the site root)
+index.html                 hero text, section shells, SEO tags
+public/resume.pdf          your CV (copied to the site root)
+public/og.png              1200×630 share image for LinkedIn, WhatsApp, X
+scripts/check.mjs          the content/link/build check
 src/
-  main.js                  entry: detects WebGL / reduced motion / phone, boots everything
-  config.js                colours, stage labels, speeds, intro timings  ← tweak here
-  scene/
-    createScene.js         renderer, camera rig, bloom, particles, grid, render loop
-    infinityLoop.js        the loop: curve, tube, 8 stage nodes, labels, packets
-    intro.js               GSAP intro timeline (fly-in, draw, nodes, text, packets)
-    scrollScene.js         ScrollTrigger: hero hand-off + slow drift while reading
-  ui/
-    loader.js              terminal boot screen
-    nav.js                 pipeline-style top navigation
-    reveal.js              3D scroll reveals, timeline swing-in, project pipelines
-    tilt.js                pointer-driven 3D tilt for cards
-    career.js              career.yml run (4 floating job panels)
-    cloud.js               tech-stack sphere with filters and details
-    workflow.js            contact "Run workflow" animation
-    icons.js               passed / running / queued icons
-    terminal.js            interactive terminal (~/shell)
-    dashboard.js           ops board + count-up numbers
-    rollout.js             k8s rolling-update animation
-    palette.js             Ctrl/⌘K command palette
-    live.js                latest deploy in the footer
-    fx.js                  progress line, title scramble, magnetic buttons, cursor, marquee
-  styles/main.css          base styles (colour tokens at the top)
-  styles/upgrades.css      styles for the v3 features
+  main.js                  entry: motion setting, WebGL check, intro, scene, motion toggle
+  config.js                3D colours, stage labels, speeds, intro timings
+  data/                    ← all personal content (see above)
+  scene/                   the 3D loop: createScene, infinityLoop, intro, scrollScene
+  ui/                      page behaviour (one module per feature, see the table)
+  styles/site.css          the whole design; colour and font tokens at the top
 .github/workflows/deploy.yml
 ```
 
-## Architecture
+## Design tokens
 
-- **One fixed `<canvas>`** sits behind the page and renders the loop, a particle field and a faint grid floor. Stage labels are HTML (`CSS2DRenderer`), so they stay crisp at any size.
-- **Page sections are normal HTML.** Their 3D feel comes from CSS 3D transforms driven by GSAP: tilt cards, floating job panels, a perspective timeline and a projected tool sphere. They work and stay readable without WebGL.
-- **The 3D code is loaded only when WebGL works** (a dynamic `import()`), so the 2D fallback stays light. three.js and GSAP are split into their own cached files.
-- **The scene is driven by three values (0..1)**, all set with GSAP:
-  - `intro` is the camera fly-in.
-  - `hero` is the scroll hand-off, where the loop moves to the right edge and fades into a backdrop.
-  - `page` is a slow drift of the camera and loop across the whole page.
+At the top of `src/styles/site.css`:
 
-## Animation timeline (hero)
+```css
+--bg: #090909;   --text: #F2EFEB;   --muted: #A09C9A;
+--accent: #E32B3C;        /* large type, fills, lines */
+--accent-text: #FF5666;   /* red for small text (passes contrast on black) */
+--display: "Anton";  --sans: "Manrope";  --hand: "Caveat";  --mono: "JetBrains Mono";
+```
 
-| Time | What happens | Easing |
-| --- | --- | --- |
-| 0.0–1.1 s | Terminal boot screen types its lines; the scene is built and shaders compile behind it | – |
-| 0.0–2.8 s | Camera pushes in from far away (z 62 → fitted distance) | `expo.out` |
-| 0.0–2.6 s | Loop scales 0.72 → 1 and unwinds its spin −0.9 → 0 rad | `power3.out` |
-| 0.25–2.15 s | Tube draws itself along its length | `power2.inOut` |
-| 1.1 s + 0.08 s each | The 8 stage nodes pop in, Plan → Monitor | `back.out(2.2)` |
-| 1.35 s + 0.09 s each | Name, headline, summary, buttons and stats fade up 24 px | `power3.out`, 0.8 s |
-| 2.0 s → | Packets start moving (one lap ≈ 22 s); each node pulses and its label lights up when a packet passes | linear |
-| Scroll | Through the hero, the loop shrinks, moves to the right edge, fades to ~26% and its labels fade out | scrubbed (0.6 s smoothing) |
-
-The timings are all in `INTRO` in `src/config.js`.
-
-## Performance
-
-- Pixel ratio is capped at 2 (1.5 on phones); bloom renders at a pixel ratio of 1.5 or less.
-- Nodes, rings, packets and trails use `InstancedMesh` (4 draw calls for all of them).
-- The render loop stops when the tab is hidden. Once the loop is only a backdrop, it draws at half rate.
-- On phones there's no bloom (a soft glow tube is used instead), fewer particles and packets, and simpler geometry.
-- Everything is generated in code. There are no models or textures to download.
-- GPU resources are disposed when the page is closed.
+The 3D loop's colours are in `COLORS` in `src/config.js`; keep them in step with the CSS.
 
 ## Accessibility and fallbacks
 
-- **`prefers-reduced-motion`**: no boot animation, no fly-in, no moving packets or auto-rotation. You get a still frame of the loop (it switches to its faded backdrop once you scroll past the hero) and every section in its final state.
-- **No WebGL**: the canvas is skipped and the hero shows a static SVG drawing of the loop. All content is the same.
-- Semantic headings, landmarks, a "Skip to projects" link, visible focus rings, `aria-live` regions for the tool details and the workflow run, and a hidden text list of all tools.
-- Title, description, Open Graph tags, canonical URL and JSON-LD are kept from the original site.
-
----
-
-## Tweaks
-
-All in **`src/config.js`**. Keep the CSS colours in `src/styles/main.css` (`:root`) in sync.
-
-**Colours**
-```js
-export const COLORS = {
-  background: 0x090c11,
-  dev: 0x3fd8f5,     // Plan / Code / Build / Test lobe
-  ops: 0x3ddc97,     // Release / Deploy / Operate / Monitor lobe
-  packet: 0xf5b544,  // travelling packets
-  accent: 0xff5ccb,  // node flash
-  ...
-};
-```
-
-**Loop speed and packets**
-```js
-export const PACKETS = { count: 5, countMobile: 3, speed: 0.045, trail: 7, trailGap: 0.006 };
-export const LOOP = { size: 4.2, depth: 0.9, tubeRadius: 0.075, idleSpin: 0.06, ... };
-```
-`speed` is laps per second (0.045 ≈ one lap every 22 s). `idleSpin` is the gentle rocking of the loop.
-
-**Node labels**
-```js
-export const STAGES = [
-  { name: 'Plan', lobe: 'dev', at: 0.3125 },
-  ...
-];
-```
-Change `name` to relabel a stage. `at` is the position along the loop (0..1): the left lobe covers 0.25–0.75 and the right lobe 0.75–1.25.
-
-**Glow**: `BLOOM = { strength, radius, threshold }`. Raise `threshold` or lower `strength` for less glow.
-
-**Camera**: `CAMERA.start` (where the fly-in begins), `CAMERA.parallax` (pointer drift) and `CAMERA.tilt` (how far the loop leans towards the pointer).
+- **Motion off** (button or system setting): no intro curtain, no fly-in, packets parked, no marquee or reveals; the loop is a still frame that still follows scrolling.
+- **No WebGL**: the hero shows a static SVG of the loop; all content is the same.
+- One `<h1>`, landmarks, a skip link, visible focus rings, 44 px tap targets on phones, labelled controls, focus management in the menu, popup and palette, `aria-live` for search results and the terminal.
+- No horizontal scrolling from 320 px up; tested at 1440, 768, 390 and 320 px.

@@ -34,12 +34,10 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Check the build output
-        run: |
-          test -f dist/index.html || { echo "dist/index.html is missing"; exit 1; }
-          if [ ! -f dist/resume.pdf ]; then
-            echo "::warning::resume.pdf is missing from public/ - the Download CV button will not work"
-          fi
+      - name: Check content, links and build output
+        # Fails the deploy on broken anchors, bad project data, missing CV or
+        # share image, private IPs or names that must not be published.
+        run: npm run check
 
       - name: Set up GitHub Pages
         uses: actions/configure-pages@v5

@@ -4,13 +4,13 @@
  */
 
 export const COLORS = {
-  background: 0x090c11, // page theme colour
-  dev: 0x3fd8f5,        // left lobe (Plan, Code, Build, Test): cyan
-  ops: 0x3ddc97,        // right lobe (Release, Deploy, Operate, Monitor): green
-  packet: 0xf5b544,     // packets travelling the loop: amber
-  accent: 0xff5ccb,     // small magenta highlight (node flash core)
-  grid: 0x1b2a3a,
-  particles: 0x7fb8d8,
+  background: 0x090909, // page background (matches --bg in site.css)
+  dev: 0xf2efeb,        // left lobe (Plan, Code, Build, Test): warm off-white
+  ops: 0xe32b3c,        // right lobe (Release, Deploy, Operate, Monitor): brand red
+  packet: 0xfff4e8,     // packets travelling the loop: bright warm white
+  accent: 0xff5666,     // node flash core
+  grid: 0x161514,
+  particles: 0x8a8580,
 };
 
 /**
@@ -48,11 +48,11 @@ export const PACKETS = {
 
 export const PARTICLES = { desktop: 1400, mobile: 450 };
 
-export const BLOOM = { strength: 0.85, radius: 0.32, threshold: 0.2 };
+export const BLOOM = { strength: 0.55, radius: 0.3, threshold: 0.32 };
 
 /** Intro timeline (seconds). See README "Animation timeline". */
 export const INTRO = {
-  bootMin: 1.1,         // minimum time the terminal boot screen stays up
+  bootMin: 1.0,         // minimum time the intro curtain stays up
   flyIn: 2.8,           // camera push-in duration
   draw: 1.9,            // tube "draws itself" duration
   drawDelay: 0.25,

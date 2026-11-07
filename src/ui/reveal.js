@@ -1,42 +1,33 @@
 /**
- * Scroll reveals that make each section feel like it arrives in 3D space:
- *  - [data-reveal] blocks rise and tip forward from a slight backward tilt.
- *  - Experience cards swing in from the side, like doors on the timeline.
- *  - Project pipelines light up stage by stage.
- * Everything is visible immediately when reduced motion is on.
+ * Scroll reveals: [data-reveal] blocks rise 32px and fade in, in small
+ * batches, with the shared ease. Featured project cards also draw their
+ * pipeline left to right. Nothing hides content when motion is off.
  */
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion } from './motion.js';
 
-export function initReveals({ reduced }) {
+const EASE = 'expo.out'; // close to cubic-bezier(.22, 1, .36, 1)
+
+export function initReveals() {
   const blocks = gsap.utils.toArray('[data-reveal]');
-  const pipes = gsap.utils.toArray('.pipe');
-  const xps = gsap.utils.toArray('.xp');
+  if (!motion.on) return;
 
-  if (reduced) {
-    pipes.forEach((p) => p.classList.add('lit'));
-    return;
-  }
-
-  gsap.set(blocks, { autoAlpha: 0, y: 46, rotationX: 14, transformPerspective: 900, transformOrigin: '50% 100%' });
+  gsap.set(blocks, { autoAlpha: 0, y: 32 });
   ScrollTrigger.batch(blocks, {
-    start: 'top 88%',
+    start: 'top 90%',
     once: true,
-    onEnter: (batch) => gsap.to(batch, {
-      autoAlpha: 1, y: 0, rotationX: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08,
-      clearProps: 'transform', // hand transforms back to CSS (needed for hover tilt)
-    }),
+    onEnter: (batch) => gsap.to(batch, { autoAlpha: 1, y: 0, duration: 0.9, ease: EASE, stagger: 0.07, clearProps: 'transform,opacity,visibility' }),
   });
 
-  xps.forEach((el) => {
-    const left = el.dataset.side !== 'right';
-    gsap.fromTo(el,
-      { autoAlpha: 0, x: left ? -70 : 70, rotationY: left ? 28 : -28, transformPerspective: 1100 },
-      {
-        autoAlpha: 1, x: 0, rotationY: 0, duration: 1.1, ease: 'power3.out', clearProps: 'transform',
-        scrollTrigger: { trigger: el, start: 'top 85%', once: true },
-      });
+  // Section titles: each line slides up from behind a mask.
+  gsap.utils.toArray('.sec-head h2, .talk').forEach((h) => {
+    gsap.from(h, { yPercent: 40, autoAlpha: 0, duration: 1.1, ease: EASE, scrollTrigger: { trigger: h, start: 'top 88%', once: true } });
   });
 
-  pipes.forEach((p) => ScrollTrigger.create({ trigger: p, start: 'top 90%', once: true, onEnter: () => p.classList.add('lit') }));
+  // If motion is switched off later, show everything that is still hidden.
+  motion.subscribe((on) => {
+    if (on) return;
+    gsap.set('[data-reveal], .sec-head h2, .talk', { clearProps: 'all' });
+  });
 }

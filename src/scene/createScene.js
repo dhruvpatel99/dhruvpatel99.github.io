@@ -24,6 +24,7 @@ const clamp = (v, a, b) => Math.min(Math.max(v, a), b);
 
 export function createScene({ canvas, mobile, reduced }) {
   const useBloom = !mobile && !reduced;
+  let motionOn = !reduced; // can change at runtime (header Motion button)
 
   /* ---------- Renderer ---------- */
   const renderer = new THREE.WebGLRenderer({
@@ -108,7 +109,7 @@ export function createScene({ canvas, mobile, reduced }) {
 
   /* ---------- Layout: fit the loop to the screen ---------- */
   const state = { intro: reduced ? 1 : 0, introScale: reduced ? 1 : 0.72, introSpin: reduced ? 0 : -0.9, hero: 0, page: 0 };
-  const layout = { dist: 16, loopY: 1, portrait: false, W: 10, H: 6 };
+  const layout = { dist: 16, loopX: 0, loopY: 1, portrait: false, W: 10, H: 6 };
 
   function resize() {
     const w = window.innerWidth;
@@ -116,19 +117,21 @@ export function createScene({ canvas, mobile, reduced }) {
     const aspect = w / h;
     layout.portrait = aspect < 0.85;
     const halfWidth = LOOP.size + (mobile ? 0.9 : 1.4); // loop + labels
-    const fill = layout.portrait ? 0.94 : 0.5;          // share of screen width the loop uses
+    const fill = layout.portrait ? 0.92 : 0.44;         // share of screen width the loop uses
     layout.dist = clamp(halfWidth / (fill * tanHalf * aspect), 11, 42);
     layout.H = layout.dist * tanHalf;
     layout.W = layout.H * aspect;
-    // Loop centre sits ~27% from the top (24% on phones), leaving room for the text below.
-    layout.loopY = layout.H * (1 - 2 * (layout.portrait ? 0.24 : 0.27));
+    // Desktop: loop sits right of the hero copy, ~34% from the top.
+    // Phones: centred near the top, above the text.
+    layout.loopY = layout.H * (1 - 2 * (layout.portrait ? 0.3 : 0.34));
+    layout.loopX = layout.portrait ? 0 : layout.W * 0.5;
 
     camera.aspect = aspect;
     camera.updateProjectionMatrix();
     renderer.setSize(w, h, false);
     composer?.setSize(w, h);
     labelRenderer.setSize(w, h);
-    if (reduced) renderOnce();
+    if (!motionOn) renderOnce();
   }
   window.addEventListener('resize', resize);
 
@@ -168,7 +171,7 @@ export function createScene({ canvas, mobile, reduced }) {
   const lookTarget = new THREE.Vector3();
 
   function place(dt) {
-    const k = reduced ? 1 : 1 - Math.pow(0.002, dt);
+    const k = motionOn ? 1 - Math.pow(0.002, dt) : 1;
     pointer.x += (pointer.tx - pointer.x) * k;
     pointer.y += (pointer.ty - pointer.y) * k;
     const p = state.hero;
@@ -190,7 +193,7 @@ export function createScene({ canvas, mobile, reduced }) {
     const g = loop.group;
     const backX = layout.portrait ? 0 : layout.W * 0.78;
     const backY = layout.portrait ? layout.loopY * 0.4 : -layout.H * 0.05;
-    g.position.set(lerp(0, backX, ease), lerp(layout.loopY, backY, ease), lerp(0, -6, ease));
+    g.position.set(lerp(layout.loopX, backX, ease), lerp(layout.loopY, backY, ease), lerp(0, -6, ease));
     g.scale.setScalar(state.introScale * lerp(1, layout.portrait ? 0.7 : 0.95, ease));
     g.rotation.set(
       pointer.y * CAMERA.tilt + ease * 0.15,
@@ -224,13 +227,30 @@ export function createScene({ canvas, mobile, reduced }) {
     if (state.hero >= 0.999 && frame % 2) return;
     const step = Math.min(acc, 0.1);
     acc = 0;
+    adapt(dt);
     loop.update(step);
     place(step);
     draw();
   }
 
+  // Slow device (no GPU, old laptop): after ~2 s under ~30 fps, drop the
+  // bloom pass and render at pixel ratio 1 so the page stays responsive.
+  let slowFor = 0;
+  let degraded = false;
+  function adapt(dt) {
+    if (degraded) return;
+    slowFor = dt > 0.034 ? slowFor + dt : Math.max(0, slowFor - dt);
+    if (slowFor < 2) return;
+    degraded = true;
+    composer?.dispose();
+    composer = null;
+    bloomPass = null;
+    renderer.setPixelRatio(1);
+    resize();
+  }
+
   function startLoop() {
-    if (running || reduced) return;
+    if (running || !motionOn) return;
     running = true;
     last = performance.now();
     raf = requestAnimationFrame(tick);
@@ -248,7 +268,7 @@ export function createScene({ canvas, mobile, reduced }) {
   // Pause completely while the tab is hidden.
   const onVisibility = () => {
     if (document.hidden) stopLoop();
-    else if (!reduced) startLoop();
+    else if (motionOn) startLoop();
   };
   document.addEventListener('visibilitychange', onVisibility);
 
@@ -269,5 +289,13 @@ export function createScene({ canvas, mobile, reduced }) {
   }
 
   resize();
-  return { state, loop, startLoop, stopLoop, renderOnce, dispose, useBloom };
+  /** Header Motion button: pause on a still frame, or start moving again. */
+  function setMotion(on) {
+    motionOn = on;
+    loop.setMotion(on);
+    if (on) startLoop();
+    else { stopLoop(); renderOnce(); }
+  }
+
+  return { state, loop, startLoop, stopLoop, renderOnce, setMotion, dispose, useBloom, get motionOn() { return motionOn; } };
 }

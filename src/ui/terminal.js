@@ -108,7 +108,7 @@ export function initTerminal({ reduced }) {
       desc: 'system info, me edition',
       run() {
         const lines = NEOFETCH.map(([art, info], i) => `${c('art', art)}  ${i === 0 ? c('pu', info) : i === 1 ? c('dim', info) : info.replace(/^([^:]+):/, (m, k) => `${c('k', k)}:`)}`);
-        const bar = ['#3FD8F5', '#3DDC97', '#F5B544', '#FF5CCB', '#5B8CFF', '#E8EDF4'].map((col) => `<i style="background:${col}"></i>`).join('');
+        const bar = ['#090909', '#1A1918', '#6F6B68', '#A09C9A', '#F2EFEB', '#E32B3C'].map((col) => `<i style="background:${col}"></i>`).join('');
         print(`${lines.join('\n')}\n${' '.repeat(17)}<span class="swatch">${bar}</span>`);
       },
     },
@@ -118,7 +118,7 @@ export function initTerminal({ reduced }) {
       run() {
         const icon = { pass: c('ok', '✓'), run: c('warn', '●') };
         print(PROJECTS.map(([s, name, what, st]) => `${icon[s]} ${c('k', name.padEnd(21))}${esc(what.padEnd(38))}${c(s === 'pass' ? 'ok' : 'warn', st)}`).join('\n'));
-        print(c('dim', 'Scroll up to ~/projects for the full cards.'));
+        print(c('dim', 'Scroll up to Work for the full cards, or open #work/<id>.'));
       },
     },
     experience: {

@@ -251,14 +251,15 @@ export function createInfinityLoop({ mobile = false, reduced = false, bloom = tr
   }
 
   let spin = 0;
+  let still = reduced; // motion off: no idle spin, packets parked
   function update(dt) {
-    if (!reduced) spin += dt * LOOP.idleSpin;
+    if (!still) spin += dt * LOOP.idleSpin;
     // Gentle "breathing" rotation so the 3D depth of the crossing reads.
     tiltGroup.rotation.y = Math.sin(spin) * 0.35;
     tiltGroup.rotation.x = Math.sin(spin * 0.7) * 0.06;
     if (packetsRunning) {
       flow = Math.min(1, flow + dt * 1.5);
-      placePackets(reduced ? 0 : dt * PACKETS.speed);
+      placePackets(still ? 0 : dt * PACKETS.speed);
     }
     updateNodes(dt);
   }
@@ -295,5 +296,7 @@ export function createInfinityLoop({ mobile = false, reduced = false, bloom = tr
   setDraw(reduced ? 1 : 0);
   updateNodes(0);
 
-  return { group, tiltGroup, curve, stages: stageState, setDraw, startPackets, update, setOpacity, dispose };
+  const setMotion = (on) => { still = !on; };
+
+  return { group, tiltGroup, curve, stages: stageState, setDraw, startPackets, update, setOpacity, setMotion, dispose };
 }

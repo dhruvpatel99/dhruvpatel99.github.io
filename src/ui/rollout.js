@@ -1,19 +1,18 @@
 /**
- * Kubernetes rolling update, drawn with plain HTML in the k3s project card.
+ * Kubernetes rolling update, drawn with plain HTML inside the k3s project popup.
  * Strategy: maxSurge 1, maxUnavailable 0. A new pod starts, becomes Ready,
- * then one old pod terminates. Ready stays at 6/6 the whole time.
- * Runs only while visible; with reduced motion it shows the finished state.
+ * then one old pod terminates, so Ready stays at 6/6 the whole time.
+ * With motion off it shows the finished state. Returns a stop() function.
  */
-export function initRollout({ reduced }) {
-  const root = document.querySelector('[data-rollout]');
-  if (!root) return;
+import { motion } from './motion.js';
+
+export function startRollout(root) {
   const podsEl = root.querySelector('[data-ro-pods]');
   const readyEl = root.querySelector('[data-ro-ready]');
   const msgEl = root.querySelector('[data-ro-msg]');
   const TOTAL = 6;
   let version = 1;
-  let visible = false;
-  let loopRunning = false;
+  let alive = true;
 
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   const hash = () => Math.random().toString(36).slice(2, 7);
@@ -25,18 +24,18 @@ export function initRollout({ reduced }) {
     el.innerHTML = `<span class="pod-dot"></span><span class="pod-name">${hash()}</span><span class="pod-v">v${v}</span>`;
     return el;
   }
-  const ready = () => podsEl.querySelectorAll('.pod.ready').length;
-  const setReady = () => { readyEl.textContent = String(Math.min(TOTAL, ready())); };
+  const setReady = () => { readyEl.textContent = String(Math.min(TOTAL, podsEl.querySelectorAll('.pod.ready').length)); };
 
+  podsEl.innerHTML = '';
   for (let i = 0; i < TOTAL; i++) podsEl.appendChild(pod(version));
   setReady();
-  if (reduced) { msgEl.textContent = 'deployment "enotary" successfully rolled out'; return; }
+  msgEl.textContent = 'deployment "enotary" successfully rolled out';
 
   async function rollout() {
     const next = version + 1;
     msgEl.textContent = `rolling out v${next} (maxSurge=1, maxUnavailable=0)`;
-    for (let i = 0; i < TOTAL; i++) {
-      while (!visible) await sleep(300);
+    for (let i = 0; i < TOTAL && alive; i++) {
+      while (alive && !motion.on) await sleep(400);
       const fresh = pod(next, 'pending');
       podsEl.appendChild(fresh);
       await sleep(450);
@@ -54,20 +53,21 @@ export function initRollout({ reduced }) {
       setReady();
       await sleep(250);
     }
+    if (!alive) return;
     version = next;
-    msgEl.textContent = `deployment "enotary" successfully rolled out`;
+    msgEl.textContent = 'deployment "enotary" successfully rolled out';
     root.classList.add('done');
-    await sleep(3200);
+    await sleep(2600);
     root.classList.remove('done');
   }
 
-  async function loop() {
-    if (loopRunning) return;
-    loopRunning = true;
-    await sleep(800);
-    // Keep rolling while the card is on screen; pause otherwise.
-    for (;;) { while (!visible) await sleep(400); await rollout(); }
-  }
+  (async () => {
+    await sleep(700);
+    while (alive) {
+      if (!motion.on) { await sleep(400); continue; }
+      await rollout();
+    }
+  })();
 
-  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) loop(); }, { threshold: 0.35 }).observe(root);
+  return () => { alive = false; };
 }

@@ -5,23 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dhruv Patel – DevOps &amp; Support Engineer</title>
   <meta name="description" content="Dhruv Patel, DevOps and Support Engineer in Ahmedabad. CI/CD for 14+ applications, IIS deployments, Docker and k3s, monitoring with Prometheus, Grafana and Loki.">
-  <meta name="theme-color" content="#090C11">
+  <meta name="theme-color" content="#090909">
   <link rel="canonical" href="https://dhruvpatel99.github.io/">
   <meta property="og:title" content="Dhruv Patel – DevOps &amp; Support Engineer">
   <meta property="og:description" content="Automating infrastructure, deployments and reliability. CI/CD for 14+ applications, 4 in production.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dhruvpatel99.github.io/">
-  <meta name="twitter:card" content="summary">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40' fill='none'%3E%3Cdefs%3E%3ClinearGradient id='brandGrad' x1='0' y1='0' x2='40' y2='40' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%233FD8F5'/%3E%3Cstop offset='1' stop-color='%235B8CFF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='0.75' y='0.75' width='38.5' height='38.5' rx='11' fill='%230E151F' stroke='url%28%23brandGrad%29' stroke-opacity='.55' stroke-width='1.5'/%3E%3Cpath d='M13 24.2V11.5h6.5a8.5 8.5 0 0 1 0 17h-2.2' stroke='url%28%23brandGrad%29' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='13' cy='28.5' r='3.2' fill='%233DDC97'/%3E%3C/svg%3E">
+  <meta property="og:image" content="https://dhruvpatel99.github.io/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Dhruv Patel, DevOps and Support Engineer">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://dhruvpatel99.github.io/og.png">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='9' fill='%23090909'/%3E%3Cpath d='M11 9h8.5a11 11 0 0 1 0 22H11z' fill='none' stroke='%23F2EFEB' stroke-width='4'/%3E%3Ccircle cx='31' cy='29' r='3.4' fill='%23E32B3C'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/src/styles/main.css">
-  <link rel="stylesheet" href="/src/styles/upgrades.css">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@500;700&family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/styles/site.css">
   <script>
-    document.documentElement.classList.add("js");
-    // Safety net: if the main script fails to load, never leave visitors on the boot screen.
-    setTimeout(function () { var b = document.getElementById("boot"); if (b) b.remove(); }, 9000);
+    // Decide motion before first paint: saved choice first, then the system setting.
+    (function () {
+      var root = document.documentElement, on = true;
+      root.classList.add('js');
+      try {
+        var saved = localStorage.getItem('dhruvpatel-portfolio:motion');
+        on = saved ? saved === 'on' : !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      } catch (e) { on = !window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+      root.classList.toggle('motion-off', !on);
+      // Safety net: if the main script fails, never leave visitors on the intro screen.
+      setTimeout(function () { var b = document.getElementById('intro'); if (b) b.remove(); }, 9000);
+    })();
   </script>
   <script type="application/ld+json">
   {
@@ -33,327 +46,222 @@
     "address": { "@type": "PostalAddress", "addressLocality": "Ahmedabad", "addressRegion": "Gujarat", "addressCountry": "IN" },
     "email": "mailto:dhruv00987@gmail.com",
     "url": "https://dhruvpatel99.github.io/",
+    "image": "https://dhruvpatel99.github.io/og.png",
     "sameAs": ["https://github.com/dhruvpatel99", "https://www.linkedin.com/in/dhruv0911"],
     "alumniOf": "Silver Oak University"
   }
   </script>
 </head>
 <body>
-  <!-- Icon set (generic line icons, reused across the page) -->
+  <!-- Icons used across the page -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
-      <symbol id="i-pipeline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.2"/><circle cx="5" cy="18" r="2.2"/><circle cx="19" cy="12" r="2.2"/><path d="M7.2 6h3.3a3 3 0 0 1 3 3v0a3 3 0 0 0 3 3h.3M7.2 18h3.3a3 3 0 0 0 3-3v0"/></symbol>
-      <symbol id="i-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.4M12 18.8v2.4M4.2 7.5l2.1 1.2M17.7 15.3l2.1 1.2M4.2 16.5l2.1-1.2M17.7 8.7l2.1-1.2"/><circle cx="12" cy="12" r="7.2"/></symbol>
-      <symbol id="i-container" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></symbol>
-      <symbol id="i-cluster" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2.8l7.8 4.5v9.4L12 21.2l-7.8-4.5V7.3z"/><circle cx="12" cy="12" r="2.4"/><path d="M12 5.6v4M12 14.4v4M6.5 8.8l3.4 2M14.1 13.2l3.4 2M6.5 15.2l3.4-2M14.1 10.8l3.4-2"/></symbol>
-      <symbol id="i-playbook" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="3" width="15" height="18" rx="2.5"/><path d="M8 8.5l1.4 1.4L12 7.3M14 9h2.5M8 14.5l1.4 1.4 2.6-2.6M14 15h2.5"/></symbol>
-      <symbol id="i-web" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 8.5h18M6 6.3h.01M8.3 6.3h.01"/><path d="M8.5 13l-2 2 2 2M15.5 13l2 2-2 2M13 12.5l-2 5"/></symbol>
-      <symbol id="i-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="4" y="3.5" width="16" height="7" rx="2"/><rect x="4" y="13.5" width="16" height="7" rx="2"/><path d="M7.5 7h.01M7.5 17h.01M11 7h5.5M11 17h5.5"/></symbol>
-      <symbol id="i-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M7 9.5l3 2.5-3 2.5M12.5 15H17"/></symbol>
-      <symbol id="i-gauge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.2 17.5a8.5 8.5 0 1 1 15.6 0"/><path d="M12 13.5l4-4.5"/><circle cx="12" cy="14" r="1.6"/></symbol>
-      <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M6.5 15.5l3.5-4 3 2.5 4.5-6"/></symbol>
-      <symbol id="i-logs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5 6h14M5 10h10M5 14h14M5 18h8"/></symbol>
-      <symbol id="i-db" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><ellipse cx="12" cy="6" rx="7" ry="2.8"/><path d="M5 6v12c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8V6M5 12c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8"/></symbol>
-      <symbol id="i-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M7 18.5h10.5a4 4 0 0 0 .4-8 6 6 0 0 0-11.6-1.3A4.7 4.7 0 0 0 7 18.5z"/></symbol>
-      <symbol id="i-shell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7l5 5-5 5M12 17h7"/></symbol>
-      <symbol id="i-branch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="6.5" cy="5.5" r="2.2"/><circle cx="6.5" cy="18.5" r="2.2"/><circle cx="17.5" cy="8" r="2.2"/><path d="M6.5 7.7v8.6M17.5 10.2c0 4-6.5 3-10.4 6.2"/></symbol>
-      <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7.5 3v5.5c0 4.6-3.1 8-7.5 9.5-4.4-1.5-7.5-4.9-7.5-9.5V6z"/><path d="M9 12l2.1 2.1L15.2 10"/></symbol>
-      <symbol id="i-support" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13.5v-1.5a7.5 7.5 0 0 1 15 0v1.5"/><rect x="3.5" y="13" width="4" height="6" rx="1.5"/><rect x="16.5" y="13" width="4" height="6" rx="1.5"/><path d="M18.5 19c0 1.4-1.6 2-3.5 2h-2"/></symbol>
-      <symbol id="i-cube" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 7.5L12 3l8 4.5-8 4.5zM4 7.5v9L12 21v-9M20 7.5v9L12 21"/></symbol>
-      <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></symbol>
+      <symbol id="i-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16m0 0l-6-6m6 6l6-6"/></symbol>
       <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M6.5 15.5l3.5-4 3 2.5 4.5-6"/></symbol>
       <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></symbol>
       <symbol id="i-linkedin" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21H9z"/></symbol>
     </defs>
   </svg>
 
-  <a class="skip" href="#projects">Skip to projects</a>
+  <a class="skip" href="#work">Skip to work</a>
 
-  <!-- Terminal boot screen (hidden from screen readers; removed once the scene is ready) -->
-  <div class="boot" id="boot" aria-hidden="true">
-    <div class="boot-term">
-      <div class="boot-bar"><i></i><i></i><i></i><span>ops-agent — boot</span></div>
-      <pre class="boot-log" id="bootLog"></pre>
-    </div>
+  <!-- Intro curtain (hidden from screen readers; removed when the page is ready) -->
+  <div class="intro" id="intro" aria-hidden="true">
+    <div class="intro-name"><span>Dhruv</span><span>Patel<i>.</i></span></div>
+    <div class="intro-foot"><span>DevOps &amp; Support Engineer</span><span class="intro-count" id="introCount">00</span></div>
+    <div class="intro-bar"><i id="introBar"></i></div>
   </div>
 
   <!-- 3D scene: one fixed canvas behind the page -->
   <canvas class="scene" id="scene" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
 
-  <header class="topbar">
-    <div class="wrap">
-      <a class="brand" href="#top" aria-label="Dhruv Patel, back to top"><svg class="brand-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true"><defs><linearGradient id="brandGrad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse"><stop stop-color="#3FD8F5"/><stop offset="1" stop-color="#5B8CFF"/></linearGradient></defs><rect x="0.75" y="0.75" width="38.5" height="38.5" rx="11" fill="#0E151F" stroke="url(#brandGrad)" stroke-opacity=".55" stroke-width="1.5"/><path d="M13 24.2V11.5h6.5a8.5 8.5 0 0 1 0 17h-2.2" stroke="url(#brandGrad)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="13" cy="28.5" r="3.2" fill="#3DDC97"/></svg><span class="brand-name">Dhruv Patel</span></a>
-      <nav class="stages-nav" aria-label="Sections">
-        <ol id="stagesNav">
-          <li data-sec="about"><a href="#about"><span class="node"></span><span class="lbl">About</span></a></li>
-          <li data-sec="skills"><a href="#skills"><span class="node"></span><span class="lbl">Skills</span></a></li>
-          <li data-sec="experience"><a href="#experience"><span class="node"></span><span class="lbl">Experience</span></a></li>
-          <li data-sec="ops"><a href="#ops"><span class="node"></span><span class="lbl">Ops</span></a></li>
-          <li data-sec="projects"><a href="#projects"><span class="node"></span><span class="lbl">Projects</span></a></li>
-          <li data-sec="stack"><a href="#stack"><span class="node"></span><span class="lbl">Stack</span></a></li>
-          <li data-sec="shell"><a href="#shell"><span class="node"></span><span class="lbl">Shell</span></a></li>
-          <li data-sec="contact"><a href="#contact"><span class="node"></span><span class="lbl">Contact</span></a></li>
-        </ol>
+  <header class="topbar" id="topbar">
+    <div class="wrap topbar-in">
+      <a class="brand" href="#top" aria-label="Dhruv Patel, back to top">Dhruv Patel<i>.</i></a>
+      <nav class="nav" aria-label="Sections">
+        <ul id="navList">
+          <li><a href="#about" data-sec="about">About</a></li>
+          <li><a href="#work" data-sec="work">Work</a></li>
+          <li><a href="#experience" data-sec="experience">Experience</a></li>
+          <li><a href="#ops" data-sec="ops">Ops</a></li>
+          <li><a href="#stack" data-sec="stack">Stack</a></li>
+          <li><a href="#shell" data-sec="shell">Shell</a></li>
+        </ul>
+        <span class="nav-ink" id="navInk" aria-hidden="true"></span>
       </nav>
-      <button class="kbar-btn" id="kbarOpen" type="button" aria-haspopup="dialog" aria-controls="kbar"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span class="kbar-lbl">Search</span><kbd data-kbd>Ctrl K</kbd></button>
+      <div class="top-actions">
+        <button class="pill motion-btn" id="motionBtn" type="button" aria-pressed="true"><span class="motion-dot" aria-hidden="true"></span><span class="motion-lbl">Motion <b>on</b></span></button>
+        <button class="pill kbar-btn" id="kbarOpen" type="button" aria-haspopup="dialog" aria-controls="kbar" aria-label="Search sections and actions"><svg aria-hidden="true"><use href="#i-search"/></svg><kbd data-kbd>Ctrl K</kbd></button>
+        <a class="pill cta" href="#contact">Let’s talk</a>
+        <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu"><span class="sr-only">Menu</span><i></i><i></i></button>
+      </div>
     </div>
     <div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
   </header>
+
+  <!-- Mobile menu -->
+  <div class="menu" id="menu" hidden>
+    <nav aria-label="Menu">
+      <ol class="menu-list" id="menuList"></ol>
+    </nav>
+    <div class="menu-foot">
+      <a href="mailto:dhruv00987@gmail.com" data-bind="email">dhruv00987@gmail.com</a>
+      <div class="menu-social"><a href="https://github.com/dhruvpatel99" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://www.linkedin.com/in/dhruv0911" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="resume.pdf" download>CV</a></div>
+    </div>
+  </div>
 
   <main id="top">
     <!-- ================= HERO ================= -->
     <section class="hero" id="hero" aria-labelledby="hero-title">
       <!-- Static loop, shown only when WebGL is not available -->
       <svg class="loop-fallback" viewBox="0 0 600 220" aria-hidden="true">
-        <defs><linearGradient id="lf" x1="0" x2="1"><stop offset="0" stop-color="#3FD8F5"/><stop offset=".5" stop-color="#5BB8F0"/><stop offset="1" stop-color="#3DDC97"/></linearGradient></defs>
+        <defs><linearGradient id="lf" x1="0" x2="1"><stop offset="0" stop-color="#F2EFEB"/><stop offset=".55" stop-color="#F2EFEB"/><stop offset="1" stop-color="#E32B3C"/></linearGradient></defs>
         <path d="M500.0 110.0 L499.9 113.5 L499.6 117.0 L499.2 120.4 L498.5 123.8 L497.7 127.2 L496.8 130.6 L495.6 133.8 L494.3 137.0 L492.8 140.2 L491.2 143.2 L489.4 146.1 L487.5 149.0 L485.5 151.7 L483.3 154.4 L481.1 156.9 L478.7 159.3 L476.2 161.5 L473.6 163.7 L471.0 165.7 L468.3 167.5 L465.5 169.3 L462.6 170.9 L459.7 172.4 L456.8 173.8 L453.8 175.0 L450.8 176.1 L447.7 177.1 L444.7 177.9 L441.6 178.7 L438.6 179.3 L435.5 179.8 L432.4 180.2 L429.4 180.5 L426.3 180.6 L423.3 180.7 L420.3 180.7 L417.3 180.6 L414.3 180.4 L411.3 180.1 L408.4 179.7 L405.5 179.2 L402.7 178.7 L399.8 178.1 L397.0 177.4 L394.3 176.7 L391.6 175.9 L388.9 175.0 L386.2 174.1 L383.6 173.1 L381.0 172.1 L378.5 171.0 L376.0 169.9 L373.5 168.7 L371.1 167.5 L368.7 166.2 L366.3 165.0 L363.9 163.6 L361.6 162.3 L359.4 160.9 L357.1 159.5 L354.9 158.0 L352.8 156.6 L350.6 155.1 L348.5 153.6 L346.4 152.1 L344.3 150.5 L342.3 148.9 L340.3 147.4 L338.3 145.8 L336.3 144.1 L334.4 142.5 L332.5 140.9 L330.5 139.2 L328.7 137.5 L326.8 135.9 L324.9 134.2 L323.1 132.5 L321.3 130.8 L319.4 129.1 L317.6 127.4 L315.8 125.6 L314.1 123.9 L312.3 122.2 L310.5 120.5 L308.7 118.7 L307.0 117.0 L305.2 115.2 L303.5 113.5 L301.7 111.7 L300.0 110.0 L298.3 108.3 L296.5 106.5 L294.8 104.8 L293.0 103.0 L291.3 101.3 L289.5 99.5 L287.7 97.8 L285.9 96.1 L284.2 94.4 L282.4 92.6 L280.6 90.9 L278.7 89.2 L276.9 87.5 L275.1 85.8 L273.2 84.1 L271.3 82.5 L269.5 80.8 L267.5 79.1 L265.6 77.5 L263.7 75.9 L261.7 74.2 L259.7 72.6 L257.7 71.1 L255.7 69.5 L253.6 67.9 L251.5 66.4 L249.4 64.9 L247.2 63.4 L245.1 62.0 L242.9 60.5 L240.6 59.1 L238.4 57.7 L236.1 56.4 L233.7 55.0 L231.3 53.8 L228.9 52.5 L226.5 51.3 L224.0 50.1 L221.5 49.0 L219.0 47.9 L216.4 46.9 L213.8 45.9 L211.1 45.0 L208.4 44.1 L205.7 43.3 L203.0 42.6 L200.2 41.9 L197.3 41.3 L194.5 40.8 L191.6 40.3 L188.7 39.9 L185.7 39.6 L182.7 39.4 L179.7 39.3 L176.7 39.3 L173.7 39.4 L170.6 39.5 L167.6 39.8 L164.5 40.2 L161.4 40.7 L158.4 41.3 L155.3 42.1 L152.3 42.9 L149.2 43.9 L146.2 45.0 L143.2 46.2 L140.3 47.6 L137.4 49.1 L134.5 50.7 L131.7 52.5 L129.0 54.3 L126.4 56.3 L123.8 58.5 L121.3 60.7 L118.9 63.1 L116.7 65.6 L114.5 68.3 L112.5 71.0 L110.6 73.9 L108.8 76.8 L107.2 79.8 L105.7 83.0 L104.4 86.2 L103.2 89.4 L102.3 92.8 L101.5 96.2 L100.8 99.6 L100.4 103.0 L100.1 106.5 L100.0 110.0 L100.1 113.5 L100.4 117.0 L100.8 120.4 L101.5 123.8 L102.3 127.2 L103.2 130.6 L104.4 133.8 L105.7 137.0 L107.2 140.2 L108.8 143.2 L110.6 146.1 L112.5 149.0 L114.5 151.7 L116.7 154.4 L118.9 156.9 L121.3 159.3 L123.8 161.5 L126.4 163.7 L129.0 165.7 L131.7 167.5 L134.5 169.3 L137.4 170.9 L140.3 172.4 L143.2 173.8 L146.2 175.0 L149.2 176.1 L152.3 177.1 L155.3 177.9 L158.4 178.7 L161.4 179.3 L164.5 179.8 L167.6 180.2 L170.6 180.5 L173.7 180.6 L176.7 180.7 L179.7 180.7 L182.7 180.6 L185.7 180.4 L188.7 180.1 L191.6 179.7 L194.5 179.2 L197.3 178.7 L200.2 178.1 L203.0 177.4 L205.7 176.7 L208.4 175.9 L211.1 175.0 L213.8 174.1 L216.4 173.1 L219.0 172.1 L221.5 171.0 L224.0 169.9 L226.5 168.7 L228.9 167.5 L231.3 166.2 L233.7 165.0 L236.1 163.6 L238.4 162.3 L240.6 160.9 L242.9 159.5 L245.1 158.0 L247.2 156.6 L249.4 155.1 L251.5 153.6 L253.6 152.1 L255.7 150.5 L257.7 148.9 L259.7 147.4 L261.7 145.8 L263.7 144.1 L265.6 142.5 L267.5 140.9 L269.5 139.2 L271.3 137.5 L273.2 135.9 L275.1 134.2 L276.9 132.5 L278.7 130.8 L280.6 129.1 L282.4 127.4 L284.2 125.6 L285.9 123.9 L287.7 122.2 L289.5 120.5 L291.3 118.7 L293.0 117.0 L294.8 115.2 L296.5 113.5 L298.3 111.7 L300.0 110.0 L301.7 108.3 L303.5 106.5 L305.2 104.8 L307.0 103.0 L308.7 101.3 L310.5 99.5 L312.3 97.8 L314.1 96.1 L315.8 94.4 L317.6 92.6 L319.4 90.9 L321.3 89.2 L323.1 87.5 L324.9 85.8 L326.8 84.1 L328.7 82.5 L330.5 80.8 L332.5 79.1 L334.4 77.5 L336.3 75.9 L338.3 74.2 L340.3 72.6 L342.3 71.1 L344.3 69.5 L346.4 67.9 L348.5 66.4 L350.6 64.9 L352.8 63.4 L354.9 62.0 L357.1 60.5 L359.4 59.1 L361.6 57.7 L363.9 56.4 L366.3 55.0 L368.7 53.8 L371.1 52.5 L373.5 51.3 L376.0 50.1 L378.5 49.0 L381.0 47.9 L383.6 46.9 L386.2 45.9 L388.9 45.0 L391.6 44.1 L394.3 43.3 L397.0 42.6 L399.8 41.9 L402.7 41.3 L405.5 40.8 L408.4 40.3 L411.3 39.9 L414.3 39.6 L417.3 39.4 L420.3 39.3 L423.3 39.3 L426.3 39.4 L429.4 39.5 L432.4 39.8 L435.5 40.2 L438.6 40.7 L441.6 41.3 L444.7 42.1 L447.7 42.9 L450.8 43.9 L453.8 45.0 L456.8 46.2 L459.7 47.6 L462.6 49.1 L465.5 50.7 L468.3 52.5 L471.0 54.3 L473.6 56.3 L476.2 58.5 L478.7 60.7 L481.1 63.1 L483.3 65.6 L485.5 68.3 L487.5 71.0 L489.4 73.9 L491.2 76.8 L492.8 79.8 L494.3 83.0 L495.6 86.2 L496.8 89.4 L497.7 92.8 L498.5 96.2 L499.2 99.6 L499.6 103.0 L499.9 106.5 L500.0 110.0 Z" fill="none" stroke="url(#lf)" stroke-width="5" stroke-linejoin="round"/>
-        <g class="lf-nodes">
-          <circle cx="251" cy="154" r="7" class="d"/><circle cx="129" cy="166" r="7" class="d"/><circle cx="129" cy="54" r="7" class="d"/><circle cx="251" cy="66" r="7" class="d"/>
-          <circle cx="349" cy="154" r="7" class="o"/><circle cx="471" cy="166" r="7" class="o"/><circle cx="471" cy="54" r="7" class="o"/><circle cx="349" cy="66" r="7" class="o"/>
-        </g>
-        <g class="lf-labels">
-          <text x="246" y="190">Plan</text><text x="88" y="200">Code</text><text x="88" y="30">Build</text><text x="246" y="40">Test</text>
-          <text x="318" y="190">Release</text><text x="468" y="200">Deploy</text><text x="462" y="30">Operate</text><text x="318" y="40">Monitor</text>
-        </g>
       </svg>
       <p class="sr-only">Animated DevOps loop: Plan, Code, Build and Test on the development side, then Release, Deploy, Operate and Monitor on the operations side, with work items travelling from stage to stage.</p>
 
-      <div class="wrap hero-copy">
-        <p class="whoami" data-hero-item><span class="pulse-dot" aria-hidden="true"></span><span>Support Engineer at Naapbooks, Ahmedabad</span></p>
-        <h1 id="hero-title" data-hero-item><span class="h-name">Dhruv Patel</span><span class="h-sep" aria-hidden="true"> – </span><span class="h-role">DevOps &amp; Support Engineer</span></h1>
-        <p class="role-line" data-hero-item>Automating infrastructure, deployments and reliability.</p>
-        <p class="summary" data-hero-item>
-          I build and run the CI/CD pipelines, IIS and Linux deployments, containers and monitoring behind
-          <strong>14+ applications</strong>, <strong>4 of them in production</strong>, and handle L1/L2 support when something breaks.
-        </p>
-        <div class="actions" data-hero-item>
-          <a class="btn primary" href="#projects">See my projects</a>
-          <a class="btn" href="resume.pdf" download><svg aria-hidden="true"><use href="#i-download"/></svg>Download CV</a>
-          <a class="btn icon" href="https://github.com/dhruvpatel99" target="_blank" rel="noopener" aria-label="GitHub"><svg aria-hidden="true"><use href="#i-github"/></svg></a>
-          <a class="btn icon" href="https://www.linkedin.com/in/dhruv0911" target="_blank" rel="noopener" aria-label="LinkedIn"><svg aria-hidden="true"><use href="#i-linkedin"/></svg></a>
+      <div class="wrap hero-in">
+        <div class="hero-meta" data-hero-item>
+          <span class="avail"><span class="avail-dot" aria-hidden="true"></span>Open to DevOps and support roles</span>
+          <span class="hero-loc">Ahmedabad, IN</span>
         </div>
-        <ul class="proof" aria-label="Key numbers from my work" data-hero-item>
-          <li><b data-count="14" data-suffix="+">14+</b><span>applications on CI/CD</span></li>
-          <li><b data-count="4">4</b><span>production pipelines</span></li>
-          <li><b data-count="25">25</b><span>containers, 6 on k3s</span></li>
-        </ul>
+
+        <div class="hero-copy">
+          <p class="eyebrow" data-hero-item>DevOps &amp; Support Engineer · Naapbooks</p>
+          <p class="hero-lede" data-hero-item>I build and run the pipelines, IIS and Linux deployments, containers and monitoring behind <strong>14+ applications</strong>, <strong>4 of them in production</strong>, and handle L1/L2 support when something breaks.</p>
+          <div class="actions" data-hero-item>
+            <a class="btn primary" href="#work">View work<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn" href="#contact">Contact</a>
+            <a class="btn ghost" href="resume.pdf" download><svg aria-hidden="true"><use href="#i-download"/></svg>CV</a>
+          </div>
+        </div>
+
+        <p class="scribble" data-hero-item aria-hidden="true">↖ the loop I run every day</p>
+        <h1 class="hero-name" id="hero-title">
+          <span class="hn-line"><span class="hn">Dhruv</span></span>
+          <span class="hn-line"><span class="hn">Patel<i>.</i></span></span>
+          <span class="sr-only"> – DevOps &amp; Support Engineer</span>
+        </h1>
+
+        <div class="hero-foot" data-hero-item>
+          <ul class="metrics" id="metrics" aria-label="Key numbers from my work">
+            <li><b>14+</b><span>applications on CI/CD</span></li>
+            <li><b>4</b><span>pipelines in production</span></li>
+            <li><b>25</b><span>containers managed, 6 on k3s</span></li>
+          </ul>
+          <a class="scroll-cue" href="#about"><svg aria-hidden="true"><use href="#i-down"/></svg><span>Scroll</span></a>
+        </div>
       </div>
-      <a class="scroll-cue" href="#about" data-hero-item><span>scroll</span><i aria-hidden="true"></i></a>
     </section>
 
     <!-- Tool marquee -->
     <div class="marquee" aria-hidden="true">
       <div class="marquee-track" id="marquee">
-        <span><svg><use href="#i-pipeline"/></svg>GitHub Actions</span><span><svg><use href="#i-gear"/></svg>Jenkins</span><span><svg><use href="#i-container"/></svg>Docker</span><span><svg><use href="#i-cluster"/></svg>Kubernetes</span><span><svg><use href="#i-cube"/></svg>Terraform</span><span><svg><use href="#i-playbook"/></svg>Ansible</span><span><svg><use href="#i-web"/></svg>IIS</span><span><svg><use href="#i-terminal"/></svg>Linux</span><span><svg><use href="#i-server"/></svg>Windows Server</span><span><svg><use href="#i-gauge"/></svg>Prometheus</span><span><svg><use href="#i-chart"/></svg>Grafana</span><span><svg><use href="#i-logs"/></svg>Loki</span><span><svg><use href="#i-cloud"/></svg>AWS</span><span><svg><use href="#i-shell"/></svg>PowerShell</span><span><svg><use href="#i-db"/></svg>MySQL</span>
+        <span>GitHub Actions</span><span>Jenkins</span><span>Docker</span><span>Kubernetes</span><span>Terraform</span><span>Ansible</span><span>IIS</span><span>Linux</span><span>Windows Server</span><span>Prometheus</span><span>Grafana</span><span>Loki</span><span>AWS</span><span>PowerShell</span><span>MySQL</span>
       </div>
     </div>
 
     <!-- ================= ABOUT ================= -->
     <section class="block" id="about" aria-labelledby="about-title">
       <div class="wrap">
-        <div class="sec-head" data-reveal>
-          <p class="path">~/about</p>
-          <h2 id="about-title">I make releases boring</h2>
-          <p>A support engineer who moved into DevOps by automating the work that used to be done by hand.</p>
-        </div>
+        <header class="sec-head" data-reveal>
+          <p class="sec-num"><span>01</span>About</p>
+          <h2 id="about-title">I make releases <em>boring</em>.</h2>
+        </header>
         <div class="about-grid">
-          <div class="about-text glass" data-reveal>
+          <div class="about-text" data-reveal>
+            <p class="big">A support engineer who moved into DevOps by automating the work that used to be done by hand.</p>
             <p>At <strong>Naapbooks Limited</strong> I build the pipelines that ship our applications, deploy them to <strong>IIS on Windows Server</strong> and to <strong>Ubuntu servers</strong>, run the Docker containers behind three products, and watch everything through Prometheus, Grafana and Loki.</p>
-            <p>When production breaks, I'm on it: I've fixed ASP.NET Core startup failures (HTTP 500.30) and service outages (HTTP 503) on live IIS servers, and I give L1/L2 support for infrastructure and applications.</p>
+            <p>When production breaks, I’m on it: I’ve fixed ASP.NET Core startup failures (HTTP 500.30) and service outages (HTTP 503) on live IIS servers, and I give L1/L2 support for infrastructure and applications.</p>
             <p>My degree is in <strong>cybersecurity</strong>, so least privilege, secrets management and rollback-ready releases matter to me as much as speed.</p>
-            <ul class="facts">
-              <li><span class="k">Education</span><span>B.Tech, Cybersecurity, Silver Oak University (2022–2025)<br>Diploma, Computer Engineering, VPMP Polytechnic (2018–2022)</span></li>
-              <li><span class="k">Based in</span><span>Ahmedabad, Gujarat, India</span></li>
-              <li><span class="k">Languages</span><span>Gujarati, Hindi, English</span></li>
-            </ul>
           </div>
-
-          <!-- Career shown as a GitHub-Actions-style run: 4 jobs as connected floating panels -->
-          <div class="career" id="career" role="region" aria-label="My career shown as a CI pipeline run">
-            <div class="career-head">
-              <div class="run-title">
-                <span class="si" id="runIcon" data-icon="run"></span>
-                <div>
-                  <div class="run-name">career.yml <span>run #2026</span></div>
-                  <div class="run-meta"><span class="branch">main</span> pushed by dhruvpatel99</div>
-                </div>
-              </div>
-              <span class="chip running" id="runChip">In progress</span>
-            </div>
-            <ol class="career-jobs" id="careerJobs">
-              <li class="job-panel" data-final="done">
-                <div class="job-top"><span class="si" data-icon="queued"></span><span class="job-id">checkout-education</span><span class="job-when">2018–2025</span></div>
-                <ul class="job-lines">
-                  <li class="cmd">Run actions/checkout@education</li>
-                  <li class="ok">Diploma, Computer Engineering<small>VPMP Polytechnic, 2018–2022</small></li>
-                  <li class="ok">B.Tech, Cybersecurity<small>Silver Oak University, 2022–2025</small></li>
-                </ul>
-              </li>
-              <li class="job-panel" data-final="done">
-                <div class="job-top"><span class="si" data-icon="queued"></span><span class="job-id">security-testing</span><span class="job-when">Jan–Apr 2025</span></div>
-                <ul class="job-lines">
-                  <li class="cmd">Run pentest --standard owasp-top-10</li>
-                  <li class="ok">Penetration Testing Intern<small>Alicorn Solutions</small></li>
-                  <li class="ok">Vulnerability reports delivered with fixes</li>
-                </ul>
-              </li>
-              <li class="job-panel" data-final="done">
-                <div class="job-top"><span class="si" data-icon="queued"></span><span class="job-id">build-at-naapbooks</span><span class="job-when">Jul 2025 – now</span></div>
-                <ul class="job-lines">
-                  <li class="cmd">Run support-engineer --company naapbooks</li>
-                  <li class="ok">CI/CD pipelines for 14+ applications</li>
-                  <li class="ok">IIS deploys: VizMan, InsiderQ, eNotary</li>
-                  <li class="ok">Jenkins deploys to an Ubuntu server with 7 domains</li>
-                  <li class="ok">Monitoring with Prometheus, Grafana and Loki</li>
-                </ul>
-              </li>
-              <li class="job-panel" data-final="running">
-                <div class="job-top"><span class="si" data-icon="queued"></span><span class="job-id">migrate-to-k3s</span><span class="job-when">running</span></div>
-                <ul class="job-lines">
-                  <li class="cmd">Run migrate --from docker --to k3s</li>
-                  <li class="ok">eNotary: 6 containers live on k3s</li>
-                  <li class="wip">Next: the remaining containers for 2 products</li>
-                </ul>
-              </li>
-            </ol>
-            <div class="career-foot">
-              <span>4 jobs, triggered by a career in DevOps</span>
-              <button class="rerun" id="rerun" type="button">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9M13.5 2.5v3h-3"/></svg>
-                Re-run all jobs
-              </button>
-            </div>
-          </div>
+          <aside class="about-side" data-reveal>
+            <dl class="facts">
+              <div><dt>Based in</dt><dd>Ahmedabad, Gujarat, India</dd></div>
+              <div><dt>Role</dt><dd>Support Engineer (DevOps), Naapbooks Limited</dd></div>
+              <div><dt>Education</dt><dd>B.Tech, Cybersecurity, Silver Oak University<br>Diploma, Computer Engineering, VPMP Polytechnic</dd></div>
+              <div><dt>Languages</dt><dd>Gujarati, Hindi, English</dd></div>
+            </dl>
+            <p class="scribble small" aria-hidden="true">security first, then speed</p>
+          </aside>
         </div>
+
+        <h3 class="sub-head" data-reveal>What I’m trusted with</h3>
+        <ol class="skills" id="skills"></ol>
       </div>
     </section>
 
-    <!-- ================= SKILLS ================= -->
-    <section class="block" id="skills" aria-labelledby="skills-title">
+    <!-- ================= WORK ================= -->
+    <section class="block" id="work" aria-labelledby="work-title">
       <div class="wrap">
-        <div class="sec-head" data-reveal>
-          <p class="path">~/skills</p>
-          <h2 id="skills-title">What I'm trusted with</h2>
-          <p>Each skill comes with where I've used it.</p>
+        <header class="sec-head" data-reveal>
+          <p class="sec-num"><span>02</span>Work</p>
+          <h2 id="work-title">Selected <em>work</em>.</h2>
+          <p class="sec-sub">Real pipelines and platforms, with where each one stands today. Open any project for the full story.</p>
+        </header>
+        <div class="featured" id="featured"></div>
+
+        <div class="index-head" data-reveal>
+          <h3 class="sub-head" id="index-title">Project index</h3>
+          <div class="index-tools">
+            <div class="filters" id="filters" role="group" aria-label="Filter projects by category"><span class="filters-ink" id="filtersInk" aria-hidden="true"></span></div>
+            <label class="search"><svg aria-hidden="true"><use href="#i-search"/></svg><span class="sr-only">Search projects</span><input id="projSearch" type="search" placeholder="Search projects or tools" autocomplete="off"></label>
+          </div>
         </div>
-        <div class="caps">
-          <article class="cap glass tilt" data-reveal>
-            <div class="cap-ic"><svg aria-hidden="true"><use href="#i-pipeline"/></svg></div>
-            <h3>CI/CD engineering</h3>
-            <p>Pipelines for 14+ applications, 4 in production, sped up with dependency caching and parallel jobs.</p>
-            <ul class="tags"><li>GitHub Actions</li><li>Jenkins</li><li>Self-hosted runners</li></ul>
-          </article>
-          <article class="cap glass tilt" data-reveal>
-            <div class="cap-ic"><svg aria-hidden="true"><use href="#i-web"/></svg></div>
-            <h3>Windows and IIS deployments</h3>
-            <p>Scripted builds and IIS releases with PowerShell health checks before go-live and rollback-ready configuration.</p>
-            <ul class="tags"><li>IIS</li><li>Windows Server</li><li>PowerShell</li></ul>
-          </article>
-          <article class="cap glass tilt" data-reveal>
-            <div class="cap-ic"><svg aria-hidden="true"><use href="#i-container"/></svg></div>
-            <h3>Containers and orchestration</h3>
-            <p>25 Docker containers for 3 products on Ubuntu 22.04. The first 6 now run on k3s for zero-downtime deployments.</p>
-            <ul class="tags"><li>Docker</li><li>Kubernetes (k3s)</li><li>Linux</li></ul>
-          </article>
-          <article class="cap glass tilt" data-reveal>
-            <div class="cap-ic"><svg aria-hidden="true"><use href="#i-chart"/></svg></div>
-            <h3>Monitoring and alerting</h3>
-            <p>Metrics, logs and alerts for IIS-hosted .NET applications in one place, which cut troubleshooting time.</p>
-            <ul class="tags"><li>Prometheus</li><li>Grafana</li><li>Loki</li></ul>
-          </article>
-          <article class="cap glass tilt" data-reveal>
-            <div class="cap-ic"><svg aria-hidden="true"><use href="#i-support"/></svg></div>
-            <h3>Production support</h3>
-            <p>L1/L2 support for infrastructure and applications, including HTTP 500.30 and 503 outages on production IIS.</p>
-            <ul class="tags"><li>Troubleshooting</li><li>Active Directory</li><li>Microsoft 365</li></ul>
-          </article>
-          <article class="cap glass tilt" data-reveal>
-            <div class="cap-ic"><svg aria-hidden="true"><use href="#i-shield"/></svg></div>
-            <h3>Security and access</h3>
-            <p>Web application testing against the OWASP Top 10, role-based access in MySQL, and secrets kept out of pipelines.</p>
-            <ul class="tags"><li>OWASP Top 10</li><li>MySQL RBAC</li><li>Secrets management</li></ul>
-          </article>
-        </div>
+        <p class="sr-only" id="projCount" aria-live="polite"></p>
+        <ol class="proj-index" id="projIndex" aria-labelledby="index-title"></ol>
+        <p class="empty" id="projEmpty" hidden>No projects match that. <button type="button" id="projReset">Clear the filters</button></p>
+        <div class="more-wrap"><button class="btn" id="projMore" type="button" hidden>Load more</button></div>
       </div>
     </section>
 
     <!-- ================= EXPERIENCE ================= -->
     <section class="block" id="experience" aria-labelledby="experience-title">
       <div class="wrap">
-        <div class="sec-head" data-reveal>
-          <p class="path">~/experience</p>
-          <h2 id="experience-title">Experience</h2>
-          <p>Production support with a growing share of DevOps work.</p>
-        </div>
-        <div class="timeline">
-          <article class="xp glass" data-side="left">
-            <span class="xp-dot" aria-hidden="true"><span class="si" data-icon="run"></span></span>
-            <div class="xp-head">
-              <div>
-                <h3>Support Engineer</h3>
-                <p class="co">Naapbooks Limited, Ahmedabad</p>
-              </div>
-              <div class="when"><span class="state wip">Running</span>July 2025 – now</div>
-            </div>
-            <p class="products">Applications I deploy: <b>VizMan</b> <b>InsiderQ</b> <b>eNotary</b></p>
-            <ul class="steps">
-              <li><strong>CI/CD and IIS deployments for VizMan, InsiderQ and eNotary.</strong></li>
-              <li>Build and maintain CI/CD pipelines for 14+ applications (4 production, 10+ internal and staging) with GitHub Actions and Jenkins.</li>
-              <li>Scripted builds and IIS deployments for .NET and Flutter Web applications, replacing manual release steps, with PowerShell health checks before go-live.</li>
-              <li>Built Jenkins pipelines that deploy an API service and an IIS-hosted UI, including database schema migrations with Alembic.</li>
-              <li>Set up a Linux Jenkins pipeline that deploys a production web application to a shared Ubuntu 22.04 server hosting 7 domains on every push to staging.</li>
-              <li>Set up role-based access control (RBAC) in MySQL.</li>
-              <li>Environment-based configuration, secure secrets management and rollback-ready deployments; self-hosted runners for on-premises deployments.</li>
-              <li>Resolved ASP.NET Core startup failures (HTTP 500.30) and service outages (HTTP 503) on production IIS servers; L1/L2 support.</li>
-              <li>Rolled out standard email signatures to all Microsoft 365 mailboxes with Exchange Online PowerShell, piloting first.</li>
-              <li>Moved eNotary's 6 containers from Docker to Kubernetes (k3s) for zero-downtime deployments.</li>
-              <li class="wip">Manage 25 Docker containers for 3 products; moving the rest to k3s next.</li>
-            </ul>
-          </article>
-          <article class="xp glass" data-side="right">
-            <span class="xp-dot" aria-hidden="true"><span class="si" data-icon="pass"></span></span>
-            <div class="xp-head">
-              <div>
-                <h3>Penetration Testing Intern</h3>
-                <p class="co">Alicorn Solutions, Ahmedabad</p>
-              </div>
-              <div class="when"><span class="state ok">Passed</span>Jan – Apr 2025</div>
-            </div>
-            <ul class="steps">
-              <li>Penetration testing and vulnerability assessments of web applications against the OWASP Top 10.</li>
-              <li>Vulnerability reports with clear fixes for development teams, working with senior analysts.</li>
-            </ul>
-          </article>
-        </div>
+        <header class="sec-head" data-reveal>
+          <p class="sec-num"><span>03</span>Experience</p>
+          <h2 id="experience-title">Where I’ve <em>worked</em>.</h2>
+          <p class="sec-sub">Production support with a growing share of DevOps work.</p>
+        </header>
+        <ol class="xp-list" id="xpList"></ol>
+        <h3 class="sub-head" data-reveal>Education</h3>
+        <ol class="edu" id="eduList"></ol>
       </div>
     </section>
 
     <!-- ================= OPS DASHBOARD ================= -->
     <section class="block" id="ops" aria-labelledby="ops-title">
       <div class="wrap">
-        <div class="sec-head" data-reveal>
-          <p class="path">~/metrics</p>
-          <h2 id="ops-title">Ops at a glance</h2>
-          <p>My work as a Grafana board. The six numbers are real; the graph and the log stream are a live demo of what I watch every day.</p>
-        </div>
-        <div class="dash glass" data-reveal>
+        <header class="sec-head" data-reveal>
+          <p class="sec-num"><span>04</span>Ops</p>
+          <h2 id="ops-title">Ops at a <em>glance</em>.</h2>
+          <p class="sec-sub">My work as a Grafana board. The six numbers are real; the graph and the log stream are a live demo of what I watch every day.</p>
+        </header>
+        <div class="dash" data-reveal>
           <div class="dash-bar">
             <span class="dash-title"><svg aria-hidden="true"><use href="#i-chart"/></svg>dhruv / ops-overview</span>
             <span class="dash-time"><span class="live-dot" aria-hidden="true"></span>Last 24 hours · refresh 5s</span>
           </div>
           <ul class="stats" aria-label="Key numbers">
-            <li class="stat c-cyan"><span class="stat-k">Apps on CI/CD</span><b data-count="14" data-suffix="+">14+</b><svg class="spark" viewBox="0 0 100 28" aria-hidden="true"><path d="M0 24 L14 22 L28 20 L42 17 L56 15 L70 11 L84 8 L100 5"/></svg></li>
-            <li class="stat c-green"><span class="stat-k">Production pipelines</span><b data-count="4">4</b><svg class="spark" viewBox="0 0 100 28" aria-hidden="true"><path d="M0 22 L25 22 L25 16 L50 16 L50 11 L75 11 L75 6 L100 6"/></svg></li>
-            <li class="stat c-amber"><span class="stat-k">Containers managed</span><b data-count="25">25</b><svg class="spark" viewBox="0 0 100 28" aria-hidden="true"><path d="M0 20 L20 18 L40 19 L60 12 L80 10 L100 8"/></svg></li>
-            <li class="stat c-cyan"><span class="stat-k">Pods on k3s</span><b data-count="6">6</b><svg class="spark" viewBox="0 0 100 28" aria-hidden="true"><path d="M0 26 L70 26 L72 6 L100 6"/></svg></li>
-            <li class="stat c-green"><span class="stat-k">Domains on one Ubuntu server</span><b data-count="7">7</b><svg class="spark" viewBox="0 0 100 28" aria-hidden="true"><path d="M0 22 L30 18 L55 14 L80 10 L100 8"/></svg></li>
-            <li class="stat c-magenta"><span class="stat-k">Products deployed to IIS</span><b data-count="3">3</b><svg class="spark" viewBox="0 0 100 28" aria-hidden="true"><path d="M0 20 L33 20 L33 13 L66 13 L66 7 L100 7"/></svg></li>
+            <li class="stat"><span class="stat-k">Apps on CI/CD</span><b data-count="14" data-suffix="+">14+</b><svg class="spark" viewBox="0 0 100 28" aria-hidden="true"><path d="M0 24 L14 22 L28 20 L42 17 L56 15 L70 11 L84 8 L100 5"/></svg></li>
+            <li class="stat"><span class="stat-k">Production pipelines</span><b data-count="4">4</b><svg class="spark" viewBox="0 0 100 28" aria-hidden="true"><path d="M0 22 L25 22 L25 16 L50 16 L50 11 L75 11 L75 6 L100 6"/></svg></li>
+            <li class="stat"><span class="stat-k">Containers managed</span><b data-count="25">25</b><svg class="spark" viewBox="0 0 100 28" aria-hidden="true"><path d="M0 20 L20 18 L40 19 L60 12 L80 10 L100 8"/></svg></li>
+            <li class="stat"><span class="stat-k">Pods on k3s</span><b data-count="6">6</b><svg class="spark" viewBox="0 0 100 28" aria-hidden="true"><path d="M0 26 L70 26 L72 6 L100 6"/></svg></li>
+            <li class="stat"><span class="stat-k">Domains on one Ubuntu server</span><b data-count="7">7</b><svg class="spark" viewBox="0 0 100 28" aria-hidden="true"><path d="M0 22 L30 18 L55 14 L80 10 L100 8"/></svg></li>
+            <li class="stat"><span class="stat-k">Products deployed to IIS</span><b data-count="3">3</b><svg class="spark" viewBox="0 0 100 28" aria-hidden="true"><path d="M0 20 L33 20 L33 13 L66 13 L66 7 L100 7"/></svg></li>
           </ul>
           <div class="dash-row">
             <figure class="panel graph-panel">
               <figcaption><span>Pipeline runs / min</span><span class="demo-tag">demo data</span></figcaption>
               <div class="graph-wrap"><canvas id="graph" aria-hidden="true"></canvas></div>
-              <div class="legend" aria-hidden="true"><span class="lg c-green">success</span><span class="lg c-amber">running</span><span class="lg c-magenta">failed → rolled back</span></div>
+              <div class="legend" aria-hidden="true"><span class="lg c-ok">success</span><span class="lg c-run">running</span><span class="lg c-fail">failed → rolled back</span></div>
             </figure>
             <figure class="panel logs-panel">
               <figcaption><span>Loki · {job="deploy"}</span><span class="demo-tag">demo data</span></figcaption>
@@ -364,255 +272,27 @@
       </div>
     </section>
 
-    <!-- ================= PROJECTS ================= -->
-    <section class="block" id="projects" aria-labelledby="projects-title">
-      <div class="wrap">
-        <div class="sec-head" data-reveal>
-          <p class="path">~/projects</p>
-          <h2 id="projects-title">Projects</h2>
-          <p>Each card shows the stages of the work and where it stands today.</p>
-        </div>
-
-        <div class="projects">
-          <article class="proj featured glass tilt" data-reveal>
-            <div class="proj-top">
-              <span class="proj-status ok"><span class="si" data-icon="pass"></span>In production</span>
-              <span class="branch">naapbooks/iis</span>
-            </div>
-            <div class="featured-body">
-              <div>
-                <h3>CI/CD and IIS deployments for VizMan, InsiderQ and eNotary</h3>
-                <p class="where">Naapbooks, 2025 – now</p>
-                <ol class="pipe" aria-label="Pipeline stages: build, deploy to IIS, health check">
-                  <li class="ok"><span class="dot"></span>build</li>
-                  <li class="ok"><span class="dot"></span>deploy to IIS</li>
-                  <li class="ok"><span class="dot"></span>health check</li>
-                </ol>
-                <ul class="steps">
-                  <li>Automated build and IIS deployment, replacing manual release steps.</li>
-                  <li>PowerShell health checks validate each deployment before go-live.</li>
-                  <li>Environment-based configuration, secrets management and rollback-ready releases.</li>
-                </ul>
-                <ul class="tags"><li>GitHub Actions</li><li>Jenkins</li><li>IIS</li><li>Windows Server</li><li>PowerShell</li></ul>
-              </div>
-              <div class="deploy-map" aria-hidden="true">
-                <div class="row">
-                  <div class="node">git push<small>repository</small></div>
-                  <div class="arrow"></div>
-                  <div class="node">pipeline<small>Actions / Jenkins</small></div>
-                  <div class="arrow"></div>
-                  <div class="node target">IIS<small>Windows Server</small></div>
-                </div>
-                <div class="apps">
-                  <div class="app"><span class="si" data-icon="pass"></span>VizMan</div>
-                  <div class="app"><span class="si" data-icon="pass"></span>InsiderQ</div>
-                  <div class="app"><span class="si" data-icon="pass"></span>eNotary</div>
-                </div>
-                <p class="cap-line">health-check.ps1 runs before each go-live</p>
-              </div>
-            </div>
-          </article>
-
-          <article class="proj glass tilt" data-reveal>
-            <div class="proj-top">
-              <span class="proj-status ok"><span class="si" data-icon="pass"></span>Completed</span>
-              <span class="branch">aws/serverless</span>
-            </div>
-            <h3>CloudOps Helpdesk on AWS</h3>
-            <p class="where">Personal project, 2026</p>
-            <ol class="pipe" aria-label="Stages: API, IAM, frontend and CDN all passed">
-              <li class="ok"><span class="dot"></span>api</li>
-              <li class="ok"><span class="dot"></span>iam</li>
-              <li class="ok"><span class="dot"></span>frontend</li>
-              <li class="ok"><span class="dot"></span>cdn</li>
-            </ol>
-            <ul class="steps">
-              <li>Ticket API with API Gateway, Python Lambda and DynamoDB; tested GET 200, POST 201, PATCH 200.</li>
-              <li>React + Vite Employee Portal and Admin Dashboard, connected to the live API.</li>
-              <li>Served over HTTPS by CloudFront from a private S3 bucket using Origin Access Control.</li>
-              <li>Least-privilege IAM role: three DynamoDB actions on one table, no keys in code; CORS locked to the site's own domains.</li>
-              <li>GitHub Actions also builds and deploys a mirror to GitHub Pages on every push.</li>
-            </ul>
-            <ul class="tags"><li>CloudFront</li><li>S3</li><li>Lambda</li><li>API Gateway</li><li>DynamoDB</li><li>IAM</li><li>React</li><li>GitHub Actions</li></ul>
-            <div class="links"><a href="https://dpdx3rbgfvdsz.cloudfront.net/" target="_blank" rel="noopener">Live demo</a><a href="https://github.com/dhruvpatel99/cloudops-helpdesk-aws" target="_blank" rel="noopener">View code on GitHub</a></div>
-          </article>
-
-          <article class="proj glass tilt" data-reveal>
-            <div class="proj-top">
-              <span class="proj-status wip"><span class="si" data-icon="run"></span>In progress</span>
-              <span class="branch">containers/k3s</span>
-            </div>
-            <h3>Docker to Kubernetes (k3s) migration</h3>
-            <p class="where">Naapbooks, 2026</p>
-            <ol class="pipe" aria-label="Stages: Docker done; eNotary moved to k3s; remaining products in progress">
-              <li class="ok"><span class="dot"></span>docker</li>
-              <li class="ok"><span class="dot"></span>enotary → k3s</li>
-              <li class="wip"><span class="dot"></span>2 more products</li>
-            </ol>
-            <p>25 containers for 3 products ran on one Ubuntu 22.04 staging server. I moved eNotary's 6 containers to k3s first, so its deployments now roll out without downtime. The other two products are next.</p>
-            <div class="rollout" data-rollout aria-hidden="true">
-              <div class="ro-head"><span class="ro-cmd">$ kubectl rollout status deploy/enotary</span><span class="ro-ready"><b data-ro-ready>6</b>/6 ready</span></div>
-              <div class="ro-pods" data-ro-pods></div>
-              <div class="ro-foot"><span data-ro-msg>waiting for rollout…</span><span class="ro-avail">availability <b data-ro-avail>100%</b></span></div>
-            </div>
-            <p class="sr-only">Animation: a rolling update replaces the 6 pods one at a time, so 6 of 6 stay ready the whole way through.</p>
-            <ul class="tags"><li>Docker</li><li>Kubernetes (k3s)</li><li>Ubuntu 22.04</li><li>Zero downtime</li></ul>
-          </article>
-          <article class="proj glass tilt" data-reveal>
-            <div class="proj-top">
-              <span class="proj-status ok"><span class="si" data-icon="pass"></span>Completed</span>
-              <span class="branch">observability</span>
-            </div>
-            <h3>Centralized monitoring and logging</h3>
-            <p class="where">Naapbooks</p>
-            <ol class="pipe" aria-label="Stages: collect, visualise, alert">
-              <li class="ok"><span class="dot"></span>collect</li>
-              <li class="ok"><span class="dot"></span>visualise</li>
-              <li class="ok"><span class="dot"></span>alert</li>
-            </ol>
-            <ul class="steps">
-              <li>Prometheus for metrics, Loki with Promtail for logs, for IIS-hosted .NET applications.</li>
-              <li>Real-time Grafana dashboards for server metrics and API performance.</li>
-              <li>Alerts for high resource usage and application failures.</li>
-            </ul>
-            <ul class="tags"><li>Prometheus</li><li>Grafana</li><li>Loki</li><li>Promtail</li></ul>
-          </article>
-
-          <article class="proj glass tilt" data-reveal>
-            <div class="proj-top">
-              <span class="proj-status wip"><span class="si" data-icon="run"></span>Building</span>
-              <span class="branch">aws/platform</span>
-            </div>
-            <h3>AWS Zero-Touch Deployment Platform</h3>
-            <p class="where">Personal project, 2026</p>
-            <ol class="pipe" aria-label="Planned stages: CI, container image, cluster deploy, monitoring; CI in progress">
-              <li class="wip"><span class="dot"></span>ci</li>
-              <li><span class="dot"></span>image → ecr</li>
-              <li><span class="dot"></span>k8s</li>
-              <li><span class="dot"></span>monitor</li>
-            </ol>
-            <p>A push to main should be the only manual step. GitHub Actions tests and builds a Node/Express + React helpdesk into Docker images, pushes them to Amazon ECR with GitHub OIDC (no stored keys), and deploys to Kubernetes: kind locally, EKS optionally. Terraform defines the infrastructure and Prometheus with Grafana watches it.</p>
-            <ul class="tags"><li>GitHub Actions</li><li>Docker</li><li>Amazon ECR</li><li>Kubernetes</li><li>Terraform</li><li>Prometheus</li><li>Grafana</li></ul>
-          </article>
-          <article class="proj glass tilt" data-reveal>
-            <div class="proj-top">
-              <span class="proj-status wip"><span class="si" data-icon="run"></span>In progress</span>
-              <span class="branch">iac/hyper-v</span>
-            </div>
-            <h3>Infrastructure as code lab: Terraform on Hyper-V</h3>
-            <p class="where">Naapbooks, 2026</p>
-            <ol class="pipe" aria-label="Stages: Terraform provisioning done; unattended Ubuntu install in progress; Ansible configuration next">
-              <li class="ok"><span class="dot"></span>terraform</li>
-              <li class="wip"><span class="dot"></span>unattended install</li>
-              <li><span class="dot"></span>ansible</li>
-            </ol>
-            <p>Terraform provisions Ubuntu Server VMs on Windows Hyper-V, so a server can be rebuilt from Git instead of by hand. I'm making the Ubuntu install fully unattended, then handing configuration to Ansible, and moving the lab onto an office Hyper-V host.</p>
-            <ul class="tags"><li>Terraform</li><li>Hyper-V</li><li>Ubuntu Server</li><li>Ansible</li></ul>
-          </article>
-          <article class="proj glass tilt" data-reveal>
-            <div class="proj-top">
-              <span class="proj-status ok"><span class="si" data-icon="pass"></span>Completed</span>
-              <span class="branch">database/access</span>
-            </div>
-            <h3>MySQL role-based access control</h3>
-            <p class="where">Naapbooks</p>
-            <ol class="pipe" aria-label="Stages: define roles, grant privileges, assign users">
-              <li class="ok"><span class="dot"></span>roles</li>
-              <li class="ok"><span class="dot"></span>grants</li>
-              <li class="ok"><span class="dot"></span>users</li>
-            </ol>
-            <p>Set up RBAC in MySQL so access is managed through roles instead of one-off privileges for each user.</p>
-            <ul class="tags"><li>MySQL</li><li>RBAC</li><li>Least privilege</li></ul>
-          </article>
-
-          <article class="proj glass tilt" data-reveal>
-            <div class="proj-top">
-              <span class="proj-status ok"><span class="si" data-icon="pass"></span>Completed</span>
-              <span class="branch">security</span>
-            </div>
-            <h3>OWASP Top 10 vulnerability assessment tool</h3>
-            <p class="where">B.Tech major project, 2025</p>
-            <ol class="pipe" aria-label="Stages: scan, report">
-              <li class="ok"><span class="dot"></span>scan</li>
-              <li class="ok"><span class="dot"></span>report</li>
-            </ol>
-            <ul class="steps">
-              <li>A web application that scans sites for vulnerabilities from the OWASP Top 10.</li>
-              <li>Produces a structured security report for each scan.</li>
-            </ul>
-            <ul class="tags"><li>Web security</li><li>OWASP Top 10</li></ul>
-          </article>
-
-          <article class="proj glass tilt" data-reveal>
-            <div class="proj-top">
-              <span class="proj-status wip"><span class="si" data-icon="run"></span>In progress</span>
-              <span class="branch">side-project</span>
-            </div>
-            <h3>Baari – live queues for clinics and salons</h3>
-            <p class="where">Built with a friend</p>
-            <p>Customers scan a QR code to join a queue and watch their place live, with a map of nearby wait times. I handle the DevOps side: builds, deployment and hosting.</p>
-            <ul class="tags"><li>Java</li><li>React</li><li>CI/CD</li></ul>
-            <div class="links"><a href="https://github.com/dhruvpatel99/baari" target="_blank" rel="noopener">View code on GitHub</a></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
     <!-- ================= TECH STACK ================= -->
     <section class="block" id="stack" aria-labelledby="stack-title">
       <div class="wrap">
-        <div class="sec-head" data-reveal>
-          <p class="path">~/stack</p>
-          <h2 id="stack-title">Tech stack</h2>
-          <p>The tools I use, and what I use each one for.</p>
-        </div>
-        <div class="filters" role="group" aria-label="Filter tools" data-reveal>
-          <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
-          <button class="filter" type="button" data-filter="cicd" aria-pressed="false">CI/CD</button>
-          <button class="filter" type="button" data-filter="infra" aria-pressed="false">Infrastructure</button>
-          <button class="filter" type="button" data-filter="obs" aria-pressed="false">Observability</button>
-          <button class="filter" type="button" data-filter="data" aria-pressed="false">Data and cloud</button>
-        </div>
-        <div class="stack-stage">
-          <div class="cloud" id="cloud">
-            <ul class="cloud-list" id="cloudList" aria-label="Tools. Choose one to read what I use it for.">
-              <li><button class="orb" type="button" data-cat="cicd" data-kind="CI/CD" data-desc="Application pipelines with self-hosted runners for on-premises deploys. Also deploys this site."><svg aria-hidden="true"><use href="#i-pipeline"/></svg>GitHub Actions</button></li>
-              <li><button class="orb" type="button" data-cat="cicd" data-kind="CI/CD" data-desc="Deploys an API service and an IIS UI with Alembic migrations, and a Linux app on every push to staging."><svg aria-hidden="true"><use href="#i-gear"/></svg>Jenkins</button></li>
-              <li><button class="orb" type="button" data-cat="cicd" data-kind="Automation" data-desc="Configuration management in my infrastructure-as-code lab, next to Terraform."><svg aria-hidden="true"><use href="#i-playbook"/></svg>Ansible</button></li>
-              <li><button class="orb" type="button" data-cat="infra" data-kind="Infrastructure as code" data-desc="Learning IaC: provisions Ubuntu Server VMs on Hyper-V in my lab, fully reproducible from Git."><svg aria-hidden="true"><use href="#i-cube"/></svg>Terraform</button></li>
-              <li><button class="orb" type="button" data-cat="cicd" data-kind="Scripting" data-desc="Pre-go-live health checks and the Exchange Online email signature rollout."><svg aria-hidden="true"><use href="#i-shell"/></svg>PowerShell</button></li>
-              <li><button class="orb" type="button" data-cat="infra" data-kind="Containers" data-desc="25 containers for 3 products on an Ubuntu 22.04 staging server, run with Docker Compose."><svg aria-hidden="true"><use href="#i-container"/></svg>Docker</button></li>
-              <li><button class="orb" type="button" data-cat="infra" data-kind="Orchestration" data-desc="eNotary's 6 containers already run on k3s for zero-downtime deployments; the rest are next."><svg aria-hidden="true"><use href="#i-cluster"/></svg>Kubernetes (k3s)</button></li>
-              <li><button class="orb" type="button" data-cat="infra" data-kind="Web server" data-desc="Hosts VizMan, InsiderQ and eNotary deployments; fixed 500.30 and 503 failures in production."><svg aria-hidden="true"><use href="#i-web"/></svg>IIS</button></li>
-              <li><button class="orb" type="button" data-cat="infra" data-kind="Systems" data-desc="Runs the IIS applications I deploy and support, with Active Directory."><svg aria-hidden="true"><use href="#i-server"/></svg>Windows Server</button></li>
-              <li><button class="orb" type="button" data-cat="infra" data-kind="Systems" data-desc="Docker host and a shared web server that serves 7 domains."><svg aria-hidden="true"><use href="#i-terminal"/></svg>Linux (Ubuntu)</button></li>
-              <li><button class="orb" type="button" data-cat="obs" data-kind="Metrics" data-desc="Collects server and API metrics from IIS-hosted .NET applications."><svg aria-hidden="true"><use href="#i-gauge"/></svg>Prometheus</button></li>
-              <li><button class="orb" type="button" data-cat="obs" data-kind="Dashboards" data-desc="Real-time dashboards and alerts for resource use and application failures."><svg aria-hidden="true"><use href="#i-chart"/></svg>Grafana</button></li>
-              <li><button class="orb" type="button" data-cat="obs" data-kind="Logs" data-desc="Central logs next to the metrics, so issues are found faster."><svg aria-hidden="true"><use href="#i-logs"/></svg>Loki + Promtail</button></li>
-              <li><button class="orb" type="button" data-cat="data" data-kind="Database" data-desc="Role-based access control set up with roles and grants."><svg aria-hidden="true"><use href="#i-db"/></svg>MySQL</button></li>
-              <li><button class="orb" type="button" data-cat="data" data-kind="Database" data-desc="Administered with pgAdmin."><svg aria-hidden="true"><use href="#i-db"/></svg>PostgreSQL</button></li>
-              <li><button class="orb" type="button" data-cat="data" data-kind="Cloud" data-desc="Serverless helpdesk: Lambda, API Gateway and DynamoDB, served by CloudFront from a private S3 bucket."><svg aria-hidden="true"><use href="#i-cloud"/></svg>AWS</button></li>
-              <li><button class="orb" type="button" data-cat="cicd" data-kind="Version control" data-desc="Branch-based releases: a push to staging deploys to the server."><svg aria-hidden="true"><use href="#i-branch"/></svg>Git</button></li>
-            </ul>
-          </div>
-          <div class="tool-detail glass" id="toolDetail" aria-live="polite">
-            <p class="td-hint">Choose a tool to see what I use it for.</p>
-          </div>
-        </div>
-        <!-- Full list for search engines and screen readers -->
-        <dl class="sr-only" id="stackList"></dl>
+        <header class="sec-head" data-reveal>
+          <p class="sec-num"><span>05</span>Stack</p>
+          <h2 id="stack-title">The <em>toolbox</em>.</h2>
+          <p class="sec-sub">The tools I use, and what I actually use each one for.</p>
+        </header>
+        <div class="tool-groups" id="toolGroups"></div>
       </div>
     </section>
 
     <!-- ================= SHELL ================= -->
     <section class="block" id="shell" aria-labelledby="shell-title">
       <div class="wrap">
-        <div class="sec-head" data-reveal>
-          <p class="path">~/shell</p>
-          <h2 id="shell-title">Ask my terminal</h2>
-          <p>Type <code>help</code> to see what it can do. A few commands fetch live data from GitHub.</p>
-        </div>
-        <div class="term glass" id="term" data-reveal>
+        <header class="sec-head" data-reveal>
+          <p class="sec-num"><span>06</span>Shell</p>
+          <h2 id="shell-title">Ask my <em>terminal</em>.</h2>
+          <p class="sec-sub">Type <code>help</code> to see what it can do. A few commands fetch live data from GitHub.</p>
+        </header>
+        <div class="term" id="term" data-reveal>
           <div class="term-bar"><i></i><i></i><i></i><span>dhruv@ops: ~</span><span class="term-hint">try: kubectl get pods</span></div>
           <div class="term-body" id="termBody">
             <div class="term-out" id="termOut" role="log" aria-live="polite" aria-label="Terminal output"></div>
@@ -630,49 +310,59 @@
   </main>
 
   <!-- ================= CONTACT ================= -->
-  <footer class="contact" id="contact">
+  <footer class="contact" id="contact" aria-labelledby="contact-title">
     <div class="wrap">
-      <div class="dispatch">
-        <div data-reveal>
-          <p class="path">~/contact</p>
-          <h2>Need someone to keep your releases calm? Let's talk.</h2>
-          <p>Email is the fastest way to reach me. My code is on GitHub and my work history is on LinkedIn.</p>
-        </div>
-        <div class="wd glass" data-reveal>
-          <p class="wd-title">Run workflow</p>
-          <p class="wd-sub">This workflow has a manual trigger.</p>
-          <div class="wd-field">Workflow</div>
-          <div class="wd-select"><span>say-hello.yml</span><span>main</span></div>
-          <button class="btn run-btn" id="runWorkflow" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 3v10l8.5-5z" fill="currentColor"/></svg>Run workflow</button>
-          <ol class="wf-steps" id="wfSteps" aria-live="polite" hidden>
-            <li data-step><span class="si" data-icon="queued"></span>validate-sender</li>
-            <li data-step><span class="si" data-icon="queued"></span>compose-message</li>
-            <li data-step><span class="si" data-icon="queued"></span>deliver-to-inbox</li>
-          </ol>
-          <p class="wf-done" id="wfDone" hidden>Workflow succeeded. Say hello at <a href="mailto:dhruv00987@gmail.com">dhruv00987@gmail.com</a></p>
-          <a class="btn primary" href="mailto:dhruv00987@gmail.com"><svg aria-hidden="true"><use href="#i-mail"/></svg>Email dhruv00987@gmail.com</a>
-          <div class="alt">
-            <a class="btn" href="https://github.com/dhruvpatel99" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-github"/></svg>GitHub</a>
-            <a class="btn" href="https://www.linkedin.com/in/dhruv0911" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn</a>
+      <p class="sec-num" data-reveal><span>07</span>Contact</p>
+      <h2 class="talk" id="contact-title">Let’s <em>talk</em>.</h2>
+      <div class="contact-grid">
+        <div class="contact-main" data-reveal>
+          <p class="big">Need someone to keep your releases calm? Email is the fastest way to reach me.</p>
+          <div class="mail-row">
+            <a class="mail-link" href="mailto:dhruv00987@gmail.com" data-bind="email">dhruv00987@gmail.com</a>
+            <button class="pill copy-btn" id="copyEmail" type="button"><svg aria-hidden="true"><use href="#i-copy"/></svg>Copy</button>
           </div>
+          <ul class="socials">
+            <li><a href="https://github.com/dhruvpatel99" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-github"/></svg>GitHub<svg class="ext" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+            <li><a href="https://www.linkedin.com/in/dhruv0911" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn<svg class="ext" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+            <li><a href="resume.pdf" download><svg aria-hidden="true"><use href="#i-download"/></svg>Download CV</a></li>
+          </ul>
         </div>
+        <form class="mail-form" id="mailForm" novalidate data-reveal>
+          <p class="form-title">Write to me</p>
+          <div class="field"><label for="mfName">Your name</label><input id="mfName" name="name" type="text" autocomplete="name" required maxlength="80"></div>
+          <div class="field"><label for="mfTopic">What is it about?</label><input id="mfTopic" name="topic" type="text" maxlength="120" placeholder="A DevOps role, a pipeline, a question…"></div>
+          <div class="field"><label for="mfMsg">Message</label><textarea id="mfMsg" name="message" rows="5" required maxlength="2000"></textarea></div>
+          <p class="form-error" id="mfError" role="alert" hidden></p>
+          <button class="btn primary" type="submit"><svg aria-hidden="true"><use href="#i-mail"/></svg>Open in my email app</button>
+          <p class="form-note">This opens your own email app with the message ready to send. Nothing is sent from this page.</p>
+        </form>
       </div>
       <div class="fine">
-        <span>Dhruv Patel, Ahmedabad, Gujarat</span>
-        <span class="deploy-live" id="deployLive">Deployed to GitHub Pages by <a href="https://github.com/dhruvpatel99/dhruvpatel99.github.io/actions" target="_blank" rel="noopener">GitHub Actions</a></span>
+        <span>© <span id="year">2026</span> Dhruv Patel · Ahmedabad, Gujarat</span>
+        <span class="deploy-live" id="deployLive">Deployed to GitHub Pages by <a href="https://github.com/dhruvpatel99/dhruvpatel99.github.io/actions" target="_blank" rel="noopener noreferrer">GitHub Actions</a></span>
+        <a class="to-top" href="#top">Back to top ↑</a>
       </div>
     </div>
   </footer>
 
+  <!-- Project details -->
+  <dialog class="proj-dialog" id="projDialog" aria-labelledby="pdTitle">
+    <div class="pd-inner">
+      <button class="pd-close" id="pdClose" type="button" aria-label="Close project details"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+      <div id="pdBody"></div>
+    </div>
+  </dialog>
+
   <!-- Command palette (Ctrl/Cmd + K) -->
   <div class="kbar" id="kbar" role="dialog" aria-modal="true" aria-label="Command palette" hidden>
-    <div class="kbar-box glass">
-      <div class="kbar-input"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><input id="kbarIn" type="text" placeholder="Jump to a section or run an action…" aria-label="Search sections and actions" aria-controls="kbarList" aria-autocomplete="list" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="kbar-box">
+      <div class="kbar-input"><svg aria-hidden="true"><use href="#i-search"/></svg><input id="kbarIn" type="text" placeholder="Jump to a section or run an action…" aria-label="Search sections and actions" aria-controls="kbarList" aria-autocomplete="list" autocomplete="off"><kbd>Esc</kbd></div>
       <ul class="kbar-list" id="kbarList" role="listbox" aria-label="Results"></ul>
     </div>
   </div>
   <div class="cursor" id="cursor" aria-hidden="true"></div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <noscript><p class="noscript">This page works best with JavaScript. You can still <a href="resume.pdf">download my CV</a> or email <a href="mailto:dhruv00987@gmail.com">dhruv00987@gmail.com</a>.</p></noscript>
 
   <script type="module" src="/src/main.js"></script>
 </body>

@@ -5,11 +5,14 @@
  *  - A Loki-style log tail streams deploy lines (demo data).
  * Everything pauses while off screen, and is static with reduced motion.
  */
-const COLORS = { ok: '#3DDC97', run: '#F5B544', fail: '#FF5CCB', grid: 'rgba(150,175,205,0.10)', axis: '#5E6A7C' };
+import { motion } from './motion.js';
 
-export function initCountUps({ reduced }) {
+// Match the CSS tokens in site.css (--ok, --run, --accent).
+const COLORS = { ok: '#7FD8A4', run: '#E9B44C', fail: '#E32B3C', grid: 'rgba(242,239,235,0.07)', axis: '#6F6B68' };
+
+export function initCountUps() {
   const els = [...document.querySelectorAll('[data-count]')];
-  if (reduced || !els.length) return;
+  if (!motion.on || !els.length) return;
   const io = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
       if (!e.isIntersecting) return;
@@ -18,7 +21,7 @@ export function initCountUps({ reduced }) {
       const to = Number(el.dataset.count);
       const suffix = el.dataset.suffix || '';
       // Hero numbers wait for the intro text to land.
-      const delay = el.closest('.hero') ? 1700 : 150;
+      const delay = el.closest('.hero') ? 1400 : 150;
       const dur = 1300;
       setTimeout(() => {
         const t0 = performance.now();
@@ -51,7 +54,7 @@ function makeSeries(n) {
   return { pts, nextPoint };
 }
 
-function initGraph(canvas, { reduced }) {
+function initGraph(canvas) {
   const ctx = canvas.getContext('2d');
   const N = 48;
   const series = makeSeries(N);
@@ -127,7 +130,7 @@ function initGraph(canvas, { reduced }) {
   new ResizeObserver(resize).observe(canvas.parentElement);
   resize();
   return {
-    start() { if (reduced || running) return; running = true; last = performance.now(); requestAnimationFrame(frame); },
+    start() { if (!motion.on || running) return; running = true; last = performance.now(); requestAnimationFrame(frame); },
     stop() { running = false; },
   };
 }
@@ -146,7 +149,7 @@ const LOG_TEMPLATES = [
   ['info', 'loki msg="ingested lines" rate=1.2k/s'],
 ];
 
-function initLogs(list, { reduced }) {
+function initLogs(list) {
   const MAX = 9;
   let i = 0;
   let timer = 0;
@@ -164,21 +167,22 @@ function initLogs(list, { reduced }) {
   }
   for (let k = 0; k < MAX; k++) push(false);
   return {
-    start() { if (reduced || timer) return; timer = setInterval(push, 1300); },
+    start() { if (!motion.on || timer) return; timer = setInterval(push, 1300); },
     stop() { clearInterval(timer); timer = 0; },
   };
 }
 
-export function initDashboard({ reduced }) {
+export function initDashboard() {
   const canvas = document.getElementById('graph');
   const logs = document.getElementById('logs');
   const dash = document.querySelector('.dash');
   if (!canvas || !logs || !dash) return;
-  const graph = initGraph(canvas, { reduced });
-  const tail = initLogs(logs, { reduced });
-  new IntersectionObserver(([e]) => {
-    if (e.isIntersecting) { graph.start(); tail.start(); } else { graph.stop(); tail.stop(); }
-  }, { threshold: 0.15 }).observe(dash);
+  const graph = initGraph(canvas);
+  const tail = initLogs(logs);
+  let visible = false;
+  const sync = () => { if (visible && motion.on) { graph.start(); tail.start(); } else { graph.stop(); tail.stop(); } };
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; sync(); }, { threshold: 0.15 }).observe(dash);
+  motion.subscribe(sync);
   // Sparklines draw themselves when the board appears.
   const sparks = dash.querySelectorAll('.spark path');
   sparks.forEach((p) => { const L = p.getTotalLength(); p.style.setProperty('--len', L); });

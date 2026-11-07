@@ -2,9 +2,10 @@
  * Command palette (Ctrl+K / ⌘K): jump to any section or run a quick action.
  * Arrow keys move, Enter runs, Esc closes. Focus returns to where it was.
  */
-import { toast } from './fx.js';
-
-const EMAIL = 'dhruv00987@gmail.com';
+import { SITE, SECTIONS } from '../data/site.js';
+import { PROJECTS } from '../data/projects.js';
+import { copyEmail } from './contact.js';
+import { motion } from './motion.js';
 
 export function initPalette({ terminal }) {
   const dlg = document.getElementById('kbar');
@@ -19,34 +20,31 @@ export function initPalette({ terminal }) {
   const go = (id) => () => {
     const sec = document.getElementById(id);
     if (!sec) return;
-    sec.scrollIntoView({ behavior: 'smooth' });
+    sec.scrollIntoView({ behavior: motion.on ? 'smooth' : 'auto' });
     // Move focus to the section title so keyboard users continue from there.
     const h = sec.querySelector('h2');
     if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
   };
   const runInShell = (cmd) => () => {
-    document.getElementById('shell')?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('shell')?.scrollIntoView({ behavior: motion.on ? 'smooth' : 'auto' });
     setTimeout(() => terminal?.run(cmd), 650);
   };
+  const openProject = (id) => () => { location.hash = `#work/${id}`; };
+  const external = (url) => () => window.open(url, '_blank', 'noopener,noreferrer');
   const ITEMS = [
-    { group: 'Go to', label: 'About', hint: '~/about', act: go('about') },
-    { group: 'Go to', label: 'Skills', hint: '~/skills', act: go('skills') },
-    { group: 'Go to', label: 'Experience', hint: '~/experience', act: go('experience') },
-    { group: 'Go to', label: 'Ops dashboard', hint: '~/metrics', act: go('ops') },
-    { group: 'Go to', label: 'Projects', hint: '~/projects', act: go('projects') },
-    { group: 'Go to', label: 'Tech stack', hint: '~/stack', act: go('stack') },
-    { group: 'Go to', label: 'Terminal', hint: '~/shell', act: go('shell') },
-    { group: 'Go to', label: 'Contact', hint: '~/contact', act: go('contact') },
-    { group: 'Actions', label: 'Download CV', hint: 'resume.pdf', act: () => { const a = document.createElement('a'); a.href = 'resume.pdf'; a.download = ''; a.click(); } },
-    { group: 'Actions', label: 'Copy email address', hint: EMAIL, act: async () => { try { await navigator.clipboard.writeText(EMAIL); toast('Email copied to clipboard'); } catch { window.location.href = `mailto:${EMAIL}`; } } },
-    { group: 'Actions', label: 'Send an email', hint: 'mailto', act: () => { window.location.href = `mailto:${EMAIL}`; } },
-    { group: 'Actions', label: 'Open GitHub', hint: 'github.com/dhruvpatel99', act: () => window.open('https://github.com/dhruvpatel99', '_blank', 'noopener') },
-    { group: 'Actions', label: 'Open LinkedIn', hint: 'in/dhruv0911', act: () => window.open('https://www.linkedin.com/in/dhruv0911', '_blank', 'noopener') },
-    { group: 'Actions', label: 'Open CloudOps live demo', hint: 'AWS', act: () => window.open('https://dpdx3rbgfvdsz.cloudfront.net/', '_blank', 'noopener') },
+    ...SECTIONS.map((s) => ({ group: 'Go to', label: s.label, hint: `#${s.id}`, act: go(s.id) })),
+    ...PROJECTS.map((p) => ({ group: 'Projects', label: p.title, hint: p.tools.slice(0, 2).join(', '), act: openProject(p.id) })),
+    { group: 'Actions', label: 'Download CV', hint: SITE.resume, act: () => { const a = document.createElement('a'); a.href = SITE.resume; a.download = ''; a.click(); } },
+    { group: 'Actions', label: 'Copy email address', hint: SITE.email, act: copyEmail },
+    { group: 'Actions', label: 'Send an email', hint: 'mailto', act: () => { window.location.href = `mailto:${SITE.email}`; } },
+    { group: 'Actions', label: `Turn motion ${motion.on ? 'off' : 'on'}`, hint: 'animations', act: () => motion.set(!motion.on), dynamic: true },
+    { group: 'Actions', label: 'Open GitHub', hint: SITE.links.github.replace('https://', ''), act: external(SITE.links.github) },
+    { group: 'Actions', label: 'Open LinkedIn', hint: SITE.links.linkedin.replace('https://www.', ''), act: external(SITE.links.linkedin) },
     { group: 'Terminal', label: 'Run ./deploy.sh', hint: 'shell', act: runInShell('./deploy.sh') },
     { group: 'Terminal', label: 'kubectl get pods', hint: 'shell', act: runInShell('kubectl get pods') },
     { group: 'Terminal', label: 'gh run list (live deploys)', hint: 'shell', act: runInShell('gh run list') },
   ];
+  motion.subscribe((on) => { const it = ITEMS.find((x) => x.dynamic); if (it) it.label = `Turn motion ${on ? 'off' : 'on'}`; });
 
   let shown = ITEMS;
   let active = 0;
