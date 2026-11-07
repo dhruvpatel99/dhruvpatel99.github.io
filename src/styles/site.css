@@ -90,13 +90,37 @@ code { font-family: var(--mono); font-size: .88em; color: var(--text); backgroun
 }
 html:not(.js) .intro, .motion-off .intro { display: none; }
 .intro.done { transform: translateY(-100%); }
+.intro-top { display: flex; justify-content: space-between; gap: 16px; font-family: var(--mono); font-size: .78rem; color: var(--dim); }
+.intro-top b { color: var(--text); font-weight: 600; }
 .intro-name { align-self: end; display: grid; font-family: var(--display); text-transform: uppercase; line-height: .84; font-size: clamp(4.5rem, 17vw, 15rem); }
 .intro-name span { display: block; overflow: hidden; }
-.intro-name i { font-style: normal; color: var(--accent); }
-.intro-foot { display: flex; justify-content: space-between; align-items: end; margin-top: 18px; font-size: .78rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-.intro-count { font-family: var(--display); font-size: clamp(2.4rem, 6vw, 4.5rem); line-height: 1; color: var(--text); letter-spacing: 0; font-variant-numeric: tabular-nums; }
-.intro-bar { height: 2px; margin-top: 14px; background: var(--line); }
-.intro-bar i { display: block; height: 100%; width: 100%; background: var(--accent); transform-origin: left; transform: scaleX(0); }
+.intro-name i { font-style: normal; color: var(--accent); transition: color .3s; }
+/* The pipeline: five jobs on a line that fills red as each one passes */
+.intro-pipe { --p: 0; position: relative; list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin: clamp(22px, 4vh, 40px) 0 0; padding: 0; }
+.intro-pipe::before, .intro-pipe::after { content: ""; position: absolute; top: 13px; left: 10%; right: 10%; height: 2px; background: var(--line-2); }
+.intro-pipe::after { background: var(--accent); transform-origin: left; transform: scaleX(var(--p)); transition: transform .45s var(--ease); }
+.intro-pipe li { position: relative; z-index: 1; display: grid; justify-items: center; gap: 8px; font-family: var(--mono); font-size: .8rem; color: var(--dim); transition: color .3s; }
+.ip-node { width: 28px; height: 28px; border-radius: 50%; border: 1.5px dashed var(--line-2); background: var(--bg); display: grid; place-items: center; transition: border-color .3s, background .3s; }
+.ip-time { min-height: 1.2em; font-size: .7rem; color: var(--dim); }
+.intro-pipe li.run { color: var(--text); }
+.intro-pipe li.run .ip-node { border: 2px solid rgba(227, 43, 60, .25); border-top-color: var(--accent); animation: spin .7s linear infinite; }
+.intro-pipe li.ok { color: var(--text); }
+.intro-pipe li.ok .ip-node { border: 0; background: var(--text); }
+.intro-pipe li.ok .ip-node::after { content: ""; width: 9px; height: 5px; border-left: 2px solid var(--bg); border-bottom: 2px solid var(--bg); transform: translateY(-1px) rotate(-45deg); }
+.intro-foot { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-top: clamp(18px, 3vh, 30px); padding-top: 16px; border-top: 1px solid var(--line); }
+.intro-status { font-size: .8rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.intro-status::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 10px; border-radius: 50%; background: var(--run); vertical-align: 1px; }
+.intro-clock { font-family: var(--display); font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1; color: var(--text); font-variant-numeric: tabular-nums; }
+.intro.live .intro-status { color: var(--text); }
+.intro.live .intro-status::before { background: var(--ok); }
+.intro.live .intro-pipe li:last-child .ip-node { background: var(--accent); }
+.intro.live .intro-pipe li:last-child .ip-node::after { border-color: #fff; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (max-width: 600px) {
+  .intro-top span:last-child { display: none; }
+  .intro-pipe li { font-size: .62rem; }
+  .ip-time { font-size: .6rem; }
+}
 
 /* ---------- Buttons and pills ---------- */
 .btn {

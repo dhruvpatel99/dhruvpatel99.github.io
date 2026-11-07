@@ -73,9 +73,16 @@
 
   <!-- Intro curtain (hidden from screen readers; removed when the page is ready) -->
   <div class="intro" id="intro" aria-hidden="true">
+    <div class="intro-top"><span><b>deploy.yml</b> · main</span><span>dhruvpatel99/portfolio</span></div>
     <div class="intro-name"><span>Dhruv</span><span>Patel<i>.</i></span></div>
-    <div class="intro-foot"><span>DevOps &amp; Support Engineer</span><span class="intro-count" id="introCount">00</span></div>
-    <div class="intro-bar"><i id="introBar"></i></div>
+    <ol class="intro-pipe" id="introPipe">
+      <li><span class="ip-node"></span><span class="ip-name">checkout</span><span class="ip-time"></span></li>
+      <li><span class="ip-node"></span><span class="ip-name">install</span><span class="ip-time"></span></li>
+      <li><span class="ip-node"></span><span class="ip-name">build</span><span class="ip-time"></span></li>
+      <li><span class="ip-node"></span><span class="ip-name">test</span><span class="ip-time"></span></li>
+      <li><span class="ip-node"></span><span class="ip-name">deploy</span><span class="ip-time"></span></li>
+    </ol>
+    <div class="intro-foot"><span class="intro-status" id="introStatus">Queued</span><span class="intro-clock" id="introClock">0.0s</span></div>
   </div>
 
   <!-- 3D scene: one fixed canvas behind the page -->
